@@ -1,0 +1,35 @@
+<?php
+$_lang['sovereign'] = 'Sovereign';
+$_lang['sovereign.desc'] = 'Manage the art prize competitions here.';
+$_lang['sovereign.description'] = 'Description';
+$_lang['sovereign.menu_label'] = 'Art Prize';
+$_lang['sovereign.sovereign_err_ae'] = 'A artwork with that name already exists.';
+$_lang['sovereign.sovereign_err_nf'] = 'Artwork not found.';
+$_lang['sovereign.sovereign_err_ns'] = 'Artwork not specified.';
+$_lang['sovereign.sovereign_err_ns_name'] = 'Please specify a name for the artwork.';
+$_lang['sovereign.sovereign_err_remove'] = 'An error occurred while trying to remove the artwork.';
+$_lang['sovereign.sovereign_err_save'] = 'An error occurred while trying to save the artwork.';
+$_lang['sovereign.sovereign_create'] = 'Add New Artwork';
+$_lang['sovereign.gallery_remove'] = 'Remove Gallery';
+$_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
+$_lang['sovereign.gallery_update'] = 'Update Gallery';
+$_lang['sovereign.gallery_create'] = 'Create New Gallery';
+$_lang['sovereign.downloads'] = 'Downloads';
+$_lang['sovereign.location'] = 'Location';
+$_lang['sovereign.management'] = 'Art Prize Management';
+$_lang['sovereign.management_desc'] = 'Manage the art prize competitions here. You can edit them by either double-clicking on the grid or right-clicking on the respective row.';
+$_lang['sovereign.african_new_galleries_desc'] = 'Create new galleries here by clicking the button below. You can then click on a gallery to view and/or confirm any new submissions.';
+$_lang['sovereign.african_judges_galleries_desc'] = 'View galleries that are, or will be, voted on by the panel of assigned judges. During the submissions phase, the galleries will be viewable and show any entries that have been confirmed.<br> You may also select a gallery to assign a panel of judges here.';
+$_lang['sovereign.african_public_galleries_desc'] = 'View galleries of artworks that are publicly being voted for on the website.';
+$_lang['sovereign.name'] = 'Name';
+$_lang['sovereign.search...'] = 'Search...';
+$_lang['sovereign.galleryname'] = 'Gallery Name';
+$_lang['sovereign.year'] = 'Year';
+$_lang['sovereign.votes'] = 'Active Votes';
+$_lang['sovereign.tab_label_african'] ='African Galleries';
+$_lang['sovereign.tab_label_asian'] ='Asian Galleries';
+$_lang['sovereign.tab_label_european'] ='European Galleries';
+$_lang['sovereign.unconfirmedgallery_label'] = '1. New Galleries';
+$_lang['sovereign.judgesgallery_label'] = '2. Judges\' Galleries';
+$_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
+

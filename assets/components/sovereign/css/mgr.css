@@ -1,0 +1,23 @@
+.icon-reload { background:url("../css/img/reload.png") no-repeat scroll 5px 4px transparent !important; }
+
+#panelHome {margin-top:5px}
+.vertical-tabs-header {padding-top: 20px !important;}
+.tabs-realestates {padding-top: 0 !important}
+#likedislike-panel-location h2 { padding-left:40px;background: url(../images/css/world_globe_32.png) no-repeat 0 0;}
+li#homeTab__judges-gallery a.x-tab-right {background: url(../css/images/lock_24.png) no-repeat 0 center;}
+li#homeTab__home a.x-tab-right {background: url(../css/images/home_24.png) no-repeat 0 center;}
+li.x-tab-strip-active#homeTab__home a.x-tab-right {background: url(../css/images/home_g_24.png) no-repeat 0 center;}
+li.x-tab-strip-active#homeTab__judges-gallery a.x-tab-right {background: url(../css/images/lock_g_24.png) no-repeat 0 center;}
+
+.panel-desc {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -o-border-radius:5px;
+    -ms-border-radius:5px;
+    -khtml-border-radius:5px;
+    border-radius:5px;
+    background-color: #F7F7F7;
+    border: 1px solid #E7E7E7 !important;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
