@@ -12,7 +12,7 @@ Sovereign.panel.AfricanPanel = function(config) {
             ,monitorResize:true
             ,deferredRender: false
             ,bodyStyle: 'padding: 0 0 10px 10px'
-            ,id: 'homeTab'
+            ,id: 'africanTabs'
             ,enableTabScroll : true
             ,defaults: {
                 bodyCssClass: 'vertical-tabs tabs-sovereign'
@@ -31,7 +31,7 @@ Sovereign.panel.AfricanPanel = function(config) {
                     ,bodyCssClass: 'panel-desc'
                     ,bodyStyle: 'margin: 10px 0px 10px 0px'
                 },{
-                    xtype: 'sovereign-grid-galleryafrican'
+                    xtype: 'sovereign-grid-galleryafricansubmissions'
                     ,preventRender: true
                 }]
             },{
@@ -67,3 +67,5 @@ Sovereign.panel.AfricanPanel = function(config) {
 };
 Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel);
 Ext.reg('sovereign-panel-africa',Sovereign.panel.AfricanPanel);
+
+

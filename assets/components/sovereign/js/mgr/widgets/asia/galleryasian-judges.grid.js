@@ -1,46 +1,40 @@
-Sovereign.grid.GalleryAfricanSubmissions = function(config) {
+Sovereign.grid.GalleryAsiaJudges = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'sovereign-grid-galleryafricansubmissions'
+        id: 'sovereign-grid-galleryasiajudges'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/getList' }
+        ,baseParams: { action: 'mgr/galleryasia/getList' }
         ,fields: ['id','galleryname','year','menu']
         ,paging: true
         ,remoteSort: true
-        ,listeners : {
-            'rowclick': function(grid, index, rec){
-                console.log('yup');
-                if (grid.getSelectionModel().hasSelection()) {
-                    var row = grid.getSelectionModel().getSelections()[0];
-                    var id = row.get('id');
-                }
-                //location.href = '?a='+MODx.request.a+'&action=competitionview&competition='+id;
-                this.loadNewGrid(grid, id);
-            }
-        }
         ,autoExpandColumn: 'galleryname'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
+            ,editable: false
             ,sortable: true
             ,width: 60
         },{
             header: _('sovereign.galleryname')
             ,dataIndex: 'galleryname'
             ,sortable: true
+            ,editable: false
             ,width: 100
+            ,editor: { xtype: 'textfield' }
         },{
             header: _('sovereign.year')
             ,dataIndex: 'year'
             ,sortable: true
+            ,editable: false
             ,width: 100
+            ,editor: { xtype: 'textfield' }
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')
-            ,handler: { xtype: 'sovereign-window-galleryafricansubmissions-create' ,blankValues: true }
+            ,handler: { xtype: 'sovereign-window-galleryasiajudges-create' ,blankValues: true }
         },'->',{
             xtype: 'textfield'
-            ,id: 'galleryafricansubmissions-search-filter'
+            ,id: 'galleryasiajudges-search-filter'
             ,emptyText: _('sovereign.search...')
             ,listeners: {
                 'change': {fn:this.search,scope:this}
@@ -58,7 +52,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear-galleryafricansubmissions'
+            ,id: 'modx-filter-clear-galleryasiajudges'
             ,iconCls:'icon-reload'
             ,text: _('filter_clear')
             ,listeners: {
@@ -66,9 +60,9 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
             }
         }]
     });
-    Sovereign.grid.GalleryAfricanSubmissions.superclass.constructor.call(this,config)
+    Sovereign.grid.GalleryAsiaJudges.superclass.constructor.call(this,config)
 };
-Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
+Ext.extend(Sovereign.grid.GalleryAsiaJudges,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
@@ -76,24 +70,24 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/getList'
+            action: 'mgr/galleryasia/getList'
             ,'parent': this.config.resource
         };
-        Ext.getCmp('galleryafricansubmissions-search-filter').reset();
+        Ext.getCmp('galleryasiajudges-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },getMenu: function() {
         return [{
             text: _('sovereign.gallery_update')
-            ,handler: this.updateGalleryAfricanSubmissions
+            ,handler: this.updateGalleryAsiaJudges
         },'-',{
             text: _('sovereign.gallery_remove')
-            ,handler: this.removeGalleryAfricanSubmissions
+            ,handler: this.removeGalleryAsiaJudges
         }];
-    },updateGalleryAfricanSubmissions: function(btn,e) {
+    },updateGalleryAsiaJudges: function(btn,e) {
         if (!this.updateGalleryWindow) {
             this.updateGalleryWindow = MODx.load({
-                xtype: 'sovereign-window-galleryafricansubmissions-update'
+                xtype: 'sovereign-window-galleryasiajudges-update'
                 ,record: this.menu.record
                 ,listeners: {
                     'success': {fn:this.refresh,scope:this}
@@ -102,32 +96,30 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
         }
         this.updateGalleryWindow.setValues(this.menu.record);
         this.updateGalleryWindow.show(e.target);
-    },removeGalleryAfricanSubmissions: function() {
+    },removeGalleryAsiaJudges: function() {
         MODx.msg.confirm({
             title: _('sovereign.gallery_remove')
             ,text: _('sovereign.gallery_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/galleryafrican/remove'
+                action: 'mgr/galleryasia/remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },loadNewGrid: function(grid, id) {
-        Ext.getCmp('home-panel').replaceGrid(grid, id);
     }
 });
-Ext.reg('sovereign-grid-galleryafricansubmissions',Sovereign.grid.GalleryAfricanSubmissions);
+Ext.reg('sovereign-grid-galleryasiajudges',Sovereign.grid.GalleryAsiaJudges);
 
-Sovereign.window.UpdateGalleryAfricanSubmissions = function(config) {
+Sovereign.window.UpdateGalleryAsiaJudges = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('sovereign.gallery_update')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/update'
+            action: 'mgr/galleryasia/update'
         }
         ,fields: [{
             xtype: 'hidden'
@@ -139,24 +131,24 @@ Sovereign.window.UpdateGalleryAfricanSubmissions = function(config) {
             ,anchor: '100%'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
+            ,fieldLabel: _('sovereign.description')
             ,name: 'year'
             ,anchor: '100%'
         }]
     });
-    Sovereign.window.UpdateGalleryAfricanSubmissions.superclass.constructor.call(this,config);
+    Sovereign.window.UpdateGalleryAsiaJudges.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.UpdateGalleryAfricanSubmissions,MODx.Window);
-Ext.reg('sovereign-window-galleryafricansubmissions-update',Sovereign.window.UpdateGalleryAfricanSubmissions);
+Ext.extend(Sovereign.window.UpdateGalleryAsiaJudges,MODx.Window);
+Ext.reg('sovereign-window-galleryasiajudges-update',Sovereign.window.UpdateGalleryAsiaJudges);
 
 
-Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
+Sovereign.window.CreateGalleryAsiaJudges = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/create'
+            action: 'mgr/galleryasia/create'
         }
         ,fields: [{
             xtype: 'textfield'
@@ -170,7 +162,7 @@ Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
             ,width: 300
         }]
     });
-    Sovereign.window.CreateGalleryAfricanSubmissions.superclass.constructor.call(this,config);
+    Sovereign.window.CreateGalleryAsiaJudges.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.CreateGalleryAfricanSubmissions,MODx.Window);
-Ext.reg('sovereign-window-galleryafricansubmissions-create',Sovereign.window.CreateGalleryAfricanSubmissions);
+Ext.extend(Sovereign.window.CreateGalleryAsiaJudges,MODx.Window);
+Ext.reg('sovereign-window-galleryasiajudges-create',Sovereign.window.CreateGalleryAsiaJudges);

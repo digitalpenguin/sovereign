@@ -2,12 +2,8 @@
 
 #panelHome {margin-top:5px}
 .vertical-tabs-header {padding-top: 20px !important;}
-.tabs-realestates {padding-top: 0 !important}
-#likedislike-panel-location h2 { padding-left:40px;background: url(../images/css/world_globe_32.png) no-repeat 0 0;}
-li#homeTab__judges-gallery a.x-tab-right {background: url(../css/images/lock_24.png) no-repeat 0 center;}
-li#homeTab__home a.x-tab-right {background: url(../css/images/home_24.png) no-repeat 0 center;}
-li.x-tab-strip-active#homeTab__home a.x-tab-right {background: url(../css/images/home_g_24.png) no-repeat 0 center;}
-li.x-tab-strip-active#homeTab__judges-gallery a.x-tab-right {background: url(../css/images/lock_g_24.png) no-repeat 0 center;}
+
+.x-grid3-row :hover { background-color:#fef8dc; cursor:pointer;}
 
 .panel-desc {
     -moz-border-radius:5px;

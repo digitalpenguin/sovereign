@@ -7,6 +7,17 @@ Sovereign.grid.GalleryAfricanJudges = function(config) {
         ,fields: ['id','galleryname','year','menu']
         ,paging: true
         ,remoteSort: true
+        ,listeners : {
+            'rowclick': function(grid, index, rec){
+                console.log('yup');
+                if (grid.getSelectionModel().hasSelection()) {
+                    var row = grid.getSelectionModel().getSelections()[0];
+                    var id = row.get('id');
+                    alert('working ' + id);
+                }
+                //location.href = '?a='+MODx.request.a+'&action=competitionview&competition='+id;
+            }
+        }
         ,autoExpandColumn: 'galleryname'
         ,columns: [{
             header: _('id')

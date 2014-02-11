@@ -2,6 +2,7 @@ Sovereign.panel.Home = function(config) {
     config = config || {};
     Ext.apply(config,{
         border: false
+        ,id: 'home-panel'
         ,baseCls: 'modx-formpanel'
         ,cls: 'container'
         ,items: [{
@@ -11,6 +12,7 @@ Sovereign.panel.Home = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: { border: false ,autoHeight: true }
+            ,id: 'main-tabs'
             ,border: true
             ,items: [{
                 title: _('sovereign.tab_label_african')
@@ -63,5 +65,18 @@ Sovereign.panel.Home = function(config) {
     });
     Sovereign.panel.Home.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.panel.Home,MODx.Panel);
+Ext.extend(Sovereign.panel.Home,MODx.Panel,{
+
+    replaceGrid: function(grid, id) {
+        var africanTabs = Ext.getCmp('africanTabs');
+        var activeMainAfricanTab = africanTabs.getActiveTab();
+        activeMainAfricanTab.remove('sovereign-grid-galleryafricansubmissions');
+
+        var newGrid = new Sovereign.grid.GalleryAsiaJudges; //Ext.getCmp('sovereign-grid-galleryasia');
+        activeMainAfricanTab.add(newGrid);
+        activeMainAfricanTab.doLayout();
+
+    }
+
+});
 Ext.reg('sovereign-panel-home',Sovereign.panel.Home);
