@@ -32,10 +32,6 @@ Sovereign.panel.Home = function(config) {
                 ,tooltip: _('')
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>Testing the second tab...</p>'
-                    ,border: false
-                    ,bodyCssClass: 'panel-desc'
-                },{
                     xtype: 'sovereign-grid-galleryasia'
                     ,cls: 'main-wrapper'
                     ,preventRender: true
@@ -45,13 +41,9 @@ Sovereign.panel.Home = function(config) {
                 ,tooltip: _('')
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>Testing the third tab...</p>'
-                    ,border: false
-                    ,bodyCssClass: 'panel-desc'
-                },{
-                    /*xtype: 'sovereign-grid-gallerymideast'
+                    xtype: 'sovereign-panel-mideast'
                     ,cls: 'main-wrapper'
-                    ,preventRender: true*/
+                    ,preventRender: true
                 }]
             },{
                 title: _('sovereign.tab_label_european')
