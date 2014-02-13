@@ -4,23 +4,28 @@ Sovereign.grid.AfricanArtworks = function(config) {
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
-        ,fields: ['id','galleryname','year','menu']
+        ,fields: ['id','filename','aname','pname','menu']
         ,paging: true
         ,remoteSort: true
-        ,autoExpandColumn: 'galleryname'
+        ,autoExpandColumn: 'title'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
-            ,width: 60
+            ,width: 10
         },{
-            header: _('sovereign.galleryname')
-            ,dataIndex: 'galleryname'
+            header: _('sovereign.artwork_thumb')
+            ,dataIndex: 'filename'
+            ,sortable: true
+            ,width: 50
+        },{
+            header: _('sovereign.artist_name')
+            ,dataIndex: 'aname'
             ,sortable: true
             ,width: 100
         },{
-            header: _('sovereign.year')
-            ,dataIndex: 'year'
+            header: _('sovereign.painting_name')
+            ,dataIndex: 'pname'
             ,sortable: true
             ,width: 100
         }]

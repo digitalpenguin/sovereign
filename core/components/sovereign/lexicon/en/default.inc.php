@@ -34,4 +34,6 @@ $_lang['sovereign.tab_label_european'] ='European Galleries';
 $_lang['sovereign.unconfirmedgallery_label'] = '1. New Galleries';
 $_lang['sovereign.judgesgallery_label'] = '2. Judges\' Galleries';
 $_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
-
+$_lang['sovereign.artist_name'] = 'Artist';
+$_lang['sovereign.painting_name'] = 'Title';
+$_lang['sovereign.artwork_thumb'] = 'Artwork';
