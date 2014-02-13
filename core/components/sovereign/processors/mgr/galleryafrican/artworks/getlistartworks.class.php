@@ -1,6 +1,6 @@
 <?php
-class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
-    public $classKey = 'galleryAfrican';
+class AfricanArtworksGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'galleryAfricanImages';
     public $languageTopics = array('sovereign:default');
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'DESC';
@@ -24,4 +24,4 @@ class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 }
-return 'GalleryAfricanGetListProcessor';
+return 'AfricanArtworksGetListProcessor';

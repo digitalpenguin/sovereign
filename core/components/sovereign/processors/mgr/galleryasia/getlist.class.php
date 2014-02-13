@@ -14,6 +14,12 @@ class GalleryAsiaGetListProcessor extends modObjectGetListProcessor {
                 'OR:year:LIKE' => '%'.$query.'%',
             ));
         }
+        $id = $this->getProperty('id');
+        if (!empty($id)) {
+            $c->where(array(
+                'id' => $id
+            ));
+        }
         return $c;
     }
 }

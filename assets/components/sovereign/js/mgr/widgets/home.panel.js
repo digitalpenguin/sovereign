@@ -41,11 +41,24 @@ Sovereign.panel.Home = function(config) {
                     ,preventRender: true
                 }]
             },{
-                title: _('sovereign.tab_label_european')
+                title: _('sovereign.tab_label_mideastern')
                 ,tooltip: _('')
                 ,defaults: { autoHeight: true }
                 ,items: [{
                     html: '<p>Testing the third tab...</p>'
+                    ,border: false
+                    ,bodyCssClass: 'panel-desc'
+                },{
+                    /*xtype: 'sovereign-grid-gallerymideast'
+                    ,cls: 'main-wrapper'
+                    ,preventRender: true*/
+                }]
+            },{
+                title: _('sovereign.tab_label_european')
+                ,tooltip: _('')
+                ,defaults: { autoHeight: true }
+                ,items: [{
+                    html: '<p>Testing the fourth tab...</p>'
                     ,border: false
                     ,bodyCssClass: 'panel-desc'
                 },{
@@ -65,18 +78,5 @@ Sovereign.panel.Home = function(config) {
     });
     Sovereign.panel.Home.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.panel.Home,MODx.Panel,{
-
-    replaceGrid: function(grid, id) {
-        var africanTabs = Ext.getCmp('africanTabs');
-        var activeMainAfricanTab = africanTabs.getActiveTab();
-        activeMainAfricanTab.remove('sovereign-grid-galleryafricansubmissions');
-
-        var newGrid = new Sovereign.grid.GalleryAsiaJudges; //Ext.getCmp('sovereign-grid-galleryasia');
-        activeMainAfricanTab.add(newGrid);
-        activeMainAfricanTab.doLayout();
-
-    }
-
-});
+Ext.extend(Sovereign.panel.Home,MODx.Panel);
 Ext.reg('sovereign-panel-home',Sovereign.panel.Home);
