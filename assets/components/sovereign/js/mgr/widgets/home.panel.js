@@ -32,7 +32,7 @@ Sovereign.panel.Home = function(config) {
                 ,tooltip: _('')
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    xtype: 'sovereign-grid-galleryasia'
+                    xtype: 'sovereign-panel-asia'
                     ,cls: 'main-wrapper'
                     ,preventRender: true
                 }]

@@ -1,7 +1,7 @@
-Sovereign.grid.GalleryAsia = function(config) {
+Sovereign.grid.GalleryAsiaSubmissions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'sovereign-grid-galleryasia'
+        id: 'sovereign-grid-galleryasiaSubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryasia/getList' }
         ,fields: ['id','galleryname','year','menu']
@@ -31,10 +31,10 @@ Sovereign.grid.GalleryAsia = function(config) {
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')
-            ,handler: { xtype: 'sovereign-window-galleryasia-create' ,blankValues: true }
+            ,handler: { xtype: 'sovereign-window-galleryasiasubmissions-create' ,blankValues: true }
         },'->',{
             xtype: 'textfield'
-            ,id: 'galleryasia-search-filter'
+            ,id: 'galleryasiasubmissions-search-filter'
             ,emptyText: _('sovereign.search...')
             ,listeners: {
                 'change': {fn:this.search,scope:this}
@@ -52,7 +52,7 @@ Sovereign.grid.GalleryAsia = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear-galleryasia'
+            ,id: 'modx-filter-clear-galleryasiasubmissions'
             ,iconCls:'icon-reload'
             ,text: _('filter_clear')
             ,listeners: {
@@ -60,9 +60,9 @@ Sovereign.grid.GalleryAsia = function(config) {
             }
         }]
     });
-    Sovereign.grid.GalleryAsia.superclass.constructor.call(this,config)
+    Sovereign.grid.GalleryAsiaSubmissions.superclass.constructor.call(this,config)
 };
-Ext.extend(Sovereign.grid.GalleryAsia,MODx.grid.Grid,{
+Ext.extend(Sovereign.grid.GalleryAsiaSubmissions,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
@@ -73,30 +73,30 @@ Ext.extend(Sovereign.grid.GalleryAsia,MODx.grid.Grid,{
             action: 'mgr/galleryasia/getList'
             ,'parent': this.config.resource
         };
-        Ext.getCmp('galleryasia-search-filter').reset();
+        Ext.getCmp('galleryasiasubmissions-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },getMenu: function() {
         return [{
             text: _('sovereign.gallery_update')
-            ,handler: this.updateGalleryAsia
+            ,handler: this.updateGalleryAsiaSubmissions
         },'-',{
             text: _('sovereign.gallery_remove')
-            ,handler: this.removeGalleryAsia
+            ,handler: this.removeGalleryAsiaSubmissions
         }];
-    },updateGalleryAsia: function(btn,e) {
-        if (!this.updateGalleryWindow) {
-            this.updateGalleryWindow = MODx.load({
-                xtype: 'sovereign-window-galleryasia-update'
+    },updateGalleryAsiaSubmissions: function(btn,e) {
+        if (!this.updateGalleryAsiaSubmissionsWindow) {
+            this.updateGalleryAsiaSubmissionsWindow = MODx.load({
+                xtype: 'sovereign-window-galleryasiasubmissions-update'
                 ,record: this.menu.record
                 ,listeners: {
                     'success': {fn:this.refresh,scope:this}
                 }
             });
         }
-        this.updateGalleryWindow.setValues(this.menu.record);
-        this.updateGalleryWindow.show(e.target);
-    },removeGalleryAsia: function() {
+        this.updateGalleryAsiaSubmissionsWindow.setValues(this.menu.record);
+        this.updateGalleryAsiaSubmissionsWindow.show(e.target);
+    },removeGalleryAsiaSubmissions: function() {
         MODx.msg.confirm({
             title: _('sovereign.gallery_remove')
             ,text: _('sovereign.gallery_remove_confirm')
@@ -111,9 +111,9 @@ Ext.extend(Sovereign.grid.GalleryAsia,MODx.grid.Grid,{
         });
     }
 });
-Ext.reg('sovereign-grid-galleryasia',Sovereign.grid.GalleryAsia);
+Ext.reg('sovereign-grid-galleryasiasubmissions',Sovereign.grid.GalleryAsiaSubmissions);
 
-Sovereign.window.UpdateGalleryAsia = function(config) {
+Sovereign.window.UpdateGalleryAsiaSubmissions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('sovereign.gallery_update')
@@ -136,13 +136,13 @@ Sovereign.window.UpdateGalleryAsia = function(config) {
             ,anchor: '100%'
         }]
     });
-    Sovereign.window.UpdateGalleryAsia.superclass.constructor.call(this,config);
+    Sovereign.window.UpdateGalleryAsiaSubmissions.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.UpdateGalleryAsia,MODx.Window);
-Ext.reg('sovereign-window-galleryasia-update',Sovereign.window.UpdateGalleryAsia);
+Ext.extend(Sovereign.window.UpdateGalleryAsiaSubmissions,MODx.Window);
+Ext.reg('sovereign-window-galleryasiasubmissions-update',Sovereign.window.UpdateGalleryAsiaSubmissions);
 
 
-Sovereign.window.CreateGalleryAsia = function(config) {
+Sovereign.window.CreateGalleryAsiaSubmissions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
@@ -162,7 +162,7 @@ Sovereign.window.CreateGalleryAsia = function(config) {
             ,width: 300
         }]
     });
-    Sovereign.window.CreateGalleryAsia.superclass.constructor.call(this,config);
+    Sovereign.window.CreateGalleryAsiaSubmissions.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.CreateGalleryAsia,MODx.Window);
-Ext.reg('sovereign-window-galleryasia-create',Sovereign.window.CreateGalleryAsia);
+Ext.extend(Sovereign.window.CreateGalleryAsiaSubmissions,MODx.Window);
+Ext.reg('sovereign-window-galleryasiasubmissions-create',Sovereign.window.CreateGalleryAsiaSubmissions);
