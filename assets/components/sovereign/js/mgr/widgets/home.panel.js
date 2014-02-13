@@ -50,11 +50,7 @@ Sovereign.panel.Home = function(config) {
                 ,tooltip: _('')
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>Testing the fourth tab...</p>'
-                    ,border: false
-                    ,bodyCssClass: 'panel-desc'
-                },{
-                 xtype: 'sovereign-grid-galleryeurope'
+                 xtype: 'sovereign-panel-europe'
                  ,cls: 'main-wrapper'
                  ,preventRender: true
                  }]
