@@ -18,13 +18,16 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,dataIndex: 'filename'
             ,sortable: true
             ,width: 50
+            ,renderer: function(value){
+                return '<img src="' + Sovereign.config.assetsUrl + 'galleries/african/submissions/' + value + '" />';
+            }
         },{
             header: _('sovereign.artist_name')
             ,dataIndex: 'aname'
             ,sortable: true
             ,width: 100
         },{
-            header: _('sovereign.painting_name')
+            header: _('sovereign.artwork_name')
             ,dataIndex: 'pname'
             ,sortable: true
             ,width: 100
@@ -33,6 +36,16 @@ Sovereign.grid.AfricanArtworks = function(config) {
             text: _('sovereign.back_to_galleries')
             ,listeners: {
                 'click': {fn: this.backToGallery, scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'sovereign-add-artwork'
+            ,text: _('sovereign.add_artwork')
+            ,iconCls: 'icon-add'
+            ,cls: 'green'
+            ,handler: {
+                xtype: 'sovereign-window-africanartworks-create'
+                ,blankValues: true
             }
         },'->',{
             xtype: 'textfield'
@@ -160,14 +173,12 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }
         ,fields: [{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.name')
-            ,name: 'galleryname'
-            ,width: 300
+            ,fieldLabel: _('sovereign.artwork_name')
+            ,name: 'aname'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
-            ,name: 'year'
-            ,width: 300
+            ,fieldLabel: _('sovereign.artist_name')
+            ,name: 'pname'
         }]
     });
     Sovereign.window.CreateAfricanArtworks.superclass.constructor.call(this,config);

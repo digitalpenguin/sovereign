@@ -30,10 +30,10 @@ Sovereign.panel.MideastPanel = function(config) {
                     ,border: true
                     ,bodyCssClass: 'panel-desc'
                     ,bodyStyle: 'margin: 10px 0px 10px 0px'
-                },{
+                },{/*
                     xtype: 'sovereign-grid-gallerymideastsubmissions'
                     ,preventRender: true
-                }]
+                */}]
             },{
                 title: _('sovereign.judgesgallery_label')
                 ,defaults: { autoHeight: true }

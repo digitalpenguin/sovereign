@@ -9,7 +9,9 @@ $xpdo_meta_map = array (
     3 => 'galleryAsia',
     4 => 'galleryEuropeImages',
     5 => 'galleryEurope',
-    6 => 'galleryTypes',
-    7 => 'votes',
+    6 => 'galleryMideastImages',
+    7 => 'galleryMideast',
+    8 => 'galleryTypes',
+    9 => 'votes',
   ),
 );

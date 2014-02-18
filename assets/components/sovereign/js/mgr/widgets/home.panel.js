@@ -35,6 +35,7 @@ Sovereign.panel.Home = function(config) {
                     xtype: 'sovereign-panel-asia'
                     ,cls: 'main-wrapper'
                     ,preventRender: true
+                    ,bodyStyle: 'padding: 0 10px 0 0'
                 }]
             },{
                 title: _('sovereign.tab_label_mideastern')
@@ -44,6 +45,7 @@ Sovereign.panel.Home = function(config) {
                     xtype: 'sovereign-panel-mideast'
                     ,cls: 'main-wrapper'
                     ,preventRender: true
+                    ,bodyStyle: 'padding: 0 10px 0 0'
                 }]
             },{
                 title: _('sovereign.tab_label_european')
@@ -53,6 +55,7 @@ Sovereign.panel.Home = function(config) {
                  xtype: 'sovereign-panel-europe'
                  ,cls: 'main-wrapper'
                  ,preventRender: true
+                 ,bodyStyle: 'padding: 0 10px 0 0'
                  }]
             }]
             // only to redo the grid layout after the content is rendered
