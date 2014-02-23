@@ -10,10 +10,6 @@ $_lang['sovereign.sovereign_err_ns_name'] = 'Please specify a name for the artwo
 $_lang['sovereign.sovereign_err_remove'] = 'An error occurred while trying to remove the artwork.';
 $_lang['sovereign.sovereign_err_save'] = 'An error occurred while trying to save the artwork.';
 $_lang['sovereign.sovereign_create'] = 'Add New Artwork';
-$_lang['sovereign.gallery_remove'] = 'Remove Gallery';
-$_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
-$_lang['sovereign.gallery_update'] = 'Update Gallery';
-$_lang['sovereign.gallery_create'] = 'Create New Gallery';
 $_lang['sovereign.back_to_galleries'] = '&#171; Back to Galleries';
 $_lang['sovereign.downloads'] = 'Downloads';
 $_lang['sovereign.location'] = 'Location';
@@ -27,6 +23,11 @@ $_lang['sovereign.search...'] = 'Search...';
 $_lang['sovereign.galleryname'] = 'Gallery Name';
 $_lang['sovereign.year'] = 'Year';
 $_lang['sovereign.votes'] = 'Active Votes';
+
+
+/*
+ * Galleries Tabs
+ */
 $_lang['sovereign.tab_label_african'] ='African Galleries';
 $_lang['sovereign.tab_heading_african_submissions'] ='African Art Galleries - Unconfirmed Submissions';
 $_lang['sovereign.tab_heading_african_judges'] ='African Art Galleries - Judges\' Galleries';
@@ -46,7 +47,33 @@ $_lang['sovereign.tab_heading_european_public'] ='European Art Galleries - Publi
 $_lang['sovereign.submissionsgallery_label'] = '1. New Galleries';
 $_lang['sovereign.judgesgallery_label'] = '2. Judges\' Galleries';
 $_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
+
+/*
+ * Gallery Grid
+ */
+$_lang['sovereign.gallery_remove'] = 'Remove Gallery';
+$_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
+$_lang['sovereign.gallery_update'] = 'Update Gallery';
+$_lang['sovereign.gallery_create'] = 'Create New Gallery';
+
+/*
+ * Artwork Grid
+ */
+
+/*
+ * Create Gallery Form
+ */
+
+/*
+ * Create Artwork Form
+ */
 $_lang['sovereign.artist_name'] = 'Artist';
 $_lang['sovereign.artwork_thumb'] = 'Artwork';
 $_lang['sovereign.artwork_name'] = 'Title';
 $_lang['sovereign.add_artwork'] = 'Add New Artwork';
+$_lang['sovereign.browse_file_label'] = 'Image';
+$_lang['sovereign.artwork_caption'] = 'Caption';
+$_lang['sovereign.artwork_address1'] = 'Address 1';
+$_lang['sovereign.artwork_address2'] = 'Address 2';
+$_lang['sovereign.artwork_address3'] = 'Address 3';
+$_lang['sovereign.artwork_country'] = 'Country';

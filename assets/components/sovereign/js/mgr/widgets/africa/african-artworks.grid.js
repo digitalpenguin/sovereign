@@ -37,7 +37,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,listeners: {
                 'click': {fn: this.backToGallery, scope:this}
             }
-        },{
+        },'-',{
             xtype: 'button'
             ,id: 'sovereign-add-artwork'
             ,text: _('sovereign.add_artwork')
@@ -131,6 +131,8 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
     },backToGallery: function() {
         Ext.getCmp('sovereign-panel-africa').backToSubmissionsGrid();
     }
+
+
 });
 Ext.reg('sovereign-grid-africanartworks',Sovereign.grid.AfricanArtworks);
 
@@ -165,23 +167,177 @@ Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfrican
 
 Sovereign.window.CreateAfricanArtworks = function(config) {
     config = config || {};
+    this.ident = config.ident || 'sovupart'+Ext.id();
     Ext.applyIf(config,{
-        title: _('sovereign.artworks_create')
+        title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/create'
+            action: 'mgr/galleryafrican/artworks/upload'
         }
+        ,fileUpload : true
+        ,height: 150
+        ,width: '70%'
+        ,minWidth: 650
+        ,items: [{
+            xtype: 'hidden'
+            ,name: 'competition'
+        },{
+            html: '<h3>Testing</h3><p>These are the instructions...</p>'
+            ,bodyCssClass: 'panel-desc'
+            ,bodyStyle: 'margin: 10px 0px 10px 0px'
+        },{
+            /*
+             * hbox layout
+             */
+            layout     : 'hbox'
+            ,border     : false
+            ,items      : [{
+                /*
+                 * Left fieldset
+                 */
+                xtype           : 'fieldset'
+                ,border         : false
+                ,frame          : false
+                ,defaultType    : 'field'
+                ,flex           : 1
+                ,defaults       : {
+                    anchor: '-10'
+                    ,allowBlank: false
+                }
+                ,items      : [{
+                    xtype: 'textfield'
+                    ,inputType: 'file'
+                    ,fieldLabel: _('sovereign.browse_file_label')
+                    ,name: 'filename'
+                    ,height: 30
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('sovereign.artwork_name')
+                    ,name: 'aname'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('sovereign.artwork_caption')
+                    ,name: 'caption'
+                }]
+            },{
+                /*
+                 * Right fieldset
+                 */
+                xtype           : 'fieldset'
+                ,border         : false
+                ,defaultType    : 'field'
+                ,flex           : 1
+                ,defaults       : {
+                    anchor: '-10'
+                    ,allowBlank: false
+                }
+                ,items      : [{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('sovereign.artist_name')
+                    ,name: 'pname'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('sovereign.artwork_address1')
+                    ,name: 'pname'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('sovereign.artwork_address2')
+                    ,name: 'pname'
+                }]
+            }]
+        }]
+
+        /*
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('sovereign.artwork_name')
             ,name: 'aname'
         },{
             xtype: 'textfield'
+            ,inputType: 'file'
+            ,border: false
+            ,fieldLabel: _('sovereign.browse_file_label')
+            ,name: 'filename'
+        },{
+            xtype: 'textfield'
             ,fieldLabel: _('sovereign.artist_name')
             ,name: 'pname'
-        }]
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_caption')
+            ,name: 'caption'
+        },{
+            xtype: 'sovereign-combo-countries'
+            ,fieldLabel: _('sovereign.artwork_country')
+            ,name: 'country'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_media')
+            ,name: 'media'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_estimate')
+            ,name: 'estimate'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_winnerof')
+            ,name: 'winnerof'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_represented_by')
+            ,name: 'represented_by'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_storeprice')
+            ,name: 'storeprice'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_saleprice')
+            ,name: 'saleprice'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_statement')
+            ,name: 'statement'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_workbrief')
+            ,name: 'workbrief'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_artbrief')
+            ,name: 'artbrief'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('sovereign.artwork_donate')
+            ,name: 'donate'
+        }]*/
+
     });
     Sovereign.window.CreateAfricanArtworks.superclass.constructor.call(this,config);
 };
 Ext.extend(Sovereign.window.CreateAfricanArtworks,MODx.Window);
 Ext.reg('sovereign-window-africanartworks-create',Sovereign.window.CreateAfricanArtworks);
+
+
+/*
+ * Country Combo-Box
+ */
+Sovereign.combo.Countries = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.ArrayStore({
+            id: 0
+            ,fields: ['country-code','display']
+            ,data: [
+                ['AU','Australia']
+                ,['GB','England']
+            ]
+        })
+        ,mode: 'local'
+        ,displayField: 'display'
+        ,valueField: 'country-code'
+    });
+    Sovereign.combo.Countries.superclass.constructor.call(this,config);
+};
+Ext.extend(Sovereign.combo.Countries,MODx.combo.ComboBox);
+Ext.reg('sovereign-combo-countries',Sovereign.combo.Countries);
