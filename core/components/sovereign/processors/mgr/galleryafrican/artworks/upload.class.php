@@ -1,5 +1,5 @@
 <?php
-class SovereignArtworkUploadProcessor extends modObjectProcessor {
+class SovereignAfricanArtworkUploadProcessor extends modObjectProcessor {
     public $classKey = 'galleryAfricanImages';
     public $objectType = 'sovereign';
     public $languageTopics = array('sovereign:default');
@@ -11,7 +11,9 @@ class SovereignArtworkUploadProcessor extends modObjectProcessor {
         if ($this->hasErrors()) {
             return $this->failure();
         } else {
-            return $this->success();
+            $itemArray = $this->object->toArray();
+            unset($itemArray['description']);
+            return $this->success('',$itemArray);
         }
     }
 
@@ -61,4 +63,4 @@ class SovereignArtworkUploadProcessor extends modObjectProcessor {
         return $this->success('',$itemArray);
     }*/
 }
-return 'SovereignArtworkUploadProcessor';
+return 'SovereignAfricanArtworkUploadProcessor';

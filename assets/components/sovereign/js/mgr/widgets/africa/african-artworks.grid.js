@@ -39,14 +39,9 @@ Sovereign.grid.AfricanArtworks = function(config) {
             }
         },'-',{
             xtype: 'button'
-            ,id: 'sovereign-add-artwork'
             ,text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
-            ,cls: 'green'
-            ,handler: {
-                xtype: 'sovereign-window-africanartworks-create'
-                ,blankValues: true
-            }
+            ,handler: this.uploadArtwork
         },'->',{
             xtype: 'textfield'
             ,id: 'africanartworks-search-filter'
@@ -91,6 +86,22 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         Ext.getCmp('africanartworks-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
+    },uploadArtwork: function(btn,e) {
+        var r = {
+            competition: this.config.galleryId
+            ,active: true
+        };
+        if (!this.addArtworkWindow) {
+            this.addArtworkWindow = MODx.load({
+                xtype: 'sovereign-window-africanartworks-create'
+                ,listeners: {
+                    'success': {fn:this.refresh,scope:this}
+                }
+            });
+        }
+        //this.addArtworkWindow.competitionId = this.config.competitionId;
+        this.addArtworkWindow.setValues(r);
+        this.addArtworkWindow.show(e.target);
     },getMenu: function() {
         return [{
             text: _('sovereign.artworks_update')
@@ -165,6 +176,7 @@ Ext.extend(Sovereign.window.UpdateAfricanArtworks,MODx.Window);
 Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfricanArtworks);
 
 
+
 Sovereign.window.CreateAfricanArtworks = function(config) {
     config = config || {};
     this.ident = config.ident || 'sovupart'+Ext.id();
@@ -172,146 +184,70 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/upload'
+            action: 'mgr/galleryafrican/artworks/create'
         }
+        ,id: this.ident
         ,fileUpload : true
+        ,allowBlank: true
         ,height: 150
         ,width: '70%'
         ,minWidth: 650
-        ,items: [{
+        ,fields: [{
             xtype: 'hidden'
-            ,name: 'competition'
+            ,name: 'gallery'
         },{
-            html: '<h3>Testing</h3><p>These are the instructions...</p>'
-            ,bodyCssClass: 'panel-desc'
-            ,bodyStyle: 'margin: 10px 0px 10px 0px'
-        },{
-            /*
-             * hbox layout
-             */
-            layout     : 'hbox'
+            xtype: 'container'
+            ,layout     : 'hbox'
             ,border     : false
             ,items      : [{
-                /*
-                 * Left fieldset
-                 */
-                xtype           : 'fieldset'
+                xtype           : 'container' // Left fieldset
                 ,border         : false
+                ,layout:'form'
                 ,frame          : false
-                ,defaultType    : 'field'
                 ,flex           : 1
                 ,defaults       : {
                     anchor: '-10'
-                    ,allowBlank: false
+                    ,xtype: 'textfield'
                 }
                 ,items      : [{
-                    xtype: 'textfield'
+                    id: this.ident+'-filename'
                     ,inputType: 'file'
                     ,fieldLabel: _('sovereign.browse_file_label')
                     ,name: 'filename'
                     ,height: 30
                 },{
-                    xtype: 'textfield'
+                    id: this.ident+'-aname'
                     ,fieldLabel: _('sovereign.artwork_name')
-                    ,name: 'aname'
+                    ,name: 'pname'
                 },{
-                    xtype: 'textfield'
+                    id: this.ident+'-caption'
                     ,fieldLabel: _('sovereign.artwork_caption')
                     ,name: 'caption'
                 }]
             },{
-                /*
-                 * Right fieldset
-                 */
-                xtype           : 'fieldset'
+                xtype           : 'container' // Right fieldset
+                ,layout: 'form'
                 ,border         : false
-                ,defaultType    : 'field'
                 ,flex           : 1
                 ,defaults       : {
                     anchor: '-10'
-                    ,allowBlank: false
+                    ,xtype: 'textfield'
                 }
                 ,items      : [{
-                    xtype: 'textfield'
+                    id: this.ident+'-pname'
                     ,fieldLabel: _('sovereign.artist_name')
-                    ,name: 'pname'
+                    ,name: 'aname'
                 },{
-                    xtype: 'textfield'
+                    id: this.ident+'-address1'
                     ,fieldLabel: _('sovereign.artwork_address1')
-                    ,name: 'pname'
+                    ,name: 'address1'
                 },{
-                    xtype: 'textfield'
+                    id: this.ident+'-address2'
                     ,fieldLabel: _('sovereign.artwork_address2')
-                    ,name: 'pname'
+                    ,name: 'address2'
                 }]
             }]
         }]
-
-        /*
-        ,fields: [{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_name')
-            ,name: 'aname'
-        },{
-            xtype: 'textfield'
-            ,inputType: 'file'
-            ,border: false
-            ,fieldLabel: _('sovereign.browse_file_label')
-            ,name: 'filename'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artist_name')
-            ,name: 'pname'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_caption')
-            ,name: 'caption'
-        },{
-            xtype: 'sovereign-combo-countries'
-            ,fieldLabel: _('sovereign.artwork_country')
-            ,name: 'country'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_media')
-            ,name: 'media'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_estimate')
-            ,name: 'estimate'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_winnerof')
-            ,name: 'winnerof'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_represented_by')
-            ,name: 'represented_by'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_storeprice')
-            ,name: 'storeprice'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_saleprice')
-            ,name: 'saleprice'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_statement')
-            ,name: 'statement'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_workbrief')
-            ,name: 'workbrief'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_artbrief')
-            ,name: 'artbrief'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.artwork_donate')
-            ,name: 'donate'
-        }]*/
-
     });
     Sovereign.window.CreateAfricanArtworks.superclass.constructor.call(this,config);
 };
