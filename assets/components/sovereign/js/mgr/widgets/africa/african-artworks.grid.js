@@ -184,7 +184,8 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/create'
+            action: 'mgr/galleryafrican/artworks/upload'
+            ,path: '/var/www/sovereign/assets/components/sovereign/galleries'
         }
         ,id: this.ident
         ,fileUpload : true
