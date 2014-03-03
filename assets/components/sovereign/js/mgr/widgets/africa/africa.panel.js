@@ -78,7 +78,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
         });
 
         var artworkGrid = new Sovereign.grid.AfricanArtworks;
-        artworkGrid.config.galleryId = id; // pass id of selected gallery
+        artworkGrid.passGalleryId(id); // pass id of selected gallery
         //artworkGrid.filterByGalleryId(id);
         var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
             activeMainAfricanTab.add(artworkGrid);
