@@ -6,9 +6,4 @@ class GalleryAfricanArtworksCreateProcessor extends modObjectCreateProcessor {
     public $objectType = 'sovereign';
 }
 
-    function fireBeforeSaveEvent() {
-        $this->modx->runProcessor('mgr/galleryafrican/artworks/upload', $this->sovereign->config['assetsUrl'] . 'galleries/');
-        return true;
-    }
-
 return 'GalleryAfricanArtworksCreateProcessor';
