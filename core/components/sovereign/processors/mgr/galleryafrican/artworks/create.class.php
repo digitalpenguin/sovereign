@@ -48,6 +48,17 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
             }
             return $this->failure($msg);
         }
+
+        $filenames = array();
+        if (is_array($_FILES)) {
+            foreach ($_FILES as $file) {
+                if (!empty($file['name'])) {
+                    $filenames[] = $file['name'];
+                }
+            }
+        }
+        $this->setProperty('filename', $filenames[0]);
+
         return parent::process();
     }
 
