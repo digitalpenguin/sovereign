@@ -66,3 +66,4 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
 
 }
 return 'SovereignAfricanArtworkCreateProcessor';
+
