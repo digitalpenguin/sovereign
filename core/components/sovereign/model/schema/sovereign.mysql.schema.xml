@@ -60,6 +60,7 @@
   
     <object class="galleryAfrican" table="sovereign_gallery_african" extends="xPDOSimpleObject">
         <field key="galleryname" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
+        <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="year" dbtype="varchar" precision="6" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
         <field key="datetime" dbtype="datetime" phptype="string" null="true" />
@@ -132,6 +133,7 @@
      
     <object class="galleryAsia" table="sovereign_gallery_asia" extends="xPDOSimpleObject">
         <field key="galleryname" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
+        <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="year" dbtype="varchar" precision="6" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
         <field key="datetime" dbtype="datetime" phptype="string" null="true" />
@@ -204,6 +206,7 @@
   
     <object class="galleryEurope" table="sovereign_gallery_europe" extends="xPDOSimpleObject">
         <field key="galleryname" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
+        <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="year" dbtype="varchar" precision="6" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
         <field key="datetime" dbtype="datetime" phptype="string" null="true" />
@@ -276,6 +279,7 @@
 
     <object class="galleryMideast" table="sovereign_gallery_mideast" extends="xPDOSimpleObject">
         <field key="galleryname" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
+        <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="year" dbtype="varchar" precision="6" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
         <field key="datetime" dbtype="datetime" phptype="string" null="true" />

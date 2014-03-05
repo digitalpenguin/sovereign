@@ -7,6 +7,7 @@ $xpdo_meta_map['galleryMideast']= array (
   'fields' => 
   array (
     'galleryname' => '',
+    'url' => '',
     'year' => '',
     'enabled' => 0,
     'datetime' => NULL,
@@ -22,6 +23,14 @@ $xpdo_meta_map['galleryMideast']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '250',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'url' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
       'phptype' => 'string',
       'null' => true,
       'default' => '',

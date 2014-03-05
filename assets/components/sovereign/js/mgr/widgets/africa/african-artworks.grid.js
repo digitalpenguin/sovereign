@@ -4,7 +4,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
-        ,fields: ['id','filename','aname','pname','menu']
+        ,fields: ['id','filename','url','aname','pname','menu']
         ,paging: true
         ,remoteSort: true
         ,autoExpandColumn: 'title'
@@ -19,7 +19,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,sortable: true
             ,width: 50
             ,renderer: function(value){
-                return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/' + value.toString() + '" >';
+                return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryName + '/' + value.toString() + '" >';
             }
         },{
             header: _('sovereign.artist_name')
@@ -134,8 +134,8 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },passGalleryId: function(id) {
-        this.config.galleryId = id;
+    },passGalleryId: function(galleryname) {
+        this.config.galleryName = galleryname;
     },filterByGalleryId: function(id) {
         this.getStore().baseParams['id'] = id;
         this.getBottomToolbar().changePage(1);
@@ -180,15 +180,19 @@ Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfrican
 
 Sovereign.window.CreateAfricanArtworks = function(config) {
     config = config || {};
+    var check = Ext.getCmp('sovereign-window-africanartworks-create');
+    if (check) {
+        check.destroy();
+    }
     this.ident = config.ident || 'sovupart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
+    this.galleryName = Ext.getCmp('sovereign-grid-africanartworks').config.galleryName;
     Ext.applyIf(config,{
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/galleryafrican/artworks/create'
-            ,gallery: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
-            ,galleryId: this.galleryId
+            ,gallery: 'assets/components/sovereign/galleries/african/' + this.galleryName + '/'
+            ,galleryId: this.galleryName
         }
         ,id: this.ident
         ,fileUpload : true

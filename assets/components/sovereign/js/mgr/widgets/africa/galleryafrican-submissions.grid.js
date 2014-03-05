@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         id: 'sovereign-grid-galleryafricansubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/getList' }
-        ,fields: ['id','galleryname','year','menu']
+        ,fields: ['id','galleryname','url','year','menu']
         ,paging: true
         ,remoteSort: true
         ,listeners : {
@@ -12,10 +12,9 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
                 console.log('yup');
                 if (grid.getSelectionModel().hasSelection()) {
                     var row = grid.getSelectionModel().getSelections()[0];
-                    var id = row.get('id');
+                    var galleryname = row.get('galleryname');
                 }
-                //location.href = '?a='+MODx.request.a+'&action=competitionview&competition='+id;
-                this.loadNewGrid(grid, row, id);
+                this.loadNewGrid(grid, row, galleryname);
             }
         }
         ,autoExpandColumn: 'galleryname'
@@ -68,6 +67,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
     });
     Sovereign.grid.GalleryAfricanSubmissions.superclass.constructor.call(this,config)
 };
+
 Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
@@ -110,16 +110,20 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,params: {
                 action: 'mgr/galleryafrican/remove'
                 ,id: this.menu.record.id
+                ,dir: this.menu.record.url
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },loadNewGrid: function(grid, row, id) {
-        Ext.getCmp('sovereign-panel-africa').replaceSubmissionsGrid(grid, row, id);
+    },loadNewGrid: function(grid, row, galleryname) {
+        Ext.getCmp('sovereign-panel-africa').replaceSubmissionsGrid(grid, row, galleryname);
     }
 });
 Ext.reg('sovereign-grid-galleryafricansubmissions',Sovereign.grid.GalleryAfricanSubmissions);
+
+
+
 
 Sovereign.window.UpdateGalleryAfricanSubmissions = function(config) {
     config = config || {};
@@ -150,15 +154,28 @@ Ext.extend(Sovereign.window.UpdateGalleryAfricanSubmissions,MODx.Window);
 Ext.reg('sovereign-window-galleryafricansubmissions-update',Sovereign.window.UpdateGalleryAfricanSubmissions);
 
 
+
+
 Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
     config = config || {};
+    var check = Ext.getCmp('sovereign-window-galleryafricansubmissions-create');
+    if (check) check.destroy();
+    this.ident = config.ident || 'sovcrgal'+Ext.id();
+    this.name = "";
+    this.url = "";
+    this.parent = 'assets/components/sovereign/galleries/african/';
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/galleryafrican/create'
+            ,name: this.name
+            ,parent: this.parent
         }
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'url'
+        },{
             xtype: 'textfield'
             ,fieldLabel: _('sovereign.name')
             ,name: 'galleryname'
