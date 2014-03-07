@@ -16,6 +16,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
         },{
             header: _('sovereign.artwork_thumb')
             ,dataIndex: 'filename'
+            ,align: 'center'
             ,sortable: true
             ,width: 50
             ,renderer: function(value){

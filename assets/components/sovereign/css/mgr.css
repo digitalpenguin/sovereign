@@ -2,6 +2,7 @@
 .icon-add { background:url("../css/img/add.png") no-repeat scroll 5px 4px transparent !important; }
 #panelHome {margin-top:5px}
 .vertical-tabs-header {padding-top: 20px !important;}
+.x-grid3-hd-inner{ text-align:left; }
 
 .x-grid3-row :hover { background-color:#fef8dc; cursor:pointer;}
 

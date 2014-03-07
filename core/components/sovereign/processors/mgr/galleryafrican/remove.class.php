@@ -1,7 +1,7 @@
 <?php
 /**
  * Remove a directory
- *
+ * @param string $galleryname The name of the gallery
  * @param string $dir The directory to remove
  * @param boolean $prependPath (optional) If true, will prepend rb_base_dir to
  * the final path
@@ -27,11 +27,21 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
     public function initialize() {
         $this->setDefaultProperties(array(
             'name' => false,
-            'parent' => '',
+            'parent' => ''
         ));
         $dir = $this->getProperty('dir');
         if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
         return parent::initialize();
+    }
+
+    public function beforeSet() {
+
+        $galleryname = $this->getProperty('galleryname');
+        $total = $this->modx->getCount('galleryAfricanImages',array('galleryname' => $galleryname));
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' Number of artworks belonging to this gallery: ' . $total);
+        if ($total > 0) {
+            return $this->failure($this->modx->lexicon('sovereign.refuse_delete_items_exist'));
+        }
     }
 
     public function process() {

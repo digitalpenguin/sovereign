@@ -3,6 +3,7 @@
 
     <object class="galleryAfricanImages" table="sovereign_gallery_african_images" extends="xPDOSimpleObject">
         <field key="filename" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="galleryname" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="caption" dbtype="text" phptype="string" />
         <field key="width" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
         <field key="height" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
@@ -76,6 +77,7 @@
      
     <object class="galleryAsiaImages" table="sovereign_gallery_asia_images" extends="xPDOSimpleObject">
         <field key="filename" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="galleryname" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="caption" dbtype="text" phptype="string" />
         <field key="width" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
         <field key="height" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
@@ -149,6 +151,7 @@
     
     <object class="galleryEuropeImages" table="sovereign_gallery_europe_images" extends="xPDOSimpleObject">
         <field key="filename" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="galleryname" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="caption" dbtype="text" phptype="string" />
         <field key="width" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
         <field key="height" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
@@ -222,6 +225,7 @@
 
     <object class="galleryMideastImages" table="sovereign_gallery_mideast_images" extends="xPDOSimpleObject">
         <field key="filename" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="galleryname" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="caption" dbtype="text" phptype="string" />
         <field key="width" dbtype="int" precision="8" phptype="integer" null="true" default="0" />
         <field key="height" dbtype="int" precision="8" phptype="integer" null="true" default="0" />

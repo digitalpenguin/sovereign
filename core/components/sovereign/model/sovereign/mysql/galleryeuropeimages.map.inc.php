@@ -7,6 +7,7 @@ $xpdo_meta_map['galleryEuropeImages']= array (
   'fields' => 
   array (
     'filename' => '',
+    'galleryname' => '',
     'caption' => NULL,
     'width' => 0,
     'height' => 0,
@@ -62,6 +63,14 @@ $xpdo_meta_map['galleryEuropeImages']= array (
   'fieldMeta' => 
   array (
     'filename' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'galleryname' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',

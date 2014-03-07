@@ -17,8 +17,6 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
     /** @var modMediaSource|modFileMediaSource $source */
     public $source;
     public function checkPermissions() {
-
-        //$this->setProperty('name', $this->getProperty('galleryname'));
         return $this->modx->hasPermission('directory_create');
     }
 
