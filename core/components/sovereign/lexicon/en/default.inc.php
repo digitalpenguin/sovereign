@@ -77,3 +77,6 @@ $_lang['sovereign.artwork_address1'] = 'Address 1';
 $_lang['sovereign.artwork_address2'] = 'Address 2';
 $_lang['sovereign.artwork_address3'] = 'Address 3';
 $_lang['sovereign.artwork_country'] = 'Country';
+
+
+$_lang['sovereign.remove.refuse_delete_items_exist'] = 'Cannot remove gallery while artworks exist!';

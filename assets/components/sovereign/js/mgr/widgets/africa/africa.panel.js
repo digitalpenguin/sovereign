@@ -79,10 +79,8 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
 
         var artworkGrid = new Sovereign.grid.AfricanArtworks;
         artworkGrid.passGalleryId(galleryname); // pass id of selected gallery
-        //artworkGrid.filterByGalleryId(id);
         var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
             activeMainAfricanTab.add(artworkGrid);
-            //submissionsGrid.destroy();
             activeMainAfricanTab.doLayout();
             artworkGrid.getEl().slideIn('r', {
                 easing: 'easeIn',
@@ -106,7 +104,6 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
         });
 
         var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
-        //var submissionsGrid = new Sovereign.grid.GalleryAfricanSubmissions;
         var slideGridOut = new Ext.util.DelayedTask(function(){
             tab.add(submissionsGrid);
             artworkGrid.destroy();

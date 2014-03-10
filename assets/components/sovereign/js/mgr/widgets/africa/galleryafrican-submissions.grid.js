@@ -111,9 +111,8 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,params: {
                 action: 'mgr/galleryafrican/remove'
                 ,id: this.menu.record.id
-                ,gallery: this.menu.record.galleryname
+                ,galleryname: this.menu.record.galleryname
                 ,dir: this.menu.record.url
-
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}

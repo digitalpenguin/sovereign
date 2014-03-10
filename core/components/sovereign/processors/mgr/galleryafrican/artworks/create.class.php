@@ -23,9 +23,10 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
     public function initialize() {
         $this->setDefaultProperties(array(
             'source' => 1,
-            'gallery' => false,
+            'galleryname' => false,
         ));
-        if (!$this->getProperty('gallery')) return $this->modx->lexicon('file_folder_err_ns');
+        $this->setProperty('galleryname', $this->getProperty('gallery'));
+        if (!$this->getProperty('galleryname')) return $this->modx->lexicon('file_folder_err_ns');
         return parent::initialize();
     }
 
@@ -38,7 +39,7 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
         if (!$this->source->checkPolicy('create')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $success = $this->source->uploadObjectsToContainer($this->getProperty('gallery'),$_FILES);
+        $success = $this->source->uploadObjectsToContainer($this->getProperty('galleryId'),$_FILES);
 
         if (empty($success)) {
             $msg = '';

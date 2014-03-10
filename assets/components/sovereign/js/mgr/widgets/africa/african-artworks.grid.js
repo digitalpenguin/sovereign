@@ -4,10 +4,10 @@ Sovereign.grid.AfricanArtworks = function(config) {
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
-        ,fields: ['id','filename','url','aname','pname','menu']
+        ,fields: ['id','filename','galleryname','url','aname','pname','menu']
         ,paging: true
         ,remoteSort: true
-        ,autoExpandColumn: 'title'
+        ,autoExpandColumn: 'aname'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -89,7 +89,7 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         this.refresh();
     },uploadArtwork: function(btn,e) {
         var r = {
-            galleryId: this.config.galleryId
+            galleryname: this.config.galleryname
             ,active: true
         };
         if (!this.addArtworkWindow) {
@@ -186,14 +186,14 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         check.destroy();
     }
     this.ident = config.ident || 'sovupart'+Ext.id();
-    this.galleryName = Ext.getCmp('sovereign-grid-africanartworks').config.galleryName;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryName;
     Ext.applyIf(config,{
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/galleryafrican/artworks/create'
-            ,gallery: 'assets/components/sovereign/galleries/african/' + this.galleryName + '/'
-            ,galleryId: this.galleryName
+            ,galleryId: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
+            ,gallery: this.galleryId
         }
         ,id: this.ident
         ,fileUpload : true
@@ -203,7 +203,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,minWidth: 650
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'gallery'
+            ,name: 'galleryname'
         },{
             xtype: 'container'
             ,layout     : 'hbox'

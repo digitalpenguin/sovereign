@@ -16,32 +16,18 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
 
     /** @var modMediaSource|modFileMediaSource $source */
     public $source;
-    public function checkPermissions() {
-        return $this->modx->hasPermission('directory_remove');
-    }
-
-    public function getLanguageTopics() {
-        return array('file');
-    }
 
     public function initialize() {
-        $this->setDefaultProperties(array(
-            'name' => false,
-            'parent' => ''
-        ));
-        $dir = $this->getProperty('dir');
-        if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
-        return parent::initialize();
-    }
-
-    public function beforeSet() {
-
         $galleryname = $this->getProperty('galleryname');
-        $total = $this->modx->getCount('galleryAfricanImages',array('galleryname' => $galleryname));
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' Number of artworks belonging to this gallery: ' . $total);
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of galleryname:' . $galleryname);
+        $c = $this->modx->newQuery('galleryAfricanImages');
+        $c->where(array('galleryname' => $galleryname));
+        $c->prepare();
+        $total = $this->modx->getCount('galleryAfricanImages', $c);
         if ($total > 0) {
-            return $this->failure($this->modx->lexicon('sovereign.refuse_delete_items_exist'));
+            return $this->failure($this->modx->lexicon('sovereign.remove.refuse_delete_items_exist'));
         }
+        return parent::initialize();
     }
 
     public function process() {
@@ -53,7 +39,7 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
         if (!$this->source->checkPolicy('remove')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of dir:' . $this->getProperty('dir'));
         $success = $this->source->removeContainer($this->getProperty('dir'));
 
         if (empty($success)) {
