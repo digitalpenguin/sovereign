@@ -11,7 +11,5 @@ $xpdo_meta_map = array (
     5 => 'galleryEurope',
     6 => 'galleryMideastImages',
     7 => 'galleryMideast',
-    8 => 'galleryTypes',
-    9 => 'votes',
   ),
 );

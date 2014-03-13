@@ -15,12 +15,13 @@ class AfricanArtworksGetListProcessor extends modObjectGetListProcessor {
             ));
         }
 
-        $id = $this->getProperty('id');
-        if (!empty($id)) {
+        $galleryId = $this->getProperty('galleryId');
+        if(!empty($galleryId)) {
             $c->where(array(
-                'id' => $id
+                'galleryname' => $galleryId
             ));
         }
+
         return $c;
     }
 }

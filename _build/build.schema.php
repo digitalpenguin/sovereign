@@ -23,6 +23,4 @@ $manager->createObjectContainer('galleryEurope');
 $manager->createObjectContainer('galleryAfricanImages');
 $manager->createObjectContainer('galleryAsiaImages');
 $manager->createObjectContainer('galleryEuropeImages');
-$manager->createObjectContainer('galleryTypes');
-$manager->createObjectContainer('votes');
 $modx->log(modX::LOG_LEVEL_INFO, 'Done!');

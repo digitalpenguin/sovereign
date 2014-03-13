@@ -98,17 +98,6 @@ $xpdo_meta_map['galleryMideast']= array (
       'default' => 0,
     ),
   ),
-  'composites' => 
-  array (
-    'Votes' => 
-    array (
-      'class' => 'artVotes',
-      'local' => 'id',
-      'foreign' => 'item_id',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-  ),
   'aggregates' => 
   array (
     'CreatedBy' => 

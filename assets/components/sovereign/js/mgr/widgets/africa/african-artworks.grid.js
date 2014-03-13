@@ -8,6 +8,9 @@ Sovereign.grid.AfricanArtworks = function(config) {
         ,paging: true
         ,remoteSort: true
         ,autoExpandColumn: 'aname'
+        ,listeners: {
+            'render': {fn:this.filterGalleries,scope:this}
+        }
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -85,6 +88,11 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
             ,'parent': this.config.resource
         };
         Ext.getCmp('africanartworks-search-filter').reset();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    },filterGalleries: function() {
+        var s = this.getStore();
+        s.baseParams.galleryId = this.config.galleryName;
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },uploadArtwork: function(btn,e) {

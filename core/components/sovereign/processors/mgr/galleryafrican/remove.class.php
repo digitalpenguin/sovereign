@@ -17,17 +17,21 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
     /** @var modMediaSource|modFileMediaSource $source */
     public $source;
 
-    public function initialize() {
+    /**
+     * This function is overridden to prevent a competition from being deleted when artworks still exist.
+     * @return bool
+     */
+    private function checkArtworksExist(){
         $galleryname = $this->getProperty('galleryname');
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of galleryname:' . $galleryname);
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of $galleryname:' . $this->getProperty('galleryname'));
         $c = $this->modx->newQuery('galleryAfricanImages');
         $c->where(array('galleryname' => $galleryname));
         $c->prepare();
         $total = $this->modx->getCount('galleryAfricanImages', $c);
         if ($total > 0) {
-            return $this->failure($this->modx->lexicon('sovereign.remove.refuse_delete_items_exist'));
+            return true;
         }
-        return parent::initialize();
+        return false;
     }
 
     public function process() {
@@ -39,8 +43,13 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
         if (!$this->source->checkPolicy('remove')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of dir:' . $this->getProperty('dir'));
-        $success = $this->source->removeContainer($this->getProperty('dir'));
+
+        $artworksExist = $this->checkArtworksExist();
+        if (!$artworksExist) {
+            $success = $this->source->removeContainer($this->getProperty('dir'));
+        } else {
+            return $this->failure($this->modx->lexicon('sovereign.remove.refuse_delete_items_exist'));
+        }
 
         if (empty($success)) {
             $msg = '';

@@ -9,7 +9,6 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         ,remoteSort: true
         ,listeners : {
             'rowclick': function(grid, index, rec){
-                console.log('yup');
                 if (grid.getSelectionModel().hasSelection()) {
                     var row = grid.getSelectionModel().getSelections()[0];
                     var galleryname = row.get('galleryname');
