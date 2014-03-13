@@ -1,17 +1,25 @@
 Sovereign.grid.AfricanArtworks = function(config) {
     config = config || {};
+    var expander = new Ext.ux.grid.RowExpander({
+        tpl : new Ext.Template(
+            '<p><b>Statement:</b> {statement}</p><br>',
+            '<p><b>Workbrief:</b> {workbrief}</p>'
+        )
+    });
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
-        ,fields: ['id','filename','galleryname','url','aname','pname','menu']
+        ,fields: ['id','filename','galleryname','url','aname','pname','statement','workbrief','menu']
         ,paging: true
         ,remoteSort: true
         ,autoExpandColumn: 'aname'
         ,listeners: {
             'render': {fn:this.filterGalleries,scope:this}
         }
-        ,columns: [{
+        ,columns: [
+            expander
+        ,{
             header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
@@ -73,6 +81,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
                 'click': {fn: this.clearFilter, scope: this}
             }
         }]
+
     });
     Sovereign.grid.AfricanArtworks.superclass.constructor.call(this,config)
 };

@@ -64,9 +64,7 @@
         <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="year" dbtype="varchar" precision="6" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
-        <field key="datetime" dbtype="datetime" phptype="string" null="true" />
         <field key="vote_on" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="true" default="" />
-        <field key="short_name" dbtype="varchar" precision="25" phptype="string" null="true" default="" />
         <field key="votes" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />

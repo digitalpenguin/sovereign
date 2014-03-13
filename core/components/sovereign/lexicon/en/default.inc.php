@@ -55,6 +55,14 @@ $_lang['sovereign.gallery_remove'] = 'Remove Gallery';
 $_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
 $_lang['sovereign.gallery_update'] = 'Update Gallery';
 $_lang['sovereign.gallery_create'] = 'Create New Gallery';
+$_lang['sovereign.active_gallery'] = 'Activated';
+$_lang['sovereign.created_on'] = 'Created on';
+$_lang['sovereign.created_by'] = 'Created by';
+$_lang['sovereign.gallery_artwork_total'] = 'Artwork Total';
+$_lang['sovereign.gallery_activate'] = 'Activate Gallery';
+$_lang['sovereign.gallery_activate_confirm'] = 'Are you sure you wish to activate this gallery? This will allow submissions for this gallery to begin.';
+$_lang['sovereign.gallery_deactivate'] = 'Deactivate Gallery';
+$_lang['sovereign.gallery_deactivate_confirm'] = 'Are you sure you wish to deactivate this gallery? This will suspend submissions for this gallery.';
 
 /*
  * Artwork Grid

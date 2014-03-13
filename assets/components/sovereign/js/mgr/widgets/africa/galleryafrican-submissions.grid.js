@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         id: 'sovereign-grid-galleryafricansubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/getList' }
-        ,fields: ['id','galleryname','url','year','menu']
+        ,fields: ['id','galleryname','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
         ,remoteSort: true
         ,listeners : {
@@ -18,11 +18,6 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         }
         ,autoExpandColumn: 'galleryname'
         ,columns: [{
-            header: _('id')
-            ,dataIndex: 'id'
-            ,sortable: true
-            ,width: 60
-        },{
             header: _('sovereign.galleryname')
             ,dataIndex: 'galleryname'
             ,sortable: true
@@ -30,6 +25,31 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         },{
             header: _('sovereign.year')
             ,dataIndex: 'year'
+            ,sortable: true
+            ,width: 100
+        },{
+            header: _('sovereign.gallery_artwork_total')
+            ,dataIndex: 'artworktotal'
+            ,sortable: true
+            ,width: 40
+        },{
+            header: _('sovereign.active_gallery')
+            ,align: 'center'
+            ,dataIndex: 'enabled'
+            ,sortable: true
+            ,width: 40
+            ,renderer: function(value){
+                var active = value ? 'greentick.png' : 'redcross.png';
+                return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
+            }
+        },{
+            header: _('sovereign.created_on')
+            ,dataIndex: 'createdon'
+            ,sortable: true
+            ,width: 100
+        },{
+            header: _('sovereign.created_by')
+            ,dataIndex: 'createdby'
             ,sortable: true
             ,width: 100
         }]
@@ -81,26 +101,58 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
         Ext.getCmp('galleryafricansubmissions-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },getMenu: function() {
-        return [{
-            text: _('sovereign.gallery_update')
-            ,handler: this.updateGalleryAfricanSubmissions
-        },'-',{
-            text: _('sovereign.gallery_remove')
-            ,handler: this.removeGalleryAfricanSubmissions
-        }];
-    },updateGalleryAfricanSubmissions: function(btn,e) {
-        if (!this.updateGalleryWindow) {
-            this.updateGalleryWindow = MODx.load({
-                xtype: 'sovereign-window-galleryafricansubmissions-update'
-                ,record: this.menu.record
-                ,listeners: {
-                    'success': {fn:this.refresh,scope:this}
-                }
-            });
+    },getMenu: function(grid, index, rec) {
+        if (grid.getSelectionModel().hasSelection()) {
+            var row = grid.getSelectionModel().getSelections()[0];
+            var enabledVal = row.get('enabled');
         }
-        this.updateGalleryWindow.setValues(this.menu.record);
-        this.updateGalleryWindow.show(e.target);
+        if(!enabledVal) {
+            return [{
+                text: _('sovereign.gallery_activate')
+                ,handler: this.activateGalleryAfricanSubmissions
+            },'-',{
+                text: _('sovereign.gallery_remove')
+                ,handler: this.removeGalleryAfricanSubmissions
+            }];
+        } else {
+            return [{
+                text: _('sovereign.gallery_deactivate')
+                ,handler: this.deactivateGalleryAfricanSubmissions
+            },'-',{
+                text: _('sovereign.gallery_remove')
+                ,handler: this.removeGalleryAfricanSubmissions
+            }];
+        }
+    },activateGalleryAfricanSubmissions: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.gallery_activate')
+            ,text: _('sovereign.gallery_activate_confirm')
+            ,url: this.config.url
+            ,galleryname: this.config.galleryname
+            ,params: {
+                action: 'mgr/galleryafrican/activate'
+                ,id: this.menu.record.id
+                ,galleryname: this.menu.record.galleryname
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },deactivateGalleryAfricanSubmissions: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.gallery_deactivate')
+            ,text: _('sovereign.gallery_deactivate_confirm')
+            ,url: this.config.url
+            ,galleryname: this.config.galleryname
+            ,params: {
+                action: 'mgr/galleryafrican/deactivate'
+                ,id: this.menu.record.id
+                ,galleryname: this.menu.record.galleryname
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     },removeGalleryAfricanSubmissions: function() {
         MODx.msg.confirm({
             title: _('sovereign.gallery_remove')
@@ -122,38 +174,6 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
     }
 });
 Ext.reg('sovereign-grid-galleryafricansubmissions',Sovereign.grid.GalleryAfricanSubmissions);
-
-
-
-
-Sovereign.window.UpdateGalleryAfricanSubmissions = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('sovereign.gallery_update')
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/galleryafrican/update'
-        }
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.name')
-            ,name: 'galleryname'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
-            ,name: 'year'
-            ,anchor: '100%'
-        }]
-    });
-    Sovereign.window.UpdateGalleryAfricanSubmissions.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.UpdateGalleryAfricanSubmissions,MODx.Window);
-Ext.reg('sovereign-window-galleryafricansubmissions-update',Sovereign.window.UpdateGalleryAfricanSubmissions);
-
 
 
 

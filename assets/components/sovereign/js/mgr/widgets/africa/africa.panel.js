@@ -24,7 +24,7 @@ Sovereign.panel.AfricanPanel = function(config) {
             ,items: [{
                 title: _('sovereign.submissionsgallery_label')
                 ,id: 'africangalleries-submissions'
-                ,defaults: { autoHeight: true }
+                ,defaults: { autoHeight: true, autoWidth: true }
                 ,items: [{
                     html: '<h3>'+_('sovereign.tab_heading_african_submissions')+'</h3><p>'+ _('sovereign.submissions_galleries_desc') +'</p>'
                     ,border: true
@@ -67,30 +67,33 @@ Sovereign.panel.AfricanPanel = function(config) {
 };
 Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
     replaceSubmissionsGrid: function(grid, row, galleryname) {
-        var africanTabs = Ext.getCmp('africanTabs');
-        var activeMainAfricanTab = africanTabs.getActiveTab();
-        var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
-        submissionsGrid.getEl().ghost('l', {
-            easing: 'easeOut',
-            duration:.3,
-            remove: true,
-            useDisplay: true
-        });
-
-        var artworkGrid = new Sovereign.grid.AfricanArtworks;
-        artworkGrid.passGalleryId(galleryname); // pass id of selected gallery
-        var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
-            activeMainAfricanTab.add(artworkGrid);
-            activeMainAfricanTab.doLayout();
-            artworkGrid.getEl().slideIn('r', {
-                easing: 'easeIn',
+        if (!Ext.getCmp('sovereign-grid-africanartworks')) { // stop double clicks
+            var africanTabs = Ext.getCmp('africanTabs');
+            var activeMainAfricanTab = africanTabs.getActiveTab();
+            var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
+            submissionsGrid.getEl().ghost('l', {
+                easing: 'easeOut',
                 duration:.3,
+                remove: true,
                 useDisplay: true
             });
-        });
 
-        slideGridIn.delay(350); // keep delay slightly longer than effect
+            var artworkGrid = new Sovereign.grid.AfricanArtworks;
+            artworkGrid.passGalleryId(galleryname); // pass id of selected gallery
+            var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
+                activeMainAfricanTab.add(artworkGrid);
+                activeMainAfricanTab.doLayout();
+                artworkGrid.getEl().slideIn('r', {
+                    easing: 'easeIn',
+                    duration:.3,
+                    useDisplay: true
+                });
+            });
 
+            slideGridIn.delay(350); // keep delay slightly longer than effect
+        } else {
+            //do nothing (to stop more than one grid loading)
+        }
     },backToSubmissionsGrid: function() {
 
         var tabs = Ext.getCmp('africanTabs');
@@ -102,6 +105,8 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             remove: true,
             useDisplay: true
         });
+
+
 
         var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
         var slideGridOut = new Ext.util.DelayedTask(function(){

@@ -32,7 +32,20 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
         if (!$this->getProperty('galleryname')) return $this->modx->lexicon('file_err_chmod_ns');
 
         $this->setProperty('url', MODX_BASE_PATH . $this->getProperty('parent') . $this->getProperty('galleryname'));
+        $this->setUserId();
+        $this->setCreateTime();
         return parent::initialize();
+    }
+
+    private function setUserId() {
+        $user = $this->modx->getLoginUserID();
+        $this->setProperty('createdby', $user);
+    }
+
+    private function setCreateTime() {
+        date_default_timezone_set('Asia/Hong_Kong');
+        $date = date('m/d/Y h:i:s a', time());
+        $this->setProperty('createdon', $date);
     }
 
     public function process() {
