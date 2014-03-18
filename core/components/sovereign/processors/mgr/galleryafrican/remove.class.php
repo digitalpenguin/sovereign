@@ -10,7 +10,7 @@
  *
  */
 class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
-    public $classKey = 'galleryAfrican';
+    public $classKey = 'africanGalleries';
     public $languageTopics = array('sovereign:default');
     public $objectType = 'sovereign';
 
@@ -24,10 +24,10 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
     private function checkArtworksExist(){
         $galleryname = $this->getProperty('galleryname');
         //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of $galleryname:' . $this->getProperty('galleryname'));
-        $c = $this->modx->newQuery('galleryAfricanImages');
+        $c = $this->modx->newQuery('africanArtworks');
         $c->where(array('galleryname' => $galleryname));
         $c->prepare();
-        $total = $this->modx->getCount('galleryAfricanImages', $c);
+        $total = $this->modx->getCount('africanArtworks', $c);
         if ($total > 0) {
             return true;
         }

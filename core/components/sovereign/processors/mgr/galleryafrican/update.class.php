@@ -1,7 +1,7 @@
 <?php
 
 class GalleryAfricanUpdateProcessor extends modObjectUpdateProcessor {
-    public $classKey = 'galleryAfrican';
+    public $classKey = 'africanGalleries';
     public $languageTopics = array('sovereign:default');
     public $objectType = 'sovereign';
 

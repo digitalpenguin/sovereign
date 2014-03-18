@@ -17,10 +17,6 @@ if (!is_dir($sources['model'])) { $modx->log(modX::LOG_LEVEL_ERROR,'Model direct
 if (!file_exists($sources['schema_file'])) { $modx->log(modX::LOG_LEVEL_ERROR,'Schema file not found!'); die(); }
 $generator->parseSchema($sources['schema_file'],$sources['model']);
 $modx->addPackage('sovereign', $sources['model']); // add package to make all models available
-$manager->createObjectContainer('galleryAfrican'); // create the database tables
-$manager->createObjectContainer('galleryAsia');
-$manager->createObjectContainer('galleryEurope');
-$manager->createObjectContainer('galleryAfricanImages');
-$manager->createObjectContainer('galleryAsiaImages');
-$manager->createObjectContainer('galleryEuropeImages');
+$manager->createObjectContainer('africanGalleries'); // create the database tables
+$manager->createObjectContainer('africanArtworks');
 $modx->log(modX::LOG_LEVEL_INFO, 'Done!');

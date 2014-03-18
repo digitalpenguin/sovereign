@@ -1,13 +1,14 @@
 <?php
-$xpdo_meta_map['galleryAfricanImages']= array (
+$xpdo_meta_map['africanArtworks']= array (
   'package' => 'sovereign',
   'version' => '1.1',
-  'table' => 'sovereign_gallery_african_images',
+  'table' => 'sovereign_african_artworks',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
-    'filename' => '',
     'galleryname' => '',
+    'gallery_id' => 0,
+    'filename' => '',
     'caption' => NULL,
     'width' => 0,
     'height' => 0,
@@ -62,7 +63,7 @@ $xpdo_meta_map['galleryAfricanImages']= array (
   ),
   'fieldMeta' => 
   array (
-    'filename' => 
+    'galleryname' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -70,7 +71,16 @@ $xpdo_meta_map['galleryAfricanImages']= array (
       'null' => true,
       'default' => '',
     ),
-    'galleryname' => 
+    'gallery_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
+    'filename' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -476,6 +486,14 @@ $xpdo_meta_map['galleryAfricanImages']= array (
   ),
   'aggregates' => 
   array (
+    'AfricanGallery' => 
+    array (
+      'class' => 'africanGalleries',
+      'local' => 'gallery_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'CreatedBy' => 
     array (
       'class' => 'modUser',

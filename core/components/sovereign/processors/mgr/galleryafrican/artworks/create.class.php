@@ -1,9 +1,9 @@
 <?php
 class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
-    public $classKey = 'galleryAfricanImages';
+    public $classKey = 'africanArtworks';
     public $languageTopics = array('sovereign:default');
     public $objectType = 'sovereign';
-    /** @var galleryAfricanImages $object */
+    /** @var africanArtworks $object */
     public $object;
 
     /** @var modMediaSource $source */
@@ -20,6 +20,16 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
         return $langs;
     }
 
+    private function addToGalleryArtworkCount() {
+        $galleryName = $this->getProperty('galleryname');
+        $artwork = $this->modx->getObject('africanArtworks', array('galleryname' => $galleryName));
+        $gallery = $artwork->getOne('AfricanGallery');
+        // WORKING IF VERY FIRST ENTRY INTO TABLE
+        //$gallery->set('artworktotal', $gallery->get('artworktotal')+1); // adds one to the total
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'CURRENT VALUE OF ARTWORK TOTAL: ' . $gallery.get('createdon'));
+        //$gallery->save();
+    }
+
     public function initialize() {
         $this->setDefaultProperties(array(
             'source' => 1,
@@ -27,10 +37,14 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
         ));
         $this->setProperty('galleryname', $this->getProperty('gallery'));
         if (!$this->getProperty('galleryname')) return $this->modx->lexicon('file_folder_err_ns');
+        $this->addToGalleryArtworkCount();
         return parent::initialize();
     }
 
+
+
     public function process() {
+
         if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
@@ -75,6 +89,7 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
         }
         return $this->source;
     }
+
 
 }
 return 'SovereignAfricanArtworkCreateProcessor';

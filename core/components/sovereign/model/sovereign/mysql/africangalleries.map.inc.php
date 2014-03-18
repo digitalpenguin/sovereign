@@ -1,18 +1,17 @@
 <?php
-$xpdo_meta_map['galleryAfrican']= array (
+$xpdo_meta_map['africanGalleries']= array (
   'package' => 'sovereign',
   'version' => '1.1',
-  'table' => 'sovereign_gallery_african',
+  'table' => 'sovereign_african_galleries',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'galleryname' => '',
+    'artworktotal' => 0,
     'url' => '',
     'year' => '',
     'enabled' => 0,
-    'datetime' => NULL,
     'vote_on' => 0,
-    'short_name' => '',
     'votes' => 0,
     'createdon' => NULL,
     'createdby' => 0,
@@ -26,6 +25,14 @@ $xpdo_meta_map['galleryAfrican']= array (
       'phptype' => 'string',
       'null' => true,
       'default' => '',
+    ),
+    'artworktotal' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
     ),
     'url' => 
     array (
@@ -51,12 +58,6 @@ $xpdo_meta_map['galleryAfrican']= array (
       'null' => true,
       'default' => 0,
     ),
-    'datetime' => 
-    array (
-      'dbtype' => 'datetime',
-      'phptype' => 'string',
-      'null' => true,
-    ),
     'vote_on' => 
     array (
       'dbtype' => 'int',
@@ -65,14 +66,6 @@ $xpdo_meta_map['galleryAfrican']= array (
       'attributes' => 'unsigned',
       'null' => true,
       'default' => 0,
-    ),
-    'short_name' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '25',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
     ),
     'votes' => 
     array (
@@ -96,6 +89,17 @@ $xpdo_meta_map['galleryAfrican']= array (
       'attributes' => 'unsigned',
       'null' => true,
       'default' => 0,
+    ),
+  ),
+  'composites' => 
+  array (
+    'AfricanArtworks' => 
+    array (
+      'class' => 'africanArtworks',
+      'local' => 'id',
+      'foreign' => 'gallery_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
     ),
   ),
   'aggregates' => 
