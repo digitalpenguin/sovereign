@@ -22,10 +22,9 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
      * @return bool
      */
     private function checkArtworksExist(){
-        $galleryname = $this->getProperty('galleryname');
-        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of $galleryname:' . $this->getProperty('galleryname'));
+        $galleryId = $this->getProperty('id');
         $c = $this->modx->newQuery('africanArtworks');
-        $c->where(array('galleryname' => $galleryname));
+        $c->where(array('gallery_id' => $galleryId));
         $c->prepare();
         $total = $this->modx->getCount('africanArtworks', $c);
         if ($total > 0) {
@@ -35,6 +34,8 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
     }
 
     public function process() {
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of dir : ' . $this->getProperty('dir'));
+
         if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
@@ -47,6 +48,7 @@ class GalleryAfricanRemoveProcessor extends modObjectRemoveProcessor {
         $artworksExist = $this->checkArtworksExist();
         if (!$artworksExist) {
             $success = $this->source->removeContainer($this->getProperty('dir'));
+            $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of dir : ' . $this->getProperty('dir'));
         } else {
             return $this->failure($this->modx->lexicon('sovereign.remove.refuse_delete_items_exist'));
         }

@@ -18,7 +18,7 @@ class AfricanArtworksGetListProcessor extends modObjectGetListProcessor {
         $galleryId = $this->getProperty('galleryId');
         if(!empty($galleryId)) {
             $c->where(array(
-                'galleryname' => $galleryId
+                'gallery_id' => $galleryId
             ));
         }
 

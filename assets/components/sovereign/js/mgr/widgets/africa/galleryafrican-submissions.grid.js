@@ -6,14 +6,15 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         ,baseParams: { action: 'mgr/galleryafrican/getList' }
         ,fields: ['id','galleryname','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
+        ,pageSize: 10
         ,remoteSort: true
         ,listeners : {
             'rowclick': function(grid, index, rec){
                 if (grid.getSelectionModel().hasSelection()) {
                     var row = grid.getSelectionModel().getSelections()[0];
-                    var galleryname = row.get('galleryname');
+                    var galleryId = row.get('id');
                 }
-                this.loadNewGrid(grid, row, galleryname);
+                this.loadNewGrid(grid, row, galleryId);
             }
         }
         ,autoExpandColumn: 'galleryname'
@@ -132,7 +133,6 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,params: {
                 action: 'mgr/galleryafrican/activate'
                 ,id: this.menu.record.id
-                ,galleryname: this.menu.record.galleryname
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
@@ -147,7 +147,6 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,params: {
                 action: 'mgr/galleryafrican/deactivate'
                 ,id: this.menu.record.id
-                ,galleryname: this.menu.record.galleryname
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
@@ -158,19 +157,18 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             title: _('sovereign.gallery_remove')
             ,text: _('sovereign.gallery_remove_confirm')
             ,url: this.config.url
-            ,galleryname: this.config.galleryname
             ,params: {
                 action: 'mgr/galleryafrican/remove'
                 ,id: this.menu.record.id
-                ,galleryname: this.menu.record.galleryname
-                ,dir: this.menu.record.url
+                // A hack to prepend the modx install base path
+                ,dir: Sovereign.config.modxBasePath + Sovereign.config.africanGalleryUrl + this.menu.record.id
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },loadNewGrid: function(grid, row, galleryname) {
-        Ext.getCmp('sovereign-panel-africa').replaceSubmissionsGrid(grid, row, galleryname);
+    },loadNewGrid: function(grid, row, galleryId) {
+        Ext.getCmp('sovereign-panel-africa').replaceSubmissionsGrid(grid, row, galleryId);
     }
 });
 Ext.reg('sovereign-grid-galleryafricansubmissions',Sovereign.grid.GalleryAfricanSubmissions);
@@ -182,15 +180,12 @@ Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
     var check = Ext.getCmp('sovereign-window-galleryafricansubmissions-create');
     if (check) check.destroy();
     this.ident = config.ident || 'sovcrgal'+Ext.id();
-    this.name = "";
-    this.url = "";
-    this.parent = 'assets/components/sovereign/galleries/african/';
+    this.parent = Sovereign.config.africanGalleryUrl;//'assets/components/sovereign/galleries/african/';
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/galleryafrican/create'
-            ,name: this.name
             ,parent: this.parent
         }
         ,fields: [{

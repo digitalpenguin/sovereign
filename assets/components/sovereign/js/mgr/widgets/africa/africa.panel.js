@@ -66,7 +66,7 @@ Sovereign.panel.AfricanPanel = function(config) {
     Sovereign.panel.AfricanPanel.superclass.constructor.call(this,config);
 };
 Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
-    replaceSubmissionsGrid: function(grid, row, galleryname) {
+    replaceSubmissionsGrid: function(grid, row, galleryId) {
         if (!Ext.getCmp('sovereign-grid-africanartworks')) { // stop double clicks
             var africanTabs = Ext.getCmp('africanTabs');
             var activeMainAfricanTab = africanTabs.getActiveTab();
@@ -74,19 +74,19 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             submissionsGrid.getEl().ghost('l', {
                 easing: 'easeOut',
                 duration:.3,
-                remove: true,
+                remove: false,
                 useDisplay: true
             });
 
             var artworkGrid = new Sovereign.grid.AfricanArtworks;
-            artworkGrid.passGalleryId(galleryname); // pass id of selected gallery
+            artworkGrid.passGalleryId(galleryId); // pass id of selected gallery
             var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
                 activeMainAfricanTab.add(artworkGrid);
                 activeMainAfricanTab.doLayout();
                 artworkGrid.getEl().slideIn('r', {
                     easing: 'easeIn',
                     duration:.3,
-                    useDisplay: true
+                    useDisplay: false
                 });
             });
 
@@ -106,18 +106,17 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             useDisplay: true
         });
 
-
-
         var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
         var slideGridOut = new Ext.util.DelayedTask(function(){
             tab.add(submissionsGrid);
-            artworkGrid.destroy();
-            tab.doLayout();
             submissionsGrid.getEl().slideIn('l', {
                 easing: 'easeIn',
                 duration:.3,
                 useDisplay: true
             });
+            artworkGrid.destroy();
+            tab.doLayout();
+            submissionsGrid.refresh();
         });
 
         slideGridOut.delay(350); // keep delay slightly longer than effect

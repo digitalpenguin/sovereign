@@ -10,8 +10,9 @@ Sovereign.grid.AfricanArtworks = function(config) {
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
-        ,fields: ['id','filename','galleryname','url','aname','pname','statement','workbrief','menu']
+        ,fields: ['id','filename','galleryname','gallery_id','url','aname','pname','statement','workbrief','menu']
         ,paging: true
+        ,pageSize: 5
         ,remoteSort: true
         ,autoExpandColumn: 'aname'
         ,listeners: {
@@ -31,7 +32,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,sortable: true
             ,width: 50
             ,renderer: function(value){
-                return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryName + '/' + value.toString() + '" >';
+                return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/' + value + '" >';
             }
         },{
             header: _('sovereign.artist_name')
@@ -101,7 +102,7 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         this.refresh();
     },filterGalleries: function() {
         var s = this.getStore();
-        s.baseParams.galleryId = this.config.galleryName;
+        s.baseParams.galleryId = this.config.galleryId;
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },uploadArtwork: function(btn,e) {
@@ -152,13 +153,13 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },passGalleryId: function(galleryname) {
-        this.config.galleryName = galleryname;
-    },filterByGalleryId: function(id) {
+    },passGalleryId: function(galleryId) {
+        this.config.galleryId = galleryId;
+    }/*,filterByGalleryId: function(id) {
         this.getStore().baseParams['id'] = id;
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },backToGallery: function() {
+    }*/,backToGallery: function() {
         Ext.getCmp('sovereign-panel-africa').backToSubmissionsGrid();
     }
 
@@ -203,14 +204,14 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         check.destroy();
     }
     this.ident = config.ident || 'sovupart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryName;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
     Ext.applyIf(config,{
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/galleryafrican/artworks/create'
-            ,galleryId: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
-            ,gallery: this.galleryId
+            ,galleryUrl: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
+            ,galleryId: this.galleryId
         }
         ,id: this.ident
         ,fileUpload : true
@@ -220,7 +221,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,minWidth: 650
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'galleryname'
+            ,name: 'gallery_id'
         },{
             xtype: 'container'
             ,layout     : 'hbox'

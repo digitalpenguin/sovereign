@@ -5,9 +5,15 @@ class Sovereign {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
+        $modxBasePath = MODX_BASE_PATH;
         $basePath = $this->modx->getOption('sovereign.core_path',$config,$this->modx->getOption('core_path').'components/sovereign/');
         $assetsUrl = $this->modx->getOption('sovereign.assets_url',$config,$this->modx->getOption('assets_url').'components/sovereign/');
+        $africanGalleryUrl = $this->modx->getOption('sovereign.african_gallery_url',$config,MODX_ASSETS_PATH.'components/sovereign/galleries/african/');
+        //$asianGalleryUrl = $this->modx->getOption('sovereign.asian_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/asian/');
+        //$europeanGalleryUrl = $this->modx->getOption('sovereign.european_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/european/');
+        //$mideasternGalleryUrl = $this->modx->getOption('sovereign.mideastern_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/mideastern/');
         $this->config = array_merge(array(
+            'modxBasePath' => $modxBasePath,
             'basePath' => $basePath,
             'corePath' => $basePath,
             'modelPath' => $basePath.'model/',
@@ -18,6 +24,7 @@ class Sovereign {
             'cssUrl' => $assetsUrl.'css/',
             'assetsUrl' => $assetsUrl,
             'connectorUrl' => $assetsUrl.'connector.php',
+            'africanGalleryUrl' => $africanGalleryUrl,
         ),$config);
         $this->modx->addPackage('sovereign',$this->config['modelPath']);
     }

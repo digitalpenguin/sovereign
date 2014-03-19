@@ -6,19 +6,7 @@ class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
     public $defaultSortDirection = 'DESC';
     public $objectType = 'sovereign';
 
-    /*private function setArtworkCount() {
-        $gallery = $this->modx->getObject('africanGalleries');
-        if($count = $gallery->getCount('AfricanArtworks') > 0){
-            $gallery->set('artworktotal' ,$count);
-        } else {
-            $gallery->set('artworktotal' ,0);
-        }
 
-
-        //$gallery->set('artworktotal', $gallery->get('artworktotal')+1); // adds one to the total
-        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'CURRENT VALUE OF ARTWORK TOTAL: ' . $gallery->get('artworktotal'));
-        //$gallery->save();
-    }*/
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
@@ -28,18 +16,30 @@ class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
                 'OR:year:LIKE' => '%'.$query.'%',
             ));
         }
-        /*
-        $id = $this->getProperty('id');
-        if (!empty($id)) {
-            $c->where(array(
-                'id' => $id
-            ));
-        }*/
         return $c;
     }
 
-    /*public function beforeSave() {
-        $this->setArtworkCount();
-    }*/
+    public function afterIteration(array $list) {
+        $rows = array();
+        foreach ($list as $row){
+            $row['artworktotal'] = $this->getArtworkCount($row['id']);
+            $row['createdby'] = $this->getUserName($row['createdby']);
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    private function getArtworkCount($galleryId) {
+        $count = $this->modx->getCount('africanArtworks', array('gallery_id' => $galleryId));
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of count:' . $count);
+        return $count;
+    }
+
+    private function getUserName($userId) {
+        $profile = $this->modx->getObject('modUserProfile', array('internalKey' => $userId));
+        $fullName = $profile->get('fullname');
+        return $fullName;
+    }
+
 }
 return 'GalleryAfricanGetListProcessor';

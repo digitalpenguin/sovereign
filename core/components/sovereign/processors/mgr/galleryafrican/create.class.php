@@ -25,13 +25,6 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
     }
 
     public function initialize() {
-        $this->setDefaultProperties(array(
-            'galleryname' => false,
-            'parent' => '',
-        ));
-        if (!$this->getProperty('galleryname')) return $this->modx->lexicon('file_err_chmod_ns');
-
-        $this->setProperty('url', MODX_BASE_PATH . $this->getProperty('parent') . $this->getProperty('galleryname'));
         $this->setUserId();
         $this->setCreateTime();
         return parent::initialize();
@@ -48,7 +41,7 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
         $this->setProperty('createdon', $date);
     }
 
-    public function process() {
+    /*public function process() {
         if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
@@ -59,7 +52,7 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
         }
         $this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking current url: ' . $this->getProperty('url') . ' Checking current parent: ' . $this->getProperty('parent'));
 
-        $success = $this->source->createContainer($this->getProperty('galleryname'),$this->getProperty('parent'));
+        $success = $this->source->createContainer($this->getProperty('id'),$this->getProperty('parent'));
 
         if (empty($success)) {
             $msg = '';
@@ -70,7 +63,7 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
             return $this->failure($msg);
         }
         return parent::process();
-    }
+    }*/
 
     /**
      * Get the active Source
@@ -87,13 +80,39 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
 
     public function beforeSave() {
         $name = $this->getProperty('galleryname');
-
         if (empty($name)) {
             $this->addFieldError('galleryname',$this->modx->lexicon('sovereign.competition_err_ns_name'));
         } else if ($this->doesAlreadyExist(array('galleryname' => $name))) {
             $this->addFieldError('galleryname',$this->modx->lexicon('sovereign.competition_err_ae'));
         }
         return parent::beforeSave();
+    }
+
+    public function afterSave() {
+        $id = $this->object->get('id');
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' CURRENT VALUE OF ID: ' . $id);
+
+        if (!$this->getSource()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+        $this->source->setRequestProperties($this->getProperties());
+        $this->source->initialize();
+        if (!$this->source->checkPolicy('create')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking current parent: ' . $this->getProperty('parent'));
+
+        $success = $this->source->createContainer($id, $this->getProperty('parent'));
+
+        if (empty($success)) {
+            $msg = '';
+            $errors = $this->source->getErrors();
+            foreach ($errors as $k => $msg) {
+                $this->modx->error->addField($k,$msg);
+            }
+            return $this->failure($msg);
+        }
+        return parent::afterSave();
     }
 }
 return 'GalleryAfricanCreateProcessor';
