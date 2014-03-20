@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         id: 'sovereign-grid-galleryafricansubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/getList' }
-        ,fields: ['id','galleryname','url','year','artworktotal','enabled','createdon','createdby','menu']
+        ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
@@ -19,26 +19,32 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         }
         ,autoExpandColumn: 'year'
         ,columns: [{
+            header: 'ID#'
+            ,dataIndex: 'id'
+            ,sortable: true
+            ,width:.03
+        },{
             header: _('sovereign.galleryname')
             ,dataIndex: 'galleryname'
             ,sortable: true
             ,width:.15
         },{
-            header: _('sovereign.year')
-            ,dataIndex: 'year'
+            header: _('sovereign.gallery_desc')
+            ,dataIndex: 'description'
             ,sortable: true
             ,width:.3
         },{
             header: _('sovereign.gallery_artwork_total')
+            ,align: 'center'
             ,dataIndex: 'artworktotal'
-            ,sortable: true
-            ,width:.08
+            ,sortable: false
+            ,width:.055
         },{
             header: _('sovereign.active_gallery')
             ,align: 'center'
             ,dataIndex: 'enabled'
             ,sortable: true
-            ,width:.06
+            ,width:.05
             ,renderer: function(value){
                 var active = value ? 'greentick.png' : 'redcross.png';
                 return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
@@ -47,12 +53,12 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
             header: _('sovereign.created_on')
             ,dataIndex: 'createdon'
             ,sortable: true
-            ,width:.1
+            ,width:.08
         },{
             header: _('sovereign.created_by')
             ,dataIndex: 'createdby'
             ,sortable: true
-            ,width:.1
+            ,width:.08
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')
@@ -193,13 +199,13 @@ Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
             ,name: 'url'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.name')
+            ,fieldLabel: _('sovereign.galleryname')
             ,name: 'galleryname'
             ,width: 300
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
-            ,name: 'year'
+            ,fieldLabel: _('sovereign.gallery_desc')
+            ,name: 'description'
             ,width: 300
         }]
     });

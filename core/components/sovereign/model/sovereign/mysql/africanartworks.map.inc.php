@@ -6,71 +6,48 @@ $xpdo_meta_map['africanArtworks']= array (
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
-    'galleryname' => '',
     'gallery_id' => 0,
-    'filename' => '',
-    'caption' => NULL,
-    'width' => 0,
-    'height' => 0,
-    'pos' => 0,
-    'gid' => 0,
-    'lot' => 0,
-    'aname' => '',
-    'country' => '',
-    'pname' => '',
-    'size1' => 0,
-    'size2' => 0,
-    'size3' => 0,
-    'media' => '',
-    'estimate' => '',
-    'winnerof' => '',
-    'represented_by' => '',
-    'special' => 0,
-    'store' => 0,
-    'storeprice' => '',
-    'saleprice' => '',
-    'url' => '',
     'sid' => 0,
+    'title' => '',
+    'first_name' => '',
+    'surname' => '',
     'address_1' => '',
     'address_2' => '',
     'address_3' => '',
     'city' => '',
     'state' => '',
     'postal_code' => '',
+    'country' => '',
     'tel_no' => '',
     'fax_no' => '',
     'email_address' => '',
     'dob' => NULL,
+    'nom_name' => '',
     'statement' => NULL,
-    'workbrief' => NULL,
-    'artbrief' => NULL,
+    'art_title' => '',
+    'art_materials' => '',
+    'height' => '',
+    'width' => '',
+    'depth' => '',
+    'value' => '',
+    'work_brief' => NULL,
+    'art_brief' => NULL,
     'donate' => '',
     'share' => 0,
-    'txcode' => '',
-    'pay_status' => '',
-    'vpstx' => '',
-    'vpsauth' => 0,
-    'status_detail' => '',
+    'filename' => '',
+    'gallery_type' => 0,
+    'caption' => NULL,
     'edition' => 0,
-    'title' => '',
+    'img_height' => '',
+    'img_width' => '',
+    'confirmed' => 0,
     'closeup_filename' => '',
     'closeup_desc' => NULL,
-    'shop_dimension_w' => '',
-    'shop_dimension_h' => '',
-    'shop_dimension_d' => '',
     'createdon' => NULL,
     'createdby' => 0,
   ),
   'fieldMeta' => 
   array (
-    'galleryname' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
     'gallery_id' => 
     array (
       'dbtype' => 'int',
@@ -79,181 +56,6 @@ $xpdo_meta_map['africanArtworks']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
-    ),
-    'filename' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'caption' => 
-    array (
-      'dbtype' => 'text',
-      'phptype' => 'string',
-    ),
-    'width' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '8',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'height' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '8',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'pos' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '2',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'gid' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '11',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'lot' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '11',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'aname' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'country' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '3',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'pname' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'size1' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'size2' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'size3' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'null' => true,
-      'default' => 0,
-    ),
-    'media' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'estimate' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '50',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'winnerof' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'represented_by' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'special' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '1',
-      'phptype' => 'integer',
-      'attributes' => 'unsigned',
-      'null' => true,
-      'default' => 0,
-    ),
-    'store' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '1',
-      'phptype' => 'integer',
-      'attributes' => 'unsigned',
-      'null' => true,
-      'default' => 0,
-    ),
-    'storeprice' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '50',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'saleprice' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '50',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'url' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
     ),
     'sid' => 
     array (
@@ -264,10 +66,34 @@ $xpdo_meta_map['africanArtworks']= array (
       'null' => true,
       'default' => 0,
     ),
+    'title' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '10',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'first_name' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '200',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'surname' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '200',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
     'address_1' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '200',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -275,7 +101,7 @@ $xpdo_meta_map['africanArtworks']= array (
     'address_2' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '200',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -283,7 +109,7 @@ $xpdo_meta_map['africanArtworks']= array (
     'address_3' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '200',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -291,7 +117,7 @@ $xpdo_meta_map['africanArtworks']= array (
     'city' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '200',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -299,7 +125,7 @@ $xpdo_meta_map['africanArtworks']= array (
     'state' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '200',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -308,6 +134,14 @@ $xpdo_meta_map['africanArtworks']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '10',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'country' => 
+    array (
+      'dbtype' => 'char',
+      'precision' => '2',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -331,7 +165,7 @@ $xpdo_meta_map['africanArtworks']= array (
     'email_address' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '250',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -342,17 +176,73 @@ $xpdo_meta_map['africanArtworks']= array (
       'phptype' => 'string',
       'null' => true,
     ),
+    'nom_name' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '200',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
     'statement' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
     ),
-    'workbrief' => 
+    'art_title' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '200',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'art_materials' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'height' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '10',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'width' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '10',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'depth' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '10',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'value' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '15',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'work_brief' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
     ),
-    'artbrief' => 
+    'art_brief' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
@@ -370,19 +260,10 @@ $xpdo_meta_map['africanArtworks']= array (
       'dbtype' => 'int',
       'precision' => '1',
       'phptype' => 'integer',
-      'attributes' => 'unsigned',
       'null' => true,
       'default' => 0,
     ),
-    'txcode' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '35',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'pay_status' => 
+    'filename' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
@@ -390,29 +271,18 @@ $xpdo_meta_map['africanArtworks']= array (
       'null' => true,
       'default' => '',
     ),
-    'vpstx' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '40',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'vpsauth' => 
+    'gallery_type' => 
     array (
       'dbtype' => 'int',
-      'precision' => '10',
+      'precision' => '1',
       'phptype' => 'integer',
       'null' => true,
       'default' => 0,
     ),
-    'status_detail' => 
+    'caption' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
+      'dbtype' => 'text',
       'phptype' => 'string',
-      'null' => true,
-      'default' => '',
     ),
     'edition' => 
     array (
@@ -423,13 +293,30 @@ $xpdo_meta_map['africanArtworks']= array (
       'null' => true,
       'default' => 0,
     ),
-    'title' => 
+    'img_height' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '50',
+      'precision' => '30',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
+    ),
+    'img_width' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '30',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'confirmed' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => true,
+      'default' => 0,
     ),
     'closeup_filename' => 
     array (
@@ -443,30 +330,6 @@ $xpdo_meta_map['africanArtworks']= array (
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
-    ),
-    'shop_dimension_w' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '10',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'shop_dimension_h' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '10',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'shop_dimension_d' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '10',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
     ),
     'createdon' => 
     array (

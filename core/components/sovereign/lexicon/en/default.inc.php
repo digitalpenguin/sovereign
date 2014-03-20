@@ -10,14 +10,13 @@ $_lang['sovereign.sovereign_err_ns_name'] = 'Please specify a name for the artwo
 $_lang['sovereign.sovereign_err_remove'] = 'An error occurred while trying to remove the artwork.';
 $_lang['sovereign.sovereign_err_save'] = 'An error occurred while trying to save the artwork.';
 $_lang['sovereign.sovereign_create'] = 'Add New Artwork';
-$_lang['sovereign.back_to_galleries'] = '&#171; Back to Galleries';
+
 $_lang['sovereign.downloads'] = 'Downloads';
 $_lang['sovereign.location'] = 'Location';
 $_lang['sovereign.management'] = 'Sovereign Art Prize Management';
 $_lang['sovereign.management_desc'] = 'Manage the art prize competitions here. You can edit them by either double-clicking on the grid or right-clicking on the respective row.';
 $_lang['sovereign.name'] = 'Name';
 $_lang['sovereign.search...'] = 'Search...';
-$_lang['sovereign.galleryname'] = 'Gallery Name';
 $_lang['sovereign.year'] = 'Year';
 $_lang['sovereign.votes'] = 'Active Votes';
 
@@ -45,11 +44,13 @@ $_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
 /*
  * Gallery Grid
  */
+$_lang['sovereign.galleryname'] = 'Gallery Name';
+$_lang['sovereign.gallery_desc'] = 'Description / Notes';
 $_lang['sovereign.gallery_remove'] = 'Remove Gallery';
 $_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
 $_lang['sovereign.gallery_update'] = 'Update Gallery';
 $_lang['sovereign.gallery_create'] = 'Create New Gallery';
-$_lang['sovereign.active_gallery'] = 'Activated';
+$_lang['sovereign.active_gallery'] = 'Enabled?';
 $_lang['sovereign.created_on'] = 'Created on';
 $_lang['sovereign.created_by'] = 'Created by';
 $_lang['sovereign.gallery_artwork_total'] = 'Artwork Total';
@@ -61,6 +62,25 @@ $_lang['sovereign.gallery_deactivate_confirm'] = 'Are you sure you wish to deact
 /*
  * Artwork Grid
  */
+$_lang['sovereign.back_to_galleries'] = '&#171; Back to Galleries';
+$_lang['sovereign.artist_name'] = 'Artist';
+$_lang['sovereign.artwork_thumb'] = 'Image';
+$_lang['sovereign.artwork_name'] = 'Title';
+$_lang['sovereign.add_artwork'] = 'Add New Artwork';
+$_lang['sovereign.browse_file_label'] = 'Image';
+$_lang['sovereign.artwork_caption'] = 'Caption';
+$_lang['sovereign.artwork_address1'] = 'Address 1';
+$_lang['sovereign.artwork_address2'] = 'Address 2';
+$_lang['sovereign.artwork_address3'] = 'Address 3';
+$_lang['sovereign.country'] = 'Country';
+$_lang['sovereign.artist_title'] = 'Title';
+$_lang['sovereign.first_name'] = 'First Name';
+$_lang['sovereign.surname'] = 'Surname';
+$_lang['sovereign.artwork_title'] = 'Artwork Title';
+$_lang['sovereign.artwork_nominator'] = 'Nominated By';
+$_lang['sovereign.artwork_donation'] = 'Donation Type';
+$_lang['sovereign.artwork_confirmed'] = 'Confirmed';
+
 
 /*
  * Create Gallery Form
@@ -69,16 +89,9 @@ $_lang['sovereign.gallery_deactivate_confirm'] = 'Are you sure you wish to deact
 /*
  * Create Artwork Form
  */
-$_lang['sovereign.artist_name'] = 'Artist';
-$_lang['sovereign.artwork_thumb'] = 'Artwork';
-$_lang['sovereign.artwork_name'] = 'Title';
-$_lang['sovereign.add_artwork'] = 'Add New Artwork';
-$_lang['sovereign.browse_file_label'] = 'Image';
-$_lang['sovereign.artwork_caption'] = 'Caption';
-$_lang['sovereign.artwork_address1'] = 'Address 1';
-$_lang['sovereign.artwork_address2'] = 'Address 2';
-$_lang['sovereign.artwork_address3'] = 'Address 3';
-$_lang['sovereign.artwork_country'] = 'Country';
+
+
+
 
 /*
  * Remove Galleries

@@ -3,7 +3,18 @@ Sovereign.grid.AfricanArtworks = function(config) {
 
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p class="desc">{pname}</p>'
+            '<div class="artwork-caption">' +
+                '<h4 class="expanded-heading">Caption</h4>' +
+                '<p class="expanded-details"></p>' +
+            '</div>' +
+            '<div class="artwork-size">' +
+                '<ul class="expanded-details">' +
+                    '<li>{height}</li>' +
+                    '<li>{width}</li>' +
+                    '<li>{depth}</li>' +
+                '</ul>' +
+            '</div>'
+
         )
     });
 
@@ -12,11 +23,15 @@ Sovereign.grid.AfricanArtworks = function(config) {
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
-        ,fields: ['id','filename','galleryname','gallery_id','url','aname','pname','statement','workbrief','menu']
+        ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
+            ,'city','state','postal_code','country','tel_no','email_address','dob','nom_name','statement'
+            ,'art_title','art_materials','height','width','depth','value','work-brief','art-brief','donate','share'
+            ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
+            ,'closeup_desc','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 5
         ,remoteSort: true
-        ,autoExpandColumn: 'aname'
+        ,autoExpandColumn: 'art_title'
         ,listeners: {
             'render': {fn:this.filterGalleries,scope:this}
         }
@@ -25,26 +40,56 @@ Sovereign.grid.AfricanArtworks = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
-            ,width: 10
+            ,width:.02
         },{
             header: _('sovereign.artwork_thumb')
             ,dataIndex: 'filename'
             ,align: 'center'
             ,sortable: true
-            ,width: 30
+            ,width:.08
             ,renderer: function(value){
                 return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/' + value + '" >';
             }
         },{
-            header: _('sovereign.artist_name')
-            ,dataIndex: 'aname'
+            header: _('sovereign.artist_title')
+            ,dataIndex: 'title'
             ,sortable: true
-            ,width: 100
+            ,width:.03
         },{
-            header: _('sovereign.artwork_name')
-            ,dataIndex: 'pname'
+            header: _('sovereign.first_name')
+            ,dataIndex: 'first_name'
+            ,sortable: false
+            ,width:.08
+        },{
+            header: _('sovereign.surname')
+            ,dataIndex: 'surname'
+            ,sortable: false
+            ,width:.08
+        },{
+            header: _('sovereign.country')
+            ,dataIndex: 'country'
             ,sortable: true
-            ,width: 100
+            ,width:.08
+        },{
+            header: _('sovereign.artwork_title')
+            ,dataIndex: 'art_title'
+            ,sortable: true
+            ,width:.1
+        },{
+            header: _('sovereign.artwork_nominator')
+            ,dataIndex: 'nom_name'
+            ,sortable: true
+            ,width:.1
+        },{
+            header: _('sovereign.artwork_donation')
+            ,dataIndex: 'donate'
+            ,sortable: true
+            ,width:.07
+        },{
+            header: _('sovereign.artwork_confirmed')
+            ,dataIndex: 'confirmed'
+            ,sortable: true
+            ,width:.05
         }]
         ,tbar:[{
             text: _('sovereign.back_to_galleries')
@@ -245,13 +290,13 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
                     ,name: 'filename'
                     ,height: 30
                 },{
-                    id: this.ident+'-aname'
+                    id: this.ident+'-arttitle'
                     ,fieldLabel: _('sovereign.artwork_name')
-                    ,name: 'pname'
+                    ,name: 'art_title'
                 },{
-                    id: this.ident+'-caption'
-                    ,fieldLabel: _('sovereign.artwork_caption')
-                    ,name: 'caption'
+                    id: this.ident+'-nominate'
+                    ,fieldLabel: _('sovereign.artwork_nominator')
+                    ,name: 'nom_name'
                 }]
             },{
                 xtype           : 'container' // Right fieldset
@@ -263,17 +308,17 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
                     ,xtype: 'textfield'
                 }
                 ,items      : [{
-                    id: this.ident+'-pname'
+                    id: this.ident+'-firstname'
                     ,fieldLabel: _('sovereign.artist_name')
-                    ,name: 'aname'
+                    ,name: 'first_name'
                 },{
                     id: this.ident+'-address1'
                     ,fieldLabel: _('sovereign.artwork_address1')
-                    ,name: 'address1'
+                    ,name: 'address_1'
                 },{
                     id: this.ident+'-address2'
                     ,fieldLabel: _('sovereign.artwork_address2')
-                    ,name: 'address2'
+                    ,name: 'address_2'
                 }]
             }]
         }]
