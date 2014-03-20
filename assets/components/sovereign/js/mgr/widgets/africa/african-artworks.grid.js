@@ -1,11 +1,13 @@
 Sovereign.grid.AfricanArtworks = function(config) {
     config = config || {};
-    var expander = new Ext.ux.grid.RowExpander({
+
+    this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p><b>Statement:</b> {statement}</p><br>',
-            '<p><b>Workbrief:</b> {workbrief}</p>'
+            '<p class="desc">{pname}</p>'
         )
     });
+
+
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworks'
         ,url: Sovereign.config.connectorUrl
@@ -18,9 +20,8 @@ Sovereign.grid.AfricanArtworks = function(config) {
         ,listeners: {
             'render': {fn:this.filterGalleries,scope:this}
         }
-        ,columns: [
-            expander
-        ,{
+        ,plugins: [this.exp]
+        ,columns: [this.exp,{
             header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
@@ -30,7 +31,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,dataIndex: 'filename'
             ,align: 'center'
             ,sortable: true
-            ,width: 50
+            ,width: 30
             ,renderer: function(value){
                 return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/' + value + '" >';
             }
@@ -95,7 +96,8 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
     },clearFilter: function() {
         this.getStore().baseParams = {
             action: 'mgr/galleryafrican/artworks/getListArtworks'
-            ,'parent': this.config.resource
+            //,'parent': this.config.resource
+            ,'galleryId': this.config.galleryId
         };
         Ext.getCmp('africanartworks-search-filter').reset();
         this.getBottomToolbar().changePage(1);

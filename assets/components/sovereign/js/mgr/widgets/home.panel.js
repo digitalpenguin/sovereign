@@ -17,15 +17,11 @@ Sovereign.panel.Home = function(config) {
             ,items: [{
                 title: _('sovereign.tab_label_african')
                 ,tooltip: _('')
-                ,defaults: { autoHeight: true }
-                ,autoScroll: true
-                ,autoHeight: true
                 ,layout: 'form'
                 ,items: [{
                     xtype: 'sovereign-panel-africa'
                     ,cls: 'main-wrapper'
                     ,preventRender: true
-                    ,bodyStyle: 'padding: 0 10px 0 0'
                 }]
             }/*,{
                 title: _('sovereign.tab_label_asian')

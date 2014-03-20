@@ -27,6 +27,9 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
     public function initialize() {
         $this->setUserId();
         $this->setCreateTime();
+        if (!$this->getSource()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
         return parent::initialize();
     }
 
@@ -90,11 +93,11 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
 
     public function afterSave() {
         $id = $this->object->get('id');
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' CURRENT VALUE OF ID: ' . $id);
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, ' CURRENT VALUE OF ID: ' . $id);
 
-        if (!$this->getSource()) {
+        /*if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
-        }
+        }*/
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
         if (!$this->source->checkPolicy('create')) {

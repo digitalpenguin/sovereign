@@ -15,9 +15,6 @@ $_lang['sovereign.downloads'] = 'Downloads';
 $_lang['sovereign.location'] = 'Location';
 $_lang['sovereign.management'] = 'Sovereign Art Prize Management';
 $_lang['sovereign.management_desc'] = 'Manage the art prize competitions here. You can edit them by either double-clicking on the grid or right-clicking on the respective row.';
-$_lang['sovereign.submissions_galleries_desc'] = 'Create new galleries here by clicking the button below. You can then click on a gallery to view and/or confirm any new submissions.';
-$_lang['sovereign.judges_galleries_desc'] = 'View galleries that are, or will be, voted on by the panel of assigned judges. During the submissions phase, the galleries will be viewable and show any entries that have been confirmed.<br> You may also select a gallery to assign a panel of judges here.';
-$_lang['sovereign.public_galleries_desc'] = 'View galleries of artworks that are publicly being voted for on the website.';
 $_lang['sovereign.name'] = 'Name';
 $_lang['sovereign.search...'] = 'Search...';
 $_lang['sovereign.galleryname'] = 'Gallery Name';
@@ -29,9 +26,6 @@ $_lang['sovereign.votes'] = 'Active Votes';
  * Galleries Tabs
  */
 $_lang['sovereign.tab_label_african'] ='African Galleries';
-$_lang['sovereign.tab_heading_african_submissions'] ='African Art Galleries - Unconfirmed Submissions';
-$_lang['sovereign.tab_heading_african_judges'] ='African Art Galleries - Judges\' Galleries';
-$_lang['sovereign.tab_heading_african_public'] ='African Art Galleries - Public Live Galleries';
 $_lang['sovereign.tab_label_asian'] ='Asian Galleries';
 $_lang['sovereign.tab_heading_asian_submissions'] ='Asian Art Galleries - Unconfirmed Submissions';
 $_lang['sovereign.tab_heading_asian_judges'] ='Asian Art Galleries - Judges\' Galleries';
@@ -86,5 +80,21 @@ $_lang['sovereign.artwork_address2'] = 'Address 2';
 $_lang['sovereign.artwork_address3'] = 'Address 3';
 $_lang['sovereign.artwork_country'] = 'Country';
 
-
+/*
+ * Remove Galleries
+ */
 $_lang['sovereign.remove.refuse_delete_items_exist'] = 'Cannot remove gallery while artworks exist!';
+
+/*
+ * Grid headers and instructions
+ */
+$_lang['sovereign.tab_heading_african_submissions'] ='African Art Galleries - Unconfirmed Submissions';
+$_lang['sovereign.submissions_galleries_desc'] = 'Create new galleries here by clicking the button below. You can then click on a gallery to view and/or confirm any new submissions.';
+$_lang['sovereign.submissions_artworks_desc'] = 'Select artworks to accept into the Judges\' Gallery. "Right Click" on the artwork and select "Confirm Artwork"';
+$_lang['sovereign.tab_heading_african_judges'] ='African Art Galleries - Judges\' Galleries';
+$_lang['sovereign.judges_galleries_desc'] = 'View galleries that are, or will be, voted on by the panel of assigned judges. During the submissions phase, the galleries will be viewable and show any entries that have been confirmed.<br> You may also select a gallery to assign a panel of judges here.';
+//$_lang['sovereign.judges_artworks_desc'] = '';
+$_lang['sovereign.tab_heading_african_public'] ='African Art Galleries - Public Live Galleries';
+$_lang['sovereign.public_galleries_desc'] = 'View galleries of artworks that are publicly being voted for on the website.';
+//$_lang['sovereign.public_artworks_desc'] = '';
+//$_lang[''] = '';

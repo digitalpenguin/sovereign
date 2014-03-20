@@ -17,28 +17,28 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
                 this.loadNewGrid(grid, row, galleryId);
             }
         }
-        ,autoExpandColumn: 'galleryname'
+        ,autoExpandColumn: 'year'
         ,columns: [{
             header: _('sovereign.galleryname')
             ,dataIndex: 'galleryname'
             ,sortable: true
-            ,width: 100
+            ,width:.15
         },{
             header: _('sovereign.year')
             ,dataIndex: 'year'
             ,sortable: true
-            ,width: 100
+            ,width:.3
         },{
             header: _('sovereign.gallery_artwork_total')
             ,dataIndex: 'artworktotal'
             ,sortable: true
-            ,width: 40
+            ,width:.08
         },{
             header: _('sovereign.active_gallery')
             ,align: 'center'
             ,dataIndex: 'enabled'
             ,sortable: true
-            ,width: 40
+            ,width:.06
             ,renderer: function(value){
                 var active = value ? 'greentick.png' : 'redcross.png';
                 return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
@@ -47,12 +47,12 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
             header: _('sovereign.created_on')
             ,dataIndex: 'createdon'
             ,sortable: true
-            ,width: 100
+            ,width:.1
         },{
             header: _('sovereign.created_by')
             ,dataIndex: 'createdby'
             ,sortable: true
-            ,width: 100
+            ,width:.1
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')

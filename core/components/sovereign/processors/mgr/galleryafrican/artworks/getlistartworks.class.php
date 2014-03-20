@@ -7,18 +7,22 @@ class AfricanArtworksGetListProcessor extends modObjectGetListProcessor {
     public $objectType = 'sovereign';
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $query = $this->getProperty('query');
-        if (!empty($query)) {
-            $c->where(array(
-                'galleryname:LIKE' => '%'.$query.'%',
-                'OR:year:LIKE' => '%'.$query.'%',
-            ));
-        }
 
         $galleryId = $this->getProperty('galleryId');
         if(!empty($galleryId)) {
             $c->where(array(
                 'gallery_id' => $galleryId
+            ));
+        }
+
+        $query = $this->getProperty('query');
+        if (!empty($query)) {
+            $c->where(array(
+                array(
+                    'aname:LIKE' => '%'.$query.'%',
+                    'OR:pname:LIKE' => '%'.$query.'%',
+                ),
+                'gallery_id' => $galleryId,
             ));
         }
 
