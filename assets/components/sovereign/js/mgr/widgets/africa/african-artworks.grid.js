@@ -25,7 +25,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','email_address','dob','nom_name','statement'
-            ,'art_title','art_materials','height','width','depth','value','work-brief','art-brief','donate','share'
+            ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
             ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
             ,'closeup_desc','createdon','createdby','menu']
         ,paging: true
@@ -54,37 +54,57 @@ Sovereign.grid.AfricanArtworks = function(config) {
             header: _('sovereign.artist_title')
             ,dataIndex: 'title'
             ,sortable: true
-            ,width:.03
+            ,width:.02
         },{
             header: _('sovereign.first_name')
             ,dataIndex: 'first_name'
             ,sortable: false
-            ,width:.08
+            ,width:.05
         },{
             header: _('sovereign.surname')
             ,dataIndex: 'surname'
             ,sortable: false
-            ,width:.08
+            ,width:.05
         },{
             header: _('sovereign.country')
             ,dataIndex: 'country'
             ,sortable: true
-            ,width:.08
+            ,width:.05
         },{
             header: _('sovereign.artwork_title')
             ,dataIndex: 'art_title'
             ,sortable: true
-            ,width:.1
+            ,width:.05
+        },{
+            header: _('sovereign.artwork_art_materials')
+            ,dataIndex: 'art_materials'
+            ,sortable: true
+            ,width:.05
+        },{
+            header: _('sovereign.artwork_caption')
+            ,dataIndex: 'art_caption'
+            ,sortable: true
+            ,width:.04
+        },{
+            header: _('sovereign.artwork_work_brief')
+            ,dataIndex: 'work_brief'
+            ,sortable: true
+            ,width:.07
+        },{
+            header: _('sovereign.artwork_art_brief')
+            ,dataIndex: 'art_brief'
+            ,sortable: true
+            ,width:.07
         },{
             header: _('sovereign.artwork_nominator')
             ,dataIndex: 'nom_name'
             ,sortable: true
-            ,width:.1
+            ,width:.07
         },{
             header: _('sovereign.artwork_donation')
             ,dataIndex: 'donate'
             ,sortable: true
-            ,width:.07
+            ,width:.05
         },{
             header: _('sovereign.artwork_confirmed')
             ,dataIndex: 'confirmed'

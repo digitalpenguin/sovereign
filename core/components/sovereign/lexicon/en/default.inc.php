@@ -76,10 +76,13 @@ $_lang['sovereign.country'] = 'Country';
 $_lang['sovereign.artist_title'] = 'Title';
 $_lang['sovereign.first_name'] = 'First Name';
 $_lang['sovereign.surname'] = 'Surname';
-$_lang['sovereign.artwork_title'] = 'Artwork Title';
-$_lang['sovereign.artwork_nominator'] = 'Nominated By';
-$_lang['sovereign.artwork_donation'] = 'Donation Type';
+$_lang['sovereign.artwork_title'] = 'Art Title';
+$_lang['sovereign.artwork_nominator'] = 'Nominator';
+$_lang['sovereign.artwork_donation'] = 'Donation';
 $_lang['sovereign.artwork_confirmed'] = 'Confirmed';
+$_lang['sovereign.artwork_art_materials'] = 'Materials';
+$_lang['sovereign.artwork_work_brief'] = 'Work Brief';
+$_lang['sovereign.artwork_art_brief'] = 'Art Brief';
 
 
 /*
