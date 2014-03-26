@@ -115,6 +115,16 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
             }
             return $this->failure($msg);
         }
+
+        $success2 = $this->source->createContainer('thumbnails', $this->getProperty('parent').$id);
+        if (empty($success2)) {
+            $msg = '';
+            $errors = $this->source->getErrors();
+            foreach ($errors as $k => $msg) {
+                $this->modx->error->addField($k,$msg);
+            }
+            return $this->failure($msg);
+        }
         return parent::afterSave();
     }
 }

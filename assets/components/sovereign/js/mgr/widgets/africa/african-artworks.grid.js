@@ -46,9 +46,12 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,dataIndex: 'filename'
             ,align: 'center'
             ,sortable: true
-            ,width:.08
+            ,width:.04
             ,renderer: function(value){
-                return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/' + value + '" >';
+                return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/thumbnails/' + value + '_small.jpeg" >';
+            }
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
             }
         },{
             header: _('sovereign.artist_title')
@@ -120,7 +123,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
             xtype: 'button'
             ,text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
-            ,handler: this.uploadArtwork
+            ,handler: { xtype: 'sovereign-window-africanartworks-create' ,blankValues: true }
         },'->',{
             xtype: 'textfield'
             ,id: 'africanartworks-search-filter'
@@ -172,21 +175,6 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         s.baseParams.galleryId = this.config.galleryId;
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },uploadArtwork: function(btn,e) {
-        var r = {
-            galleryname: this.config.galleryname
-            ,active: true
-        };
-        if (!this.addArtworkWindow) {
-            this.addArtworkWindow = MODx.load({
-                xtype: 'sovereign-window-africanartworks-create'
-                ,listeners: {
-                    'success': {fn:this.refresh,scope:this}
-                }
-            });
-        }
-        this.addArtworkWindow.setValues(r);
-        this.addArtworkWindow.show(e.target);
     },getMenu: function() {
         return [{
             text: _('sovereign.artworks_update')
@@ -263,144 +251,9 @@ Ext.extend(Sovereign.window.UpdateAfricanArtworks,MODx.Window);
 Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfricanArtworks);
 
 
-
-Sovereign.window.CreateAfricanArtworks = function(config) {
-    config = config || {};
-    var check = Ext.getCmp('sovereign-window-africanartworks-create');
-    if (check) {
-        check.destroy();
-    }
-    this.ident = config.ident || 'sovupart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
-    Ext.applyIf(config,{
-        title: _('sovereign.add_artwork')
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/create'
-            ,galleryUrl: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
-            ,galleryId: this.galleryId
-        }
-        ,id: this.ident
-        ,fileUpload : true
-        ,allowBlank: true
-        ,height: 150
-        ,width: '70%'
-        ,minWidth: 650
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'gallery_id'
-        },{
-            xtype: 'container'
-            ,layout     : 'hbox'
-            ,border     : false
-            ,items      : [{
-                xtype           : 'container' // Left fieldset
-                ,border         : false
-                ,layout:'form'
-                ,frame          : false
-                ,flex           : 1
-                ,defaults       : {
-                    anchor: '-10'
-                    ,xtype: 'textfield'
-                }
-                ,items      : [{
-                    id: this.ident+'-filename'
-                    ,inputType: 'file'
-                    ,fieldLabel: _('sovereign.browse_file_label')
-                    ,name: 'filename'
-                    ,height: 30
-                },{
-                    id: this.ident+'-arttitle'
-                    ,fieldLabel: _('sovereign.artwork_name')
-                    ,name: 'art_title'
-                },{
-                    id: this.ident+'-nominate'
-                    ,fieldLabel: _('sovereign.artwork_nominator')
-                    ,name: 'nom_name'
-                }]
-            },{
-                xtype           : 'container' // Right fieldset
-                ,layout: 'form'
-                ,border         : false
-                ,flex           : 1
-                ,defaults       : {
-                    anchor: '-10'
-                    ,xtype: 'textfield'
-                }
-                ,items      : [{
-                    id: this.ident+'-firstname'
-                    ,fieldLabel: _('sovereign.artist_name')
-                    ,name: 'first_name'
-                },{
-                    id: this.ident+'-address1'
-                    ,fieldLabel: _('sovereign.artwork_address1')
-                    ,name: 'address_1'
-                },{
-                    id: this.ident+'-address2'
-                    ,fieldLabel: _('sovereign.artwork_address2')
-                    ,name: 'address_2'
-                }]
-            }]
-        }]
-        ,buttons: [{
-            text: 'Save',
-            handler: this.upload,
-            scope: this
-        }, {
-            text: 'Cancel',
-            handler: function() {
-                config.closeAction !== 'close' ? this.hide() : this.close();
-            },
-            scope: this
-        }]
-    });
-    Sovereign.window.CreateAfricanArtworks.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.CreateAfricanArtworks,MODx.Window, {
-    upload: function() {
-        var file = Ext.get(this.ident+'-filename').getValue();
-        if (!file) {
-            Ext.MessageBox.alert(_('sovereign.error'), _('sovereign.file_err_ns'));
-            return false;
-        }
-        this.addValues();
-        return this.submit();
-    }
-    ,addValues: function() {
-        this.baseParams.action = 'mgr/galleryafrican/artworks/create';
-    },
-    submit: function(close) {
-        close = close === false ? false : true;
-        var f = this.fp.getForm();
-
-        if (f.isValid() && this.fireEvent('beforeSubmit', f.getValues())) {
-            f.submit({
-                waitMsg: _('sovereign.waiting_msg'),
-                scope: this,
-                failure: function(frm, a) {
-                    if (this.fireEvent('failure', {f: frm, a: a})) {
-                        MODx.form.Handler.errorExt(a.result, frm);
-                    }
-                },
-                success: function(frm, a) {
-                    if (this.config.success) {
-                        Ext.callback(this.config.success, this.config.scope || this, [frm, a]);
-                    }
-                    this.fireEvent('success', {f: frm, a: a});
-                    if (close) {
-                        this.config.closeAction !== 'close' ? this.hide() : this.close();
-                    }
-                }
-            });
-        }
-    }
-});
-Ext.reg('sovereign-window-africanartworks-create',Sovereign.window.CreateAfricanArtworks);
-
-
 /*
  * Country Combo-Box
- */
+ *
 Sovereign.combo.Countries = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -420,3 +273,4 @@ Sovereign.combo.Countries = function(config) {
 };
 Ext.extend(Sovereign.combo.Countries,MODx.combo.ComboBox);
 Ext.reg('sovereign-combo-countries',Sovereign.combo.Countries);
+*/
