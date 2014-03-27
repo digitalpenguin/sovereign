@@ -62,6 +62,8 @@ $_lang['sovereign.gallery_deactivate_confirm'] = 'Are you sure you wish to deact
 /*
  * Artwork Grid
  */
+$_lang['sovereign.artworks_update'] = 'Update Artwork Details';
+$_lang['sovereign.artworks_remove'] = 'Remove Artwork';
 $_lang['sovereign.back_to_galleries'] = '&#171; Back to Galleries';
 $_lang['sovereign.artist_name'] = 'Artist';
 $_lang['sovereign.artwork_thumb'] = 'Image';
