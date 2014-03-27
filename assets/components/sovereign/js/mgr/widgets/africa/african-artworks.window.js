@@ -3,7 +3,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
     var check = Ext.getCmp('sovereign-window-africanartworks-create');
     check ? check.destroy(): '';
 
-    this.fieldSet1 = {
+    this.fieldSetName = {
         xtype: 'fieldset'
         ,title: 'Artist\'s Name'
         ,flex: 1
@@ -33,7 +33,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     };
 
-    this.fieldSet2 = Ext.apply({}, {
+    this.fieldSetImage = Ext.apply({}, {
         flex: 1
         ,title: 'Address Information'
         ,items: [{
@@ -69,9 +69,9 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
                 }]
             }]
         }]
-    }, this.fieldSet1);
+    }, this.fieldSetName);
 
-    this.fieldSetContainer = {
+    this.topFieldSetContainer = {
         xtype: 'container'
         ,layout: 'hbox'
         ,height: 200
@@ -79,9 +79,80 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             align: 'stretch'
         }
         ,items: [
-            this.fieldSet1
-            ,this.fieldSet2
+            this.fieldSetName
+            ,this.fieldSetImage
         ]
+    };
+
+    this.tabs = [{
+        xtype: 'container'
+        ,title: 'Contact'
+        ,layout: 'form'
+        ,style: 'padding:10px 0 0 10px;'
+        ,bodyStyle: 'padding:6px 6px 0;'
+        ,defaults: {
+            xtype: 'textfield'
+            ,width: 230
+        }
+        ,items: [{
+            fieldLabel: 'Home'
+            ,name:'home'
+        },{
+            fieldLabel: 'Mobile'
+            ,name: 'mobile'
+        },{
+            fieldLabel: 'Fax'
+            ,name: 'fax'
+        }]
+    },{
+        title: 'Address'
+        ,xtype: 'container'
+        ,layout: 'form'
+        ,style: 'padding:10px 0 0 10px;'
+        ,bodyStyle: 'padding:6px 6px 0;'
+        ,defaults: {
+            xtype: 'textfield'
+            ,width: 230
+        }
+        ,items: [{
+            fieldLabel: 'Address 1'
+            ,name:'address_1'
+        },{
+            fieldLabel: 'Address 2'
+            ,name: 'address_2'
+        },{
+            fieldLabel: 'Address 3'
+            ,name: 'address_3'
+        }]
+    },{
+        title: 'Art Details'
+        ,xtype: 'container'
+        ,name: 'bio'
+    },{
+        title: 'Caption'
+        ,xtype: 'textarea'
+        ,name: 'caption'
+    },{
+        title: 'Work Brief'
+        ,xtype: 'textarea'
+        ,name: 'work_brief'
+    },{
+        title: 'Art Brief'
+        ,xtype: 'textarea'
+        ,name: 'art_brief'
+    }];
+
+    this.tabPanel = {
+        xtype: 'tabpanel'
+        ,activeTab: 0
+        ,deferredRender: false
+        ,layoutOnTabChange: true
+        ,border: true
+        ,flex: 1
+        ,height:230
+        ,style: 'margin-top:6px;'
+        ,plain: true
+        ,items: this.tabs
     };
 
     this.ident = config.ident || 'sovupart'+Ext.id();
@@ -91,14 +162,15 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,title: 'Add Artwork'
         ,fields: [{
             width: 700
-            ,height: 360
+            ,height: 460
             ,frame: true
             ,layout: 'vbox'
             ,layoutConfig: {
-            align: 'stretch'
+                align: 'stretch'
             }
             ,items: [
-                this.fieldSetContainer
+                this.topFieldSetContainer
+                ,this.tabPanel
             ]
         }]
     });
