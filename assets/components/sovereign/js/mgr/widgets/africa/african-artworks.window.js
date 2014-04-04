@@ -3,6 +3,10 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
     var check = Ext.getCmp('sovereign-window-africanartworks-create');
     check ? check.destroy(): '';
 
+
+    /*
+     * Top left fieldset - Artist's name
+     */
     this.fieldSetName = {
         xtype: 'fieldset'
         ,title: 'Artist\'s Name'
@@ -33,9 +37,59 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     };
 
+    /*
+     * Top-right fieldset. DOB and Image
+     */
+    this.fieldSetDob = Ext.apply({}, {
+        flex:1
+        ,title: 'Date of Birth'
+        ,items: [{
+            xtype: 'datefield'
+            ,fieldLabel: 'Date of Birth'
+            ,name: 'dob'
+        }]
+    }, this.fieldSetName);
+
+
     this.fieldSetImage = Ext.apply({}, {
+        flex:1
+        ,title: 'Image'
+        ,items: [{
+            inputType: 'file'
+            ,fieldLabel: 'Select a File to Upload'
+            ,name: 'filename'
+        }]
+    }, this.fieldSetName);
+
+    this.dobAndImageContainer = {
+        xtype:'container'
+        ,layout: 'vbox'
+        ,width:300
+        ,layoutConfig:{
+            align:'stretch'
+        }
+        ,items: [
+            this.fieldSetDob
+            ,this.fieldSetImage
+        ]
+    };
+
+    this.topFieldSetContainer = {
+        xtype: 'container'
+        ,layout: 'hbox'
+        ,height: 200
+        ,layoutConfig: {
+            align: 'stretch'
+        }
+        ,items: [
+            this.fieldSetName
+            ,this.dobAndImageContainer
+        ]
+    };
+
+    this.fieldSetTemp = Ext.apply({}, {
         flex: 1
-        ,title: 'Address Information'
+        ,title: 'Date of Birth'
         ,items: [{
             fieldLabel: 'Address'
             ,name: 'address_1'
@@ -71,16 +125,36 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     }, this.fieldSetName);
 
-    this.topFieldSetContainer = {
-        xtype: 'container'
+
+    this.addressFieldSetLeft = Ext.apply({}, {
+        flex:1
+        ,items: [{
+            fieldLabel: 'Address Line 1'
+            ,name:'address_1'
+        },{
+            fieldLabel: 'Address Line 2'
+            ,name: 'address_2'
+        },{
+            fieldLabel: 'Address Line 3'
+            ,name: 'address_3'
+        }]
+    }, this.fieldSetName);
+
+    /**
+     * Address Tab
+     */
+    this.addressTab = {
+        title: 'Address'
+        ,xtype: 'container'
         ,layout: 'hbox'
-        ,height: 200
+        ,style: 'padding:10px 0 0 10px;'
+        ,bodyStyle: 'padding:6px 6px 0;'
         ,layoutConfig: {
-            align: 'stretch'
+            align:'stretch'
         }
         ,items: [
-            this.fieldSetName
-            ,this.fieldSetImage
+            this.addressFieldSetLeft
+            ,this.dobAndImageContainer
         ]
     };
 
@@ -88,6 +162,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         xtype: 'container'
         ,title: 'Contact'
         ,layout: 'form'
+        ,width: 300
         ,style: 'padding:10px 0 0 10px;'
         ,bodyStyle: 'padding:6px 6px 0;'
         ,defaults: {
@@ -104,27 +179,8 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             fieldLabel: 'Fax'
             ,name: 'fax'
         }]
-    },{
-        title: 'Address'
-        ,xtype: 'container'
-        ,layout: 'form'
-        ,style: 'padding:10px 0 0 10px;'
-        ,bodyStyle: 'padding:6px 6px 0;'
-        ,defaults: {
-            xtype: 'textfield'
-            ,width: 230
-        }
-        ,items: [{
-            fieldLabel: 'Address 1'
-            ,name:'address_1'
-        },{
-            fieldLabel: 'Address 2'
-            ,name: 'address_2'
-        },{
-            fieldLabel: 'Address 3'
-            ,name: 'address_3'
-        }]
-    },{
+    },this.addressTab
+    ,{
         title: 'Art Details'
         ,xtype: 'container'
         ,name: 'bio'
@@ -161,7 +217,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         id: this.ident
         ,title: 'Add Artwork'
         ,fields: [{
-            width: 700
+            minWidth: 600
             ,height: 460
             ,frame: true
             ,layout: 'vbox'
