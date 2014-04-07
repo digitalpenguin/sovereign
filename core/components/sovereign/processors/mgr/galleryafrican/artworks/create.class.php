@@ -14,6 +14,8 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
 
 
     public function checkPermissions() {
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of dir : ' . $this->getProperty('galleryId'));
+
         return $this->modx->hasPermission('file_upload');
     }
 
@@ -102,6 +104,7 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
                     $modPhpThumb->setParameter('w', $thumbnail_width);
                     $sizeName = 'medium';
                 } else {
+                    $modPhpThumb->setParameter('w', $thumbnail_width);
                     $sizeName = 'large';
                 }
                 $modPhpThumb->setParameter('config_output_format', 'jpeg');
@@ -130,6 +133,7 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
                     $modPhpThumb->setParameter('h', $thumbnail_height);
                     $sizeName = 'medium';
                 } else {
+                    $modPhpThumb->setParameter('h', $thumbnail_height);
                     $sizeName = 'large';
                 }
                 $modPhpThumb->setParameter('config_output_format', 'jpeg');

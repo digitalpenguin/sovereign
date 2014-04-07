@@ -34,6 +34,13 @@ Sovereign.grid.AfricanArtworks = function(config) {
         ,autoExpandColumn: 'art_title'
         ,listeners: {
             'render': {fn:this.filterGalleries,scope:this}
+            ,'cellclick': function(grid, rowIndex, columnIndex, e) {
+                var record = grid.getStore().getAt(rowIndex); // Get the Record
+                var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
+                config.currentFileName = record.get(fieldName);
+                if (columnIndex == 2)
+                    this.displayArtwork(e);
+            }
         }
         ,plugins: [this.exp]
         ,columns: [this.exp,{
@@ -183,6 +190,11 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
             text: _('sovereign.artworks_remove')
             ,handler: this.removeAfricanArtworks
         }];
+    },displayArtwork: function(e) {
+        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtwork;
+        this.displayArtworkWindow.setValues(this.menu.record);
+        this.displayArtworkWindow.show(e.target);
+
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
@@ -250,6 +262,42 @@ Sovereign.window.UpdateAfricanArtworks = function(config) {
 Ext.extend(Sovereign.window.UpdateAfricanArtworks,MODx.Window);
 Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfricanArtworks);
 
+
+Sovereign.window.DisplayAfricanArtwork = function(config) {
+    config = config || {};
+    var check = Ext.getCmp('sovereign-window-africanartwork-display');
+    if (check) {
+        check.destroy();
+    }
+    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworks').config.currentFileName;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
+    this.ident = config.ident || 'sovdisart'+Ext.id();
+    Ext.apply(config,{
+        title: _('sovereign.artwork_window_display')
+        ,cls: 'container'
+        ,id: this.id
+        ,modal: true
+        ,layout: 'form'
+        ,width: 850
+        ,listeners: {
+            'show': function(){this.center();}
+        }
+        ,fields: [{
+            html: '<a target="_blank" href="'+ MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ this.galleryId +'/'+ this.currentFileName + '">' +
+                '<img src="' + MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ this.galleryId + '/thumbnails/' + this.currentFileName + '_large.jpeg" >'
+        }]
+        ,buttons:[{
+            text: 'Close'
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        }]
+    });
+
+    Sovereign.window.DisplayAfricanArtwork.superclass.constructor.call(this,config);
+
+};
+Ext.extend(Sovereign.window.DisplayAfricanArtwork,MODx.Window);
+Ext.reg('sovereign-window-africanartwork-display',Sovereign.window.DisplayAfricanArtwork);
 
 /*
  * Country Combo-Box

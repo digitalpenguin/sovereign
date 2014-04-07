@@ -3,10 +3,8 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
     var check = Ext.getCmp('sovereign-window-africanartworks-create');
     check ? check.destroy(): '';
 
+    // Top left fieldset - Artist's name
 
-    /*
-     * Top left fieldset - Artist's name
-     */
     this.fieldSetName = {
         xtype: 'fieldset'
         ,title: 'Artist\'s Name'
@@ -37,9 +35,9 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     };
 
-    /*
-     * Top-right fieldset. DOB and Image
-     */
+
+     //Top-right fieldset. DOB and Image
+
     this.fieldSetDob = Ext.apply({}, {
         flex:1
         ,title: 'Date of Birth'
@@ -47,6 +45,8 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             xtype: 'datefield'
             ,fieldLabel: 'Date of Birth'
             ,name: 'dob'
+            ,type: 'date'
+            ,format: MODx.config.manager_date_format
         }]
     }, this.fieldSetName);
 
@@ -86,7 +86,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             ,this.dobAndImageContainer
         ]
     };
-
+/*
     this.fieldSetTemp = Ext.apply({}, {
         flex: 1
         ,title: 'Date of Birth'
@@ -140,9 +140,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     }, this.fieldSetName);
 
-    /**
-     * Address Tab
-     */
+    //Address Tab
     this.addressTab = {
         title: 'Address'
         ,xtype: 'container'
@@ -210,13 +208,27 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,plain: true
         ,items: this.tabs
     };
-
+*/
     this.ident = config.ident || 'sovupart'+Ext.id();
     this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
     Ext.applyIf(config,{
-        id: this.ident
-        ,title: 'Add Artwork'
+        title: _('sovereign.add_artwork')
+        ,url: Sovereign.config.connectorUrl
+        ,baseParams: {
+            action: 'mgr/galleryafrican/artworks/create'
+            ,galleryUrl: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
+            ,galleryId: this.galleryId
+        }
+        ,id: this.ident
+        ,fileUpload : true
+        ,allowBlank: true
+        ,height: 150
+        ,width: '60%'
+        ,minWidth: 650
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'gallery_id'
+        },{
             minWidth: 600
             ,height: 460
             ,frame: true
@@ -226,7 +238,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             }
             ,items: [
                 this.topFieldSetContainer
-                ,this.tabPanel
+                //,this.tabPanel
             ]
         }]
     });
