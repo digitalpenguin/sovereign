@@ -6,7 +6,8 @@ class SovereignHomeManagerController extends SovereignManagerController {
     public function getPageTitle() { return $this->modx->lexicon('sovereign'); }
     public function loadCustomCssJs() {
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/plugins/fittoparent.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artworks.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artworks-create.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artworks-update.window.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artworks.grid.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/galleryafrican-submissions.grid.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/galleryafrican-judges.grid.js');

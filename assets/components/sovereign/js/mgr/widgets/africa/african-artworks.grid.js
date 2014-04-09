@@ -57,9 +57,6 @@ Sovereign.grid.AfricanArtworks = function(config) {
             ,renderer: function(value){
                 return '<img src="' + MODx.config.site_url + '/assets/components/sovereign/galleries/african/'+ config.galleryId + '/thumbnails/' + value + '_small.jpeg" >';
             }
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
-            }
         },{
             header: _('sovereign.artist_title')
             ,dataIndex: 'title'
@@ -233,7 +230,7 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
 
 });
 Ext.reg('sovereign-grid-africanartworks',Sovereign.grid.AfricanArtworks);
-
+/*
 Sovereign.window.UpdateAfricanArtworks = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -261,7 +258,7 @@ Sovereign.window.UpdateAfricanArtworks = function(config) {
 };
 Ext.extend(Sovereign.window.UpdateAfricanArtworks,MODx.Window);
 Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfricanArtworks);
-
+*/
 
 Sovereign.window.DisplayAfricanArtwork = function(config) {
     config = config || {};
@@ -299,26 +296,4 @@ Sovereign.window.DisplayAfricanArtwork = function(config) {
 Ext.extend(Sovereign.window.DisplayAfricanArtwork,MODx.Window);
 Ext.reg('sovereign-window-africanartwork-display',Sovereign.window.DisplayAfricanArtwork);
 
-/*
- * Country Combo-Box
- *
-Sovereign.combo.Countries = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        store: new Ext.data.ArrayStore({
-            id: 0
-            ,fields: ['country-code','display']
-            ,data: [
-                ['AU','Australia']
-                ,['GB','England']
-            ]
-        })
-        ,mode: 'local'
-        ,displayField: 'display'
-        ,valueField: 'country-code'
-    });
-    Sovereign.combo.Countries.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.combo.Countries,MODx.combo.ComboBox);
-Ext.reg('sovereign-combo-countries',Sovereign.combo.Countries);
-*/
+

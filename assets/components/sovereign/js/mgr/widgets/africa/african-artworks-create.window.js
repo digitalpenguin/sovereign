@@ -3,8 +3,10 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
     var check = Ext.getCmp('sovereign-window-africanartworks-create');
     check ? check.destroy(): '';
 
-    // Top left fieldset - Artist's name
 
+    /**
+     * NAME FIELDS
+     */
     this.fieldSetName = {
         xtype: 'fieldset'
         ,title: 'Artist\'s Name'
@@ -36,8 +38,9 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
     };
 
 
-     //Top-right fieldset. DOB and Image
-
+    /**
+     * DOB AND IMAGE FIELDS
+     */
     this.fieldSetDob = Ext.apply({}, {
         flex:1
         ,title: 'Date of Birth'
@@ -47,10 +50,9 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             ,name: 'dob'
             ,type: 'date'
             ,format: MODx.config.manager_date_format
+            ,allowBlank: true
         }]
     }, this.fieldSetName);
-
-
     this.fieldSetImage = Ext.apply({}, {
         flex:1
         ,title: 'Image'
@@ -58,9 +60,9 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             inputType: 'file'
             ,fieldLabel: 'Select a File to Upload'
             ,name: 'filename'
+            ,allowBlank: false
         }]
     }, this.fieldSetName);
-
     this.dobAndImageContainer = {
         xtype:'container'
         ,layout: 'vbox'
@@ -74,6 +76,10 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ]
     };
 
+
+    /**
+     * TOP FIELDS
+     */
     this.topFieldSetContainer = {
         xtype: 'container'
         ,layout: 'hbox'
@@ -86,38 +92,11 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             ,this.dobAndImageContainer
         ]
     };
-/*
-    this.fieldSetTemp = Ext.apply({}, {
 
-            xtype: 'container'
-            ,border: false
-            ,layout: 'column'
-            ,anchor: '100%'
-            ,items: [{
-                xtype: 'container'
-                ,layout: 'form'
-                ,width: 200
-                ,items: [{
-                    xtype: 'textfield'
-                    ,fieldLabel: 'State'
-                    ,name: 'state'
-                }]
-            },{
-                xtype: 'container'
-                ,layout: 'form'
-                ,columnWidth: 1
-                ,labelWidth: 30
-                ,items: [{
-                    xtype: 'textfield'
-                    ,fieldLabel: 'Post Code'
-                    ,anchor: '-0.01'
-                    ,name: 'postal_code'
-                }]
-            }]
-        }]
-    }, this.fieldSetName);
 
-*/
+    /**
+     * ADDRESS TAB
+     */
     this.addressFieldSetLeft = Ext.apply({}, {
         flex:1
         ,border:0
@@ -134,7 +113,6 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             ,name: 'address_3'
         }]
     }, this.fieldSetName);
-
     this.addressFieldSetRight = Ext.apply({}, {
         flex:1
         ,border:0
@@ -151,11 +129,11 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             ,items: [{
                 xtype: 'container'
                 ,layout: 'form'
-                ,width: 190
                 ,items: [{
                     xtype: 'textfield'
                     ,fieldLabel: 'State'
                     ,name: 'state'
+                    ,width:200
                 }]
             },{
                 xtype: 'container'
@@ -169,10 +147,14 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
                     ,name: 'postal_code'
                 }]
             }]
+        },{
+            fieldLabel: 'Country'
+            ,name: 'country'
+            ,xtype: 'modx-combo-country'
+            ,value: ''
+            ,allowBlank: true
         }]
     }, this.fieldSetName);
-
-    //Address Tab
     this.addressTab = {
         title: 'Address'
         ,xtype: 'container'
@@ -186,16 +168,106 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ]
     };
 
-    this.tabs = [{
-        xtype: 'container'
+
+
+    /**
+     * ART DETAILS TAB
+     */
+    this.artDetailsLeft = Ext.apply({}, {
+        flex:1
+        ,border:0
+        ,title:''
+        ,style: 'border-width:0px;'
+        ,items: [{
+            fieldLabel: 'Artwork Title'
+            ,name: 'art_title'
+        },{
+            fieldLabel: 'Nominator\'s Name'
+            ,name: 'nom_name'
+        }, {
+            fieldLabel: 'Edition'
+            ,name: 'edition'
+        }]
+    }, this.fieldSetName);
+    this.artDetailsRight = Ext.apply({}, {
+        flex:1
+        ,border:0
+        ,title:''
+        ,style: 'border-width:0px;'
+        ,items: [{
+            fieldLabel: 'Estimated Value'
+            ,name: 'value'
+        },{
+            fieldLabel: 'Materials Used'
+            ,name: 'art_materials'
+        },{
+            xtype: 'container'
+            ,border: false
+            ,layout: 'column'
+            ,anchor: '100%'
+            ,items: [{
+                xtype: 'container'
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: 'Height'
+                    ,name: 'height'
+                    ,width: 73
+                }]
+            },{
+                xtype: 'container'
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: 'Width'
+                    ,name: 'width'
+                    ,width: 73
+                }]
+            },{
+                xtype: 'container'
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: 'Depth'
+                    ,name: 'depth'
+                    ,width: 73
+                }]
+            },{
+                html: 'CM'
+                ,width: 30
+                ,style: 'margin-top:30px;'
+            }]
+        }]
+    }, this.fieldSetName);
+    this.artDetailsTab = {
+        title: 'Art Details'
+        ,xtype: 'container'
+        ,layout: 'hbox'
+        ,layoutConfig: {
+            align: 'stretch'
+        }
+        ,items: [
+            this.artDetailsLeft
+            ,this.artDetailsRight
+        ]
+    };
+
+
+    /**
+     * CONTACT NUMBER TAB
+     */
+    this.contactTab = {
+        flex:1
+        ,border:0
+        ,xtype: 'container'
         ,title: 'Contact'
         ,layout: 'form'
         ,width: 300
-        ,style: 'padding:10px 0 0 10px;'
+        ,style: 'padding:10px 0 0 10px; border-width:0px;'
         ,bodyStyle: 'padding:6px 6px 0;'
         ,defaults: {
             xtype: 'textfield'
-            ,width: 230
+            ,width: 300
         }
         ,items: [{
             fieldLabel: 'Home'
@@ -207,25 +279,88 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             fieldLabel: 'Fax'
             ,name: 'fax'
         }]
-    },this.addressTab
-    ,{
-        title: 'Art Details'
-        ,xtype: 'container'
-        ,name: 'bio'
-    },{
-        title: 'Caption'
-        ,xtype: 'textarea'
-        ,name: 'caption'
-    },{
-        title: 'Work Brief'
-        ,xtype: 'textarea'
-        ,name: 'work_brief'
-    },{
-        title: 'Art Brief'
-        ,xtype: 'textarea'
-        ,name: 'art_brief'
-    }];
+    };
 
+
+    this.captionTab = {
+        title: 'Caption'
+        ,flex: 1
+        ,xtype: 'container'
+        ,layout: 'form'
+        ,style: 'padding:10px 0 0 10px; border-width:0px;'
+        ,layoutConfig: {
+            align: 'stretch'
+        }
+        ,items: [{
+            fieldLabel: 'Enter the artwork caption here'
+            ,xtype: 'textarea'
+            ,name: 'caption'
+            ,width: '97%'
+            ,height: 150
+        }]
+    };
+
+
+    /**
+     * WORK BRIEF TAB
+     */
+    this.workBriefTab = {
+        title: 'Work Brief'
+        ,flex: 1
+        ,xtype: 'container'
+        ,layout: 'form'
+        ,style: 'padding:10px 0 0 10px; border-width:0px;'
+        ,layoutConfig: {
+            align: 'stretch'
+        }
+        ,items: [{
+            fieldLabel: 'Enter the WORK BRIEF here'
+            ,xtype: 'textarea'
+            ,name: 'work_brief'
+            ,width: '97%'
+            ,height: 150
+        }]
+    };
+
+
+    /**
+     * ART BRIEF TAB
+     */
+    this.artBriefTab = {
+        title: 'Art Brief'
+        ,flex: 1
+        ,xtype: 'container'
+        ,layout: 'form'
+        ,style: 'padding:10px 0 0 10px; border-width:0px;'
+        ,layoutConfig: {
+            align: 'stretch'
+        }
+        ,items: [{
+            fieldLabel: 'Enter the ART BRIEF here'
+            ,xtype: 'textarea'
+            ,name: 'art_brief'
+            ,width: '97%'
+            ,height: 150
+        }]
+    };
+
+    /**
+     * BOTTOM TABS GROUPING
+     */
+    this.tabs = [
+        this.artDetailsTab
+        ,this.addressTab
+        ,this.contactTab
+        ,this.captionTab
+        ,this.workBriefTab
+        ,this.artBriefTab
+    ];
+
+
+
+    /**
+     * PANEL FOR TABS
+     */
     this.tabPanel = {
         xtype: 'tabpanel'
         ,activeTab: 0
@@ -239,7 +374,13 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,items: this.tabs
     };
 
-    this.ident = config.ident || 'sovupart'+Ext.id();
+
+
+
+    /**
+     * MAIN FORM CONTAINER
+     */
+    this.ident = config.ident || 'sovcreateart'+Ext.id();
     this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
     Ext.applyIf(config,{
         title: _('sovereign.add_artwork')
@@ -251,10 +392,10 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }
         ,id: this.ident
         ,fileUpload : true
-        ,allowBlank: true
+        ,allowBlank: false
         ,height: 600
-        ,width: '60%'
-        ,minWidth: 500
+        ,width: 750
+        ,resizable: false
         ,fields: [{
             xtype: 'hidden'
             ,name: 'gallery_id'
@@ -276,103 +417,3 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
 };
 Ext.extend(Sovereign.window.CreateAfricanArtworks,MODx.Window);
 Ext.reg('sovereign-window-africanartworks-create',Sovereign.window.CreateAfricanArtworks);
-
-
-/*
-Sovereign.window.CreateAfricanArtworks = function(config) {
-    config = config || {};
-    var check = Ext.getCmp('sovereign-window-africanartworks-create');
-    if (check) {
-        check.destroy();
-    }
-    this.ident = config.ident || 'sovupart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
-    Ext.applyIf(config,{
-        title: _('sovereign.add_artwork')
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/create'
-            ,galleryUrl: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
-            ,galleryId: this.galleryId
-        }
-        ,id: this.ident
-        ,fileUpload : true
-        ,allowBlank: true
-        ,height: 150
-        ,width: '60%'
-        ,minWidth: 650
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'gallery_id'
-        },{
-            xtype: 'container'
-            ,layout     : 'hbox'
-            ,border     : false
-            ,items      : [{
-                xtype           : 'container' // Left fieldset
-                ,border         : false
-                ,layout         :'form'
-                ,frame          : false
-                ,flex           : 1
-                ,defaults       : {
-                    anchor: '-10'
-                    ,xtype: 'textfield'
-                    ,listeners: {
-                        afterrender: function(cmp) {
-                            cmp.getEl().set({
-                                "autocomplete": 'off'
-                            });
-                        }
-                    }
-                }
-                ,items      : [{
-                    id: this.ident+'-filename'
-                    ,inputType: 'file'
-                    ,fieldLabel: _('sovereign.browse_file_label')
-                    ,name: 'filename'
-                    ,height: 30
-                },{
-                    id: this.ident+'-arttitle'
-                    ,fieldLabel: _('sovereign.artwork_name')
-                    ,name: 'art_title'
-                },{
-                    id: this.ident+'-nominate'
-                    ,fieldLabel: _('sovereign.artwork_nominator')
-                    ,name: 'nom_name'
-                }]
-            },{
-                xtype           : 'container' // Right fieldset
-                ,layout         : 'form'
-                ,border         : false
-                ,flex           : 1
-                ,defaults       : {
-                    anchor: '-10'
-                    ,xtype: 'textfield'
-                    ,listeners: {
-                        afterrender: function(cmp) {
-                            cmp.getEl().set({
-                                "autocomplete": 'off'
-                            });
-                        }
-                    }
-                }
-                ,items      : [{
-                    id: this.ident+'-firstname'
-                    ,fieldLabel: _('sovereign.artist_name')
-                    ,name: 'first_name'
-                },{
-                    id: this.ident+'-address1'
-                    ,fieldLabel: _('sovereign.artwork_address1')
-                    ,name: 'address_1'
-                },{
-                    id: this.ident+'-address2'
-                    ,fieldLabel: _('sovereign.artwork_address2')
-                    ,name: 'address_2'
-                }]
-            }]
-        }]
-    });
-    Sovereign.window.CreateAfricanArtworks.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.CreateAfricanArtworks,MODx.Window);
-Ext.reg('sovereign-window-africanartworks-create',Sovereign.window.CreateAfricanArtworks);*/
