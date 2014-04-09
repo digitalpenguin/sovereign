@@ -88,15 +88,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
     };
 /*
     this.fieldSetTemp = Ext.apply({}, {
-        flex: 1
-        ,title: 'Date of Birth'
-        ,items: [{
-            fieldLabel: 'Address'
-            ,name: 'address_1'
-        },{
-            fieldLabel: 'Street'
-            ,name: 'address_2'
-        },{
+
             xtype: 'container'
             ,border: false
             ,layout: 'column'
@@ -125,9 +117,12 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     }, this.fieldSetName);
 
-
+*/
     this.addressFieldSetLeft = Ext.apply({}, {
         flex:1
+        ,border:0
+        ,title: ''
+        ,style: 'border-width:0px;'
         ,items: [{
             fieldLabel: 'Address Line 1'
             ,name:'address_1'
@@ -140,19 +135,54 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         }]
     }, this.fieldSetName);
 
+    this.addressFieldSetRight = Ext.apply({}, {
+        flex:1
+        ,border:0
+        ,title:''
+        ,style: 'border-width:0px;'
+        ,items: [{
+            fieldLabel: 'City'
+            ,name: 'city'
+        },{
+            xtype: 'container'
+            ,border: false
+            ,layout: 'column'
+            ,anchor: '100%'
+            ,items: [{
+                xtype: 'container'
+                ,layout: 'form'
+                ,width: 190
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: 'State'
+                    ,name: 'state'
+                }]
+            },{
+                xtype: 'container'
+                ,layout: 'form'
+                ,columnWidth: 1
+                ,labelWidth: 30
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: 'Post Code'
+                    ,anchor: '-0.01'
+                    ,name: 'postal_code'
+                }]
+            }]
+        }]
+    }, this.fieldSetName);
+
     //Address Tab
     this.addressTab = {
         title: 'Address'
         ,xtype: 'container'
         ,layout: 'hbox'
-        ,style: 'padding:10px 0 0 10px;'
-        ,bodyStyle: 'padding:6px 6px 0;'
         ,layoutConfig: {
             align:'stretch'
         }
         ,items: [
             this.addressFieldSetLeft
-            ,this.dobAndImageContainer
+            ,this.addressFieldSetRight
         ]
     };
 
@@ -204,11 +234,11 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,border: true
         ,flex: 1
         ,height:230
-        ,style: 'margin-top:6px;'
+        ,style: 'margin:6px 0;'
         ,plain: true
         ,items: this.tabs
     };
-*/
+
     this.ident = config.ident || 'sovupart'+Ext.id();
     this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
     Ext.applyIf(config,{
@@ -222,9 +252,9 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,id: this.ident
         ,fileUpload : true
         ,allowBlank: true
-        ,height: 150
+        ,height: 600
         ,width: '60%'
-        ,minWidth: 650
+        ,minWidth: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'gallery_id'
@@ -238,7 +268,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
             }
             ,items: [
                 this.topFieldSetContainer
-                //,this.tabPanel
+                ,this.tabPanel
             ]
         }]
     });
