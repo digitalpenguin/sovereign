@@ -33,7 +33,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
-            ,'city','state','postal_code','country','tel_no','fax_no','email_address','dob','nom_name','statement'
+            ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
             ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
             ,'closeup_desc','createdon','createdby','menu']
@@ -221,6 +221,7 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
             ,params: {
                 action: 'mgr/galleryafrican/artworks/remove'
                 ,id: this.menu.record.id
+                ,file: '/assets/components/sovereign/galleries/african/'+ this.menu.record.gallery_id + '/' + this.menu.record.filename
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
@@ -235,39 +236,9 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
     }*/,backToGallery: function() {
         Ext.getCmp('sovereign-panel-africa').backToSubmissionsGrid();
     }
-
-
 });
 Ext.reg('sovereign-grid-africanartworks',Sovereign.grid.AfricanArtworks);
-/*
-Sovereign.window.UpdateAfricanArtworks = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('sovereign.artworks_update')
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/update'
-        }
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.name')
-            ,name: 'galleryname'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
-            ,name: 'year'
-            ,anchor: '100%'
-        }]
-    });
-    Sovereign.window.UpdateAfricanArtworks.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.UpdateAfricanArtworks,MODx.Window);
-Ext.reg('sovereign-window-africanartworks-update',Sovereign.window.UpdateAfricanArtworks);
-*/
+
 
 Sovereign.window.DisplayAfricanArtwork = function(config) {
     config = config || {};
