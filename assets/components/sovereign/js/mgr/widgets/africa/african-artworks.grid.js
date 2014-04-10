@@ -190,6 +190,9 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         this.refresh();
     },getMenu: function() {
         return [{
+            text: _('sovereign.artworks_confirm')
+            ,handler: this.confirmAfricanArtworks
+        },'-',{
             text: _('sovereign.artworks_update')
             ,handler: this.updateAfricanArtworks
         },'-',{
@@ -201,6 +204,19 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
+    },confirmAfricanArtworks: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.artworks_confirm')
+            ,text: _('sovereign.artworks_confirm_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/galleryafrican/artworks/confirm'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
