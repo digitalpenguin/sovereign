@@ -2,13 +2,22 @@ Sovereign.grid.AfricanArtworks = function(config) {
     config = config || {};
 
     this.exp = new Ext.grid.RowExpander({
-        tpl : new Ext.Template(
-            '<div class="artwork-caption">' +
-                '<h4 class="expanded-heading">Caption</h4>' +
-                '<p class="expanded-details"></p>' +
+        enableCaching: false
+        ,tpl : new Ext.Template(
+            '<div class="expanded">' +
+                '<h4>Caption</h4>' +
+                '<p>{caption}</p>' +
             '</div>' +
-            '<div class="artwork-size">' +
-                '<ul class="expanded-details">' +
+            '<div class="expanded">' +
+                '<h4>Work Brief</h4>' +
+                '<p>{work_brief}</p>' +
+            '</div>' +
+            '<div class="expanded">' +
+            '<h4>Art Brief</h4>' +
+            '<p>{art_brief}</p>' +
+            '</div>' +
+            '<div class="expanded">' +
+                '<ul>' +
                     '<li>{height}</li>' +
                     '<li>{width}</li>' +
                     '<li>{depth}</li>' +
@@ -24,7 +33,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
-            ,'city','state','postal_code','country','tel_no','email_address','dob','nom_name','statement'
+            ,'city','state','postal_code','country','tel_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
             ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
             ,'closeup_desc','createdon','createdby','menu']

@@ -8,11 +8,9 @@
 #sovereign-grid-africanartworks .x-grid3-col-2 {
     padding: 5px 18px 2px 5px;
 }
-.x-grid3-cell-inner {
-    white-space: normal; /* word wrap in cells */
-}
 
-.expanded-heading, .expanded-details { color:#111111; }
+.expanded { color:#444444;}
+.expanded h4 {color:#333333;}
 
 .panel-desc {
     -moz-border-radius:5px;

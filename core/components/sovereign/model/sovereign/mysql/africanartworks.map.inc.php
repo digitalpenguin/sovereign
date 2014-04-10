@@ -19,6 +19,7 @@ $xpdo_meta_map['africanArtworks']= array (
     'postal_code' => '',
     'country' => '',
     'tel_no' => '',
+    'mob_no' => '',
     'fax_no' => '',
     'email_address' => '',
     'dob' => NULL,
@@ -147,6 +148,14 @@ $xpdo_meta_map['africanArtworks']= array (
       'default' => '',
     ),
     'tel_no' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '15',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'mob_no' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '15',

@@ -15,6 +15,7 @@
         <field key="postal_code" dbtype="varchar" precision="10" phptype="string" null="true" default="" />
         <field key="country" dbtype="char" precision="2" phptype="string" null="true" default="" />
         <field key="tel_no" dbtype="varchar" precision="15" phptype="string" null="true" default="" />
+        <field key="mob_no" dbtype="varchar" precision="15" phptype="string" null="true" default="" />
         <field key="fax_no" dbtype="varchar" precision="15" phptype="string" null="true" default="" />
         <field key="email_address" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
         <field key="dob" dbtype="date" phptype="string" null="true" />

@@ -253,31 +253,46 @@ Sovereign.window.UpdateAfricanArtworks = function(config) {
 
 
     /**
-     * CONTACT NUMBER TAB
+     * CONTACT TAB
      */
-    this.contactTab = {
+    this.contactLeft = Ext.apply({}, {
         flex:1
         ,border:0
-        ,xtype: 'container'
-        ,title: 'Contact'
-        ,layout: 'form'
-        ,width: 300
-        ,style: 'padding:10px 0 0 10px; border-width:0px;'
-        ,bodyStyle: 'padding:6px 6px 0;'
-        ,defaults: {
-            xtype: 'textfield'
-            ,width: 300
-        }
+        ,title:''
+        ,style: 'border-width:0px;'
         ,items: [{
-            fieldLabel: 'Home'
-            ,name:'home'
+            fieldLabel: 'Home Number'
+            ,name: 'tel_no'
         },{
-            fieldLabel: 'Mobile'
-            ,name: 'mobile'
-        },{
-            fieldLabel: 'Fax'
-            ,name: 'fax'
+            fieldLabel: 'Mobile Number'
+            ,name: 'mob_no'
+        }, {
+            fieldLabel: 'Fax Number'
+            ,name: 'fax_no'
         }]
+    },this.fieldSetName);
+    this.contactRight = Ext.apply({}, {
+        flex:1
+        ,border:0
+        ,title:''
+        ,style: 'border-width:0px;'
+        ,items: [{
+            fieldLabel: 'Email Address'
+            ,name: 'email_address'
+        }]
+    },this.fieldSetName);
+
+    this.contactTab = {
+        title: 'Contact'
+        ,xtype: 'container'
+        ,layout: 'hbox'
+        ,layoutConfig: {
+            align: 'stretch'
+        }
+        ,items: [
+            this.contactLeft
+            ,this.contactRight
+        ]
     };
 
 
