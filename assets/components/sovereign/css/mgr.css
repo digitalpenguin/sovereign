@@ -4,10 +4,11 @@
 .vertical-tabs-header {padding-top: 20px !important;}
 .x-grid3-hd-inner{ text-align:left; }
 #sovereign-grid-galleryafricansubmissions .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
-#sovereign-grid-africanartworks .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
-#sovereign-grid-africanartworks .x-grid3-col-2 {
-    padding: 5px 18px 2px 5px;
-}
+#sovereign-grid-galleryafricanjudges .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
+#sovereign-grid-africanartworksubmissions .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
+#sovereign-grid-africanartworkjudges .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
+#sovereign-grid-africanartworksubmissions .x-grid3-col-2 { padding: 5px 18px 2px 5px;}
+#sovereign-grid-africanartworkjudges .x-grid3-col-2 { padding: 5px 18px 2px 5px;}
 
 .expanded { color:#444444;}
 .expanded h4 {color:#333333;}

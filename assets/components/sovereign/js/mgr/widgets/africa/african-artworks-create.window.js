@@ -396,7 +396,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
      * MAIN FORM CONTAINER
      */
     this.ident = config.ident || 'sovcreateart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.galleryId;
     Ext.applyIf(config,{
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl

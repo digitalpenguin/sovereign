@@ -1,4 +1,4 @@
-Sovereign.grid.AfricanArtworks = function(config) {
+Sovereign.grid.AfricanArtworkSubmissions = function(config) {
     config = config || {};
 
     this.exp = new Ext.grid.RowExpander({
@@ -29,7 +29,7 @@ Sovereign.grid.AfricanArtworks = function(config) {
 
 
     Ext.applyIf(config,{
-        id: 'sovereign-grid-africanartworks'
+        id: 'sovereign-grid-africanartworksubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
@@ -166,9 +166,9 @@ Sovereign.grid.AfricanArtworks = function(config) {
         }]
 
     });
-    Sovereign.grid.AfricanArtworks.superclass.constructor.call(this,config)
+    Sovereign.grid.AfricanArtworkSubmissions.superclass.constructor.call(this,config)
 };
-Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
+Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
@@ -253,7 +253,7 @@ Ext.extend(Sovereign.grid.AfricanArtworks,MODx.grid.Grid,{
         Ext.getCmp('sovereign-panel-africa').backToSubmissionsGrid();
     }
 });
-Ext.reg('sovereign-grid-africanartworks',Sovereign.grid.AfricanArtworks);
+Ext.reg('sovereign-grid-africanartworksubmissions',Sovereign.grid.AfricanArtworkSubmissions);
 
 
 Sovereign.window.DisplayAfricanArtwork = function(config) {
@@ -262,8 +262,8 @@ Sovereign.window.DisplayAfricanArtwork = function(config) {
     if (check) {
         check.destroy();
     }
-    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworks').config.currentFileName;
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworks').config.galleryId;
+    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.currentFileName;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.galleryId;
     this.ident = config.ident || 'sovdisart'+Ext.id();
     Ext.apply(config,{
         title: _('sovereign.artwork_window_display')
