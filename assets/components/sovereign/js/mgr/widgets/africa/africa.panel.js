@@ -21,6 +21,13 @@ Sovereign.panel.AfricanPanel = function(config) {
                 ,autoHeight: true
                 ,layout: 'form'
             }
+            ,listeners: {
+                'tabchange': function(tabPanel, tab) {
+                    //if (Ext.get(tab.ownerCt.getTabEl(tab)).isVisible() == 0) {
+                        Ext.getCmp('sovereign-grid-galleryafricansubmissions').refresh();
+                    //}
+                }
+            }
             ,items: [{
                 title: _('sovereign.submissionsgallery_label')
                 ,id: 'african-panel-submissions'
