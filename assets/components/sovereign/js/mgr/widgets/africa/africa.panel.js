@@ -21,19 +21,12 @@ Sovereign.panel.AfricanPanel = function(config) {
                 ,autoHeight: true
                 ,layout: 'form'
             }
-            ,listeners: {
-                'tabchange': function(tabPanel, tab) {
-                    //if (Ext.get(tab.ownerCt.getTabEl(tab)).isVisible() == 0) {
-                        Ext.getCmp('sovereign-grid-galleryafricansubmissions').refresh();
-                    //}
-                }
-            }
             ,items: [{
                 title: _('sovereign.submissionsgallery_label')
                 ,id: 'african-panel-submissions'
                 ,defaults: { autoHeight: true, autoWidth: true }
                 ,items: [{
-                    html: '<h3>'+_('sovereign.tab_heading_african_submissions')+'</h3><p>'+ _('sovereign.submissions_galleries_desc') +'</p>'
+                    html: '<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/mailbox.png"><h3>'+_('sovereign.tab_heading_african_submissions')+'</h3><p>'+ _('sovereign.submissions_galleries_desc') +'</p>'
                     ,id: 'sovereign-galleryafrican-submissions-header'
                     ,border: true
                     ,bodyCssClass: 'panel-desc'
@@ -42,12 +35,23 @@ Sovereign.panel.AfricanPanel = function(config) {
                     xtype: 'sovereign-grid-galleryafricansubmissions'
                     ,preventRender: true
                 }]
+                ,listeners: {
+                    'activate': function() {
+                        var artworkGrid;
+                        // check if the artwork grid exists and refresh appropriate grid
+                        if (artworkGrid = Ext.getCmp('sovereign-grid-africanartworksubmissions')) {
+                            artworkGrid.refresh();
+                        } else {
+                            Ext.getCmp('sovereign-grid-galleryafricansubmissions').refresh();
+                        }
+                    }
+                }
             },{
                 title: _('sovereign.judgesgallery_label')
                 ,defaults: { autoHeight: true }
                 ,id: 'african-panel-judges'
                 ,items: [{
-                    html: '<h3>'+_('sovereign.tab_heading_african_judges')+'</h3><p>'+ _('sovereign.judges_galleries_desc') +'</p>'
+                    html: '<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/gavel.png"><h3>'+_('sovereign.tab_heading_african_judges')+'</h3><p>'+ _('sovereign.judges_galleries_desc') +'</p>'
                     ,id: 'sovereign-galleryafrican-judges-header'
                     ,border: true
                     ,bodyCssClass: 'panel-desc'
@@ -56,6 +60,17 @@ Sovereign.panel.AfricanPanel = function(config) {
                     xtype: 'sovereign-grid-galleryafricanjudges'
                     ,preventRender: true
                 }]
+                ,listeners: {
+                    'activate': function() {
+                        var artworkGrid;
+                        // check if the artwork grid exists and refresh appropriate grid
+                        if (artworkGrid = Ext.getCmp('sovereign-grid-africanartworkjudges')) {
+                            artworkGrid.refresh();
+                        } else {
+                            Ext.getCmp('sovereign-grid-galleryafricanjudges').refresh();
+                        }
+                    }
+                }
             },{
                 title: _('sovereign.publicgallery_label')
                 ,defaults: { autoHeight: true }
@@ -66,9 +81,16 @@ Sovereign.panel.AfricanPanel = function(config) {
                     ,bodyCssClass: 'panel-desc'
                     ,bodyStyle: 'margin: 10px 0px 10px 0px'
                 }/*,{
-                 xtype: 'sovereign-grid-judgesgallery_african'
+                 xtype: 'sovereign-grid-galleryafricanpublic'
                  ,preventRender: true
+
                  }*/]
+                 /*,listeners: {
+                     'activate': function(tab) {
+                         Ext.getCmp('sovereign-grid-galleryafricanpublic').refresh();
+                    }
+                 }*/
+
             }]
         }]
     });
@@ -92,7 +114,10 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             var artworkGrid = new Sovereign.grid.AfricanArtworkSubmissions;
             artworkGrid.passGalleryId(galleryId); // pass id of selected gallery
             var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
-                submissionsGridHeader.update('<h3>'+ row.get('galleryname')+' - Pending Artworks</h3><p>'+ _('sovereign.submissions_artworks_desc') +'</p>');
+                submissionsGridHeader.update('<img style="float:right;" src="'+Sovereign.config.cssUrl + '/img/mailbox.png">' +
+                    '<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/painting-icon.png">' +
+                    '<h3>'+ row.get('galleryname')+' - Pending Artworks</h3>' +
+                    '<p>'+ _('sovereign.submissions_artworks_desc') +'</p>');
                 activeMainAfricanTab.add(artworkGrid);
                 activeMainAfricanTab.doLayout();
                 /*artworkGrid.getEl().slideIn('r', {
@@ -119,7 +144,8 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
         var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
         var submissionsGridHeader = Ext.getCmp('sovereign-galleryafrican-submissions-header');
         var slideGridOut = new Ext.util.DelayedTask(function(){
-            submissionsGridHeader.update('<h3>'+_('sovereign.tab_heading_african_submissions')+'</h3><p>'+ _('sovereign.submissions_galleries_desc') +'</p>');
+            submissionsGridHeader.update('<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/mailbox.png"><h3>'+_('sovereign.tab_heading_african_submissions')+'</h3><p>'+ _('sovereign.submissions_galleries_desc') +'</p>'
+            );
             tab.remove(artworkGrid);
             tab.add(submissionsGrid);
             tab.doLayout();
@@ -149,7 +175,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             var artworkGrid = new Sovereign.grid.AfricanArtworkJudges;
             artworkGrid.passGalleryId(galleryId); // pass id of selected gallery
             var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
-                judgesGridHeader.update('<h3>'+ row.get('galleryname')+' - Judges\' Gallery Artworks</h3><p>'+ _('sovereign.judges_artworks_desc') +'</p>');
+                judgesGridHeader.update('<img style="float:right;" src="'+Sovereign.config.cssUrl + '/img/gavel.png"><img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/painting-icon.png"><h3>'+ row.get('galleryname')+' - Judges\' Gallery Artworks</h3><p>'+ _('sovereign.judges_artworks_desc') +'</p>');
                 activeMainAfricanTab.add(artworkGrid);
                 activeMainAfricanTab.doLayout();
                 /*artworkGrid.getEl().slideIn('r', {
@@ -176,7 +202,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
         var judgesGrid = Ext.getCmp('sovereign-grid-galleryafricanjudges');
         var judgesGridHeader = Ext.getCmp('sovereign-galleryafrican-judges-header');
         var slideGridOut = new Ext.util.DelayedTask(function(){
-            judgesGridHeader.update('<h3>'+_('sovereign.tab_heading_african_judges')+'</h3><p>'+ _('sovereign.judges_galleries_desc') +'</p>');
+            judgesGridHeader.update('<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/gavel.png"><h3>'+_('sovereign.tab_heading_african_judges')+'</h3><p>'+ _('sovereign.judges_galleries_desc') +'</p>');
             tab.remove(artworkGrid);
             tab.add(judgesGrid);
             tab.doLayout();

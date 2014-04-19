@@ -14,7 +14,6 @@ $_lang['sovereign.sovereign_err_ns_name'] = 'Please specify a name for the artwo
 $_lang['sovereign.sovereign_err_remove'] = 'An error occurred while trying to remove the artwork.';
 $_lang['sovereign.sovereign_err_save'] = 'An error occurred while trying to save the artwork.';
 $_lang['sovereign.sovereign_create'] = 'Add New Artwork';
-
 $_lang['sovereign.downloads'] = 'Downloads';
 $_lang['sovereign.location'] = 'Location';
 $_lang['sovereign.management'] = 'Sovereign Art Prize Management';
@@ -50,6 +49,7 @@ $_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
  */
 $_lang['sovereign.galleryname'] = 'Gallery Name';
 $_lang['sovereign.gallery_desc'] = 'Description / Notes';
+$_lang['sovereign.judges_galleries_desc'] = '';
 $_lang['sovereign.gallery_remove'] = 'Remove Gallery';
 $_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
 $_lang['sovereign.gallery_update'] = 'Update Gallery';
@@ -92,7 +92,7 @@ $_lang['sovereign.artwork_confirmed'] = 'Confirmed';
 $_lang['sovereign.artwork_art_materials'] = 'Materials';
 $_lang['sovereign.artwork_work_brief'] = 'Work Brief';
 $_lang['sovereign.artwork_art_brief'] = 'Art Brief';
-
+$_lang['sovereign.add_judges_to_gallery'] = 'Assigned Judges';
 
 /*
  * Create Gallery Form
@@ -118,7 +118,7 @@ $_lang['sovereign.submissions_galleries_desc'] = 'Create new galleries here by c
 $_lang['sovereign.submissions_artworks_desc'] = 'Select artworks to accept into the Judges\' Gallery. "Right Click" on the artwork and select "Confirm Artwork"';
 $_lang['sovereign.tab_heading_african_judges'] ='African Art Galleries - Judges\' Galleries';
 $_lang['sovereign.judges_galleries_desc'] = 'View galleries that are, or will be, voted on by the panel of assigned judges. During the submissions phase, the galleries will be viewable and show any entries that have been confirmed.<br> You may also select a gallery to assign a panel of judges here.';
-//$_lang['sovereign.judges_artworks_desc'] = '';
+$_lang['sovereign.judges_artworks_desc'] = 'Assign judges to this gallery here by clicking the "Assign Judges" button.';
 $_lang['sovereign.tab_heading_african_public'] ='African Art Galleries - Public Live Galleries';
 $_lang['sovereign.public_galleries_desc'] = 'View galleries of artworks that are publicly being voted for on the website.';
 //$_lang['sovereign.public_artworks_desc'] = '';

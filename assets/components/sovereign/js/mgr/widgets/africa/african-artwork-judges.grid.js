@@ -134,10 +134,14 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
             }
         },'-',{
             xtype: 'button'
-            ,text: _('sovereign.add_artwork')
-            ,iconCls: 'icon-add'
-            ,handler: { xtype: 'sovereign-window-africanartworks-create' ,blankValues: true }
+            ,text: _('sovereign.add_judges_to_gallery')
+            ,handler: { xtype: 'sovereign-window-african-showjudges' ,blankValues: true }
         },'->',{
+            text: _('sovereign.add_artwork')
+            ,iconCls: 'icon-add'
+            ,handler: this.createAfricanArtwork
+            ,scope: this
+        },'-',{
             xtype: 'textfield'
             ,id: 'africanartworksjudges-search-filter'
             ,emptyText: _('sovereign.search...')
@@ -197,10 +201,25 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
             ,handler: this.removeAfricanArtworks
         }];
     },displayArtwork: function(e) {
-        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtwork;
+        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkJudges;
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
+    },createAfricanArtwork: function() {
+        var win = MODx.load({
+            galleryId: this.config.galleryId
+            ,xtype: 'sovereign-window-africanartworks-create'
+            ,listeners: {
+                success: {fn: function(r) {
+                    this.refresh();
+                },scope: this},
+                scope: this
+            }
+        });
+        win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + win.galleryId + '/';
+        win.baseParams.galleryId = win.galleryId;
+        win.baseParams.confirmed = 1;
+        win.show();
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
@@ -240,9 +259,9 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
 Ext.reg('sovereign-grid-africanartworkjudges',Sovereign.grid.AfricanArtworkJudges);
 
 
-Sovereign.window.DisplayAfricanArtwork = function(config) {
+Sovereign.window.DisplayAfricanArtworkJudges = function(config) {
     config = config || {};
-    var check = Ext.getCmp('sovereign-window-africanartwork-display');
+    var check = Ext.getCmp('sovereign-window-africanartworksubmissions-display');
     if (check) {
         check.destroy();
     }
@@ -250,7 +269,7 @@ Sovereign.window.DisplayAfricanArtwork = function(config) {
     this.galleryId = Ext.getCmp('sovereign-grid-africanartworkjudges').config.galleryId;
     this.ident = config.ident || 'sovdisart'+Ext.id();
     Ext.apply(config,{
-        title: _('sovereign.artwork_window_display')
+        title: this.currentFileName
         ,cls: 'container'
         ,id: this.id
         ,modal: true
@@ -270,10 +289,19 @@ Sovereign.window.DisplayAfricanArtwork = function(config) {
         }]
     });
 
-    Sovereign.window.DisplayAfricanArtwork.superclass.constructor.call(this,config);
-
+    Sovereign.window.DisplayAfricanArtworkJudges.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.DisplayAfricanArtwork,MODx.Window);
-Ext.reg('sovereign-window-africanartwork-display',Sovereign.window.DisplayAfricanArtwork);
+Ext.extend(Sovereign.window.DisplayAfricanArtworkJudges,MODx.Window);
+Ext.reg('sovereign-window-africanartworkjudges-display',Sovereign.window.DisplayAfricanArtworkJudges);
 
 
+Sovereign.window.ShowJudgesList = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'sovshowjudges'+Ext.id();
+    Ext.apply(config, {
+        title: 'Assigned Judges'
+    });
+    Sovereign.window.ShowJudgesList.superclass.constructor.call(this,config);
+};
+Ext.extend(Sovereign.window.ShowJudgesList, MODx.Window);
+Ext.reg('sovereign-window-african-showjudges', Sovereign.window.ShowJudgesList);

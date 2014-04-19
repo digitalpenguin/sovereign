@@ -1,5 +1,5 @@
 <?php
-class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
+class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'africanGalleries';
     public $languageTopics = array('sovereign:default');
     public $defaultSortField = 'id';
@@ -17,7 +17,7 @@ class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
         if (!empty($query)) {
             $c->where(array(
                 'galleryname:LIKE' => '%'.$query.'%',
-                'OR:year:LIKE' => '%'.$query.'%',
+                'OR:description:LIKE' => '%'.$query.'%',
             ));
         }
         return $c;
@@ -44,7 +44,7 @@ class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
      * @return int
      */
     private function getArtworkCount($galleryId) {
-        $count = $this->modx->getCount('africanArtworks', array('gallery_id' => $galleryId));
+        $count = $this->modx->getCount('africanArtworks', array('gallery_id' => $galleryId, 'confirmed' => 1));
         //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of count:' . $count);
         return $count;
     }
@@ -61,4 +61,4 @@ class GalleryAfricanGetListProcessor extends modObjectGetListProcessor {
     }
 
 }
-return 'GalleryAfricanGetListProcessor';
+return 'GalleryAfricanJudgesGetListProcessor';

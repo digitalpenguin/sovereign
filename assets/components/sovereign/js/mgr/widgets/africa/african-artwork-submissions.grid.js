@@ -48,7 +48,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
                 if (columnIndex == 2)
-                    this.displayArtwork(e);
+                    this.displayAfricanArtwork(e);
             }
         }
         ,plugins: [this.exp]
@@ -133,10 +133,10 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
                 'click': {fn: this.backToGallery, scope:this}
             }
         },'-',{
-            xtype: 'button'
-            ,text: _('sovereign.add_artwork')
+            text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
-            ,handler: { xtype: 'sovereign-window-africanartworks-create' ,blankValues: true }
+            ,handler: this.createAfricanArtwork
+            ,scope: this
         },'->',{
             xtype: 'textfield'
             ,id: 'africanartworks-search-filter'
@@ -199,11 +199,25 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
             text: _('sovereign.artworks_remove')
             ,handler: this.removeAfricanArtworks
         }];
-    },displayArtwork: function(e) {
-        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtwork;
+    },displayAfricanArtwork: function(e) {
+        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkSubmissions;
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
+    },createAfricanArtwork: function() {
+        var win = MODx.load({
+            galleryId: this.config.galleryId
+            ,xtype: 'sovereign-window-africanartworks-create'
+            ,listeners: {
+                success: {fn: function(r) {
+                    this.refresh();
+                },scope: this},
+                scope: this
+            }
+        });
+        win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + win.galleryId + '/';
+        win.baseParams.galleryId = win.galleryId;
+        win.show();
     },confirmAfricanArtworks: function() {
         MODx.msg.confirm({
             title: _('sovereign.artworks_confirm')
@@ -256,24 +270,26 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
 Ext.reg('sovereign-grid-africanartworksubmissions',Sovereign.grid.AfricanArtworkSubmissions);
 
 
-Sovereign.window.DisplayAfricanArtwork = function(config) {
+Sovereign.window.DisplayAfricanArtworkSubmissions = function(config) {
     config = config || {};
-    var check = Ext.getCmp('sovereign-window-africanartwork-display');
+    var check = Ext.getCmp('sovereign-window-africanartworksubmissions-display');
     if (check) {
         check.destroy();
     }
     this.currentFileName = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.currentFileName;
     this.galleryId = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.galleryId;
     this.ident = config.ident || 'sovdisart'+Ext.id();
-    Ext.apply(config,{
-        title: _('sovereign.artwork_window_display')
+    Ext.applyIf(config,{
+        title: this.currentFileName
         ,cls: 'container'
-        ,id: this.id
+        ,id: this.ident
         ,modal: true
         ,layout: 'form'
         ,width: 850
         ,listeners: {
-            'show': function(){this.center();}
+            'show': function(){
+                this.center();
+            }
         }
         ,fields: [{
             html: '<a target="_blank" href="'+ MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ this.galleryId +'/'+ this.currentFileName + '">' +
@@ -286,10 +302,8 @@ Sovereign.window.DisplayAfricanArtwork = function(config) {
         }]
     });
 
-    Sovereign.window.DisplayAfricanArtwork.superclass.constructor.call(this,config);
+    Sovereign.window.DisplayAfricanArtworkSubmissions.superclass.constructor.call(this,config);
 
 };
-Ext.extend(Sovereign.window.DisplayAfricanArtwork,MODx.Window);
-Ext.reg('sovereign-window-africanartwork-display',Sovereign.window.DisplayAfricanArtwork);
-
-
+Ext.extend(Sovereign.window.DisplayAfricanArtworkSubmissions,MODx.Window);
+Ext.reg('sovereign-window-africanartworksubmissions-display',Sovereign.window.DisplayAfricanArtworkSubmissions);

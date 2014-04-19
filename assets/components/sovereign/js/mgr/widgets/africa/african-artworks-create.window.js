@@ -1,8 +1,10 @@
 Sovereign.window.CreateAfricanArtworks = function(config) {
     config = config || {};
     var check = Ext.getCmp('sovereign-window-africanartworks-create');
-    check ? check.destroy(): '';
-
+    //check ? check.destroy(): '';
+    if (check) {
+        check.destroy();
+    }
 
     /**
      * NAME FIELDS
@@ -396,14 +398,11 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
      * MAIN FORM CONTAINER
      */
     this.ident = config.ident || 'sovcreateart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.galleryId;
     Ext.applyIf(config,{
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/galleryafrican/artworks/create'
-            ,galleryUrl: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
-            ,galleryId: this.galleryId
         }
         ,id: this.ident
         ,fileUpload : true

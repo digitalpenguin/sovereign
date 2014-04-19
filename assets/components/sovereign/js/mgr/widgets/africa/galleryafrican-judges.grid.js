@@ -3,7 +3,7 @@ Sovereign.grid.GalleryAfricanJudges = function(config) {
     Ext.applyIf(config,{
         id: 'sovereign-grid-galleryafricanjudges'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/getList' }
+        ,baseParams: { action: 'mgr/galleryafrican/getListJudges' }
         ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
@@ -102,7 +102,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanJudges,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/getList'
+            action: 'mgr/galleryafrican/getListJudges'
             ,'parent': this.config.resource
         };
         Ext.getCmp('galleryafricanjudges-search-filter').reset();

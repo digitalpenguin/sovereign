@@ -3,7 +3,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
     Ext.applyIf(config,{
         id: 'sovereign-grid-galleryafricansubmissions'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/getList' }
+        ,baseParams: { action: 'mgr/galleryafrican/getListSubmissions' }
         ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
@@ -102,7 +102,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/getList'
+            action: 'mgr/galleryafrican/getListSubmissions'
             ,'parent': this.config.resource
         };
         Ext.getCmp('galleryafricansubmissions-search-filter').reset();
