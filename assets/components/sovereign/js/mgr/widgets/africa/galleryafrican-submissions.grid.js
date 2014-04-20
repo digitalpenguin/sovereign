@@ -3,7 +3,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
     Ext.applyIf(config,{
         id: 'sovereign-grid-galleryafricansubmissions'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/getListSubmissions' }
+        ,baseParams: { action: 'mgr/africa/galleries/getListSubmissions' }
         ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
@@ -102,7 +102,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/getListSubmissions'
+            action: 'mgr/africa/galleries/getListSubmissions'
             ,'parent': this.config.resource
         };
         Ext.getCmp('galleryafricansubmissions-search-filter').reset();
@@ -137,7 +137,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,url: this.config.url
             ,galleryname: this.config.galleryname
             ,params: {
-                action: 'mgr/galleryafrican/activate'
+                action: 'mgr/africa/galleries/activate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -151,7 +151,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,url: this.config.url
             ,galleryname: this.config.galleryname
             ,params: {
-                action: 'mgr/galleryafrican/deactivate'
+                action: 'mgr/africa/galleries/deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -164,7 +164,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             ,text: _('sovereign.gallery_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/galleryafrican/remove'
+                action: 'mgr/africa/galleries/remove'
                 ,id: this.menu.record.id
                 // A hack to prepend the modx install base path
                 ,dir: Sovereign.config.modxBasePath + Sovereign.config.africanGalleryUrl + this.menu.record.id
@@ -191,7 +191,7 @@ Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/create'
+            action: 'mgr/africa/galleries/create'
             ,parent: this.parent
         }
         ,fields: [{

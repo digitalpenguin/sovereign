@@ -31,7 +31,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworksubmissions'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworks' }
+        ,baseParams: { action: 'mgr/africa/artworks/getListArtworks' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
@@ -176,7 +176,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/artworks/getListArtworks'
+            action: 'mgr/africa/artworks/getListArtworks'
             //,'parent': this.config.resource
             ,'galleryId': this.config.galleryId
         };
@@ -204,7 +204,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
-    },createAfricanArtwork: function() {
+    },createAfricanArtwork: function(e) {
         var win = MODx.load({
             galleryId: this.config.galleryId
             ,xtype: 'sovereign-window-africanartworks-create'
@@ -217,14 +217,14 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         });
         win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + win.galleryId + '/';
         win.baseParams.galleryId = win.galleryId;
-        win.show();
+        win.show(e.target);
     },confirmAfricanArtworks: function() {
         MODx.msg.confirm({
             title: _('sovereign.artworks_confirm')
             ,text: _('sovereign.artworks_confirm_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/galleryafrican/artworks/confirm'
+                action: 'mgr/africa/artworks/confirm'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -249,7 +249,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
             ,text: _('sovereign.artworks_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/galleryafrican/artworks/remove'
+                action: 'mgr/africa/artworks/remove'
                 ,id: this.menu.record.id
                 ,file: '/assets/components/sovereign/galleries/african/'+ this.menu.record.gallery_id + '/' + this.menu.record.filename
             }

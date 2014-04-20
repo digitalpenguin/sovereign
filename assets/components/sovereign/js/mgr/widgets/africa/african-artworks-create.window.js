@@ -402,7 +402,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         title: _('sovereign.add_artwork')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/create'
+            action: 'mgr/africa/artworks/create'
         }
         ,id: this.ident
         ,fileUpload : true

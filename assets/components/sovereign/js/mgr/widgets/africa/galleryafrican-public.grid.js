@@ -3,7 +3,7 @@ Sovereign.grid.GalleryAfrican = function(config) {
     Ext.applyIf(config,{
         id: 'sovereign-grid-galleryafrican'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/getList' }
+        ,baseParams: { action: 'mgr/africa/galleries/getList' }
         ,fields: ['id','galleryname','year','menu']
         ,paging: true
         ,remoteSort: true
@@ -67,7 +67,7 @@ Ext.extend(Sovereign.grid.GalleryAfrican,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/getList'
+            action: 'mgr/africa/galleries/getList'
             ,'parent': this.config.resource
         };
         Ext.getCmp('galleryafrican-search-filter').reset();
@@ -99,7 +99,7 @@ Ext.extend(Sovereign.grid.GalleryAfrican,MODx.grid.Grid,{
             ,text: _('sovereign.gallery_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/galleryafrican/remove'
+                action: 'mgr/africa/galleries/remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -116,7 +116,7 @@ Sovereign.window.UpdateGalleryAfrican = function(config) {
         title: _('sovereign.gallery_update')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/update'
+            action: 'mgr/africa/galleries/update'
         }
         ,fields: [{
             xtype: 'hidden'
@@ -145,7 +145,7 @@ Sovereign.window.CreateGalleryAfrican = function(config) {
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/create'
+            action: 'mgr/africa/galleries/create'
         }
         ,fields: [{
             xtype: 'textfield'

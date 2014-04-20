@@ -31,7 +31,7 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworkjudges'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/galleryafrican/artworks/getListArtworksJudges' }
+        ,baseParams: { action: 'mgr/africa/artworks/getListArtworksJudges' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
@@ -180,7 +180,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/galleryafrican/artworks/getListArtworksJudges'
+            action: 'mgr/africa/artworks/getListArtworksJudges'
             //,'parent': this.config.resource
             ,'galleryId': this.config.galleryId
         };
@@ -223,13 +223,16 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
-                xtype: 'sovereign-window-africanartworks-update'
+                galleryId: this.config.galleryId
+                ,xtype: 'sovereign-window-africanartworks-update'
                 ,record: this.menu.record
                 ,listeners: {
                     'success': {fn:this.refresh,scope:this}
                 }
             });
         }
+        this.updateArtworksWindow.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + this.updateArtworksWindow.galleryId + '/';
+        this.updateArtworksWindow.baseParams.galleryId = this.updateArtworksWindow.galleryId;
         this.updateArtworksWindow.setValues(this.menu.record);
         this.updateArtworksWindow.show(e.target);
     },removeAfricanArtworks: function() {
@@ -238,7 +241,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
             ,text: _('sovereign.artworks_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/galleryafrican/artworks/remove'
+                action: 'mgr/africa/artworks/remove'
                 ,id: this.menu.record.id
                 ,file: '/assets/components/sovereign/galleries/african/'+ this.menu.record.gallery_id + '/' + this.menu.record.filename
             }
@@ -294,14 +297,3 @@ Sovereign.window.DisplayAfricanArtworkJudges = function(config) {
 Ext.extend(Sovereign.window.DisplayAfricanArtworkJudges,MODx.Window);
 Ext.reg('sovereign-window-africanartworkjudges-display',Sovereign.window.DisplayAfricanArtworkJudges);
 
-
-Sovereign.window.ShowJudgesList = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'sovshowjudges'+Ext.id();
-    Ext.apply(config, {
-        title: 'Assigned Judges'
-    });
-    Sovereign.window.ShowJudgesList.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.ShowJudgesList, MODx.Window);
-Ext.reg('sovereign-window-african-showjudges', Sovereign.window.ShowJudgesList);

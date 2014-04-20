@@ -60,6 +60,5 @@
         <composite alias="AfricanArtworks" class="africanArtworks" local="id" foreign="gallery_id" cardinality="many" owner="local" />
         <aggregate alias="CreatedBy" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
     </object>
-
       
 </model>

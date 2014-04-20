@@ -395,14 +395,11 @@ Sovereign.window.UpdateAfricanArtworks = function(config) {
      * MAIN FORM CONTAINER
      */
     this.ident = config.ident || 'sovupart'+Ext.id();
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.galleryId;
     Ext.applyIf(config,{
         title: _('sovereign.artworks_update')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/galleryafrican/artworks/update'
-            ,galleryUrl: 'assets/components/sovereign/galleries/african/' + this.galleryId + '/'
-            ,galleryId: this.galleryId
+            action: 'mgr/africa/artworks/update'
         }
         ,id: this.ident
         ,fileUpload : true
