@@ -1,6 +1,6 @@
 <?php
 
-require_once (MODX_CORE_PATH.'/model/modx/processors/security/user/_validation.php');
+require_once (MODX_CORE_PATH.'model/modx/processors/security/user/_validation.php');
 /**
  * Update a user.
  *

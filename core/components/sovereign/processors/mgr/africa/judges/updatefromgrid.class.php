@@ -1,6 +1,6 @@
 <?php
 require_once (dirname(__FILE__).'/update.class.php');
-class JudgesAfricanUpdateFromGridProcessor extends modUserUpdateProcessor {
+class JudgesAfricanUpdateFromGridProcessor extends modObjectUpdateProcessor {
     public function initialize() {
         $data = $this->getProperty('data');
         if (empty($data)) return $this->modx->lexicon('invalid_data');

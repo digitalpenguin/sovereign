@@ -135,7 +135,7 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
         },'-',{
             xtype: 'button'
             ,text: _('sovereign.add_judges_to_gallery')
-            ,handler: { xtype: 'sovereign-window-african-showjudges' ,blankValues: true }
+            ,handler: this.showAfricanJudges
         },'->',{
             text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
@@ -200,12 +200,22 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
             text: _('sovereign.artworks_remove')
             ,handler: this.removeAfricanArtworks
         }];
+    },showAfricanJudges: function(e) {
+        var win = MODx.load({
+            galleryId: this.config.galleryId
+            ,xtype: 'sovereign-window-african-showjudges'
+            ,listeners: {
+                'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        win.galleryId = this.config.galleryId;
+        win.show();
     },displayArtwork: function(e) {
         this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkJudges;
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
-    },createAfricanArtwork: function() {
+    },createAfricanArtwork: function(e) {
         var win = MODx.load({
             galleryId: this.config.galleryId
             ,xtype: 'sovereign-window-africanartworks-create'
