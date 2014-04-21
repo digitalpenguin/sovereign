@@ -3,9 +3,16 @@ Sovereign.window.AfricanShowJudgesList = function(config) {
     this.ident = config.ident || 'sovshowjudges'+Ext.id();
     Ext.apply(config, {
         title: 'Assigned Judges'
+        ,fileUpload: true
         ,width: 600
+        ,maxHeight:600
         ,fields: [{
             xtype: 'sovereign-grid-african-assignedjudges'
+        }]
+        ,buttons: [{
+            text: 'Close'
+            ,scope:this
+            ,handler: this.hide
         }]
     });
     Sovereign.window.AfricanShowJudgesList.superclass.constructor.call(this,config);
@@ -24,6 +31,7 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
+        ,border:false
         ,autoExpandColumn: 'title'
         ,save_action: 'mgr/africa/judges/updateFromGrid'
         ,autosave: true
@@ -42,6 +50,19 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             ,dataIndex: 'username'
             ,sortable: false
             ,width:.05
+        },{
+            header: 'Password'
+            ,dataIndex: 'password'
+            ,width:.05
+        }]
+        ,tbar: ['Upload .csv file:  ',{
+            xtype: 'field'
+            ,inputType: 'file'
+            ,scope: this
+        },'->',{
+            text: 'Add Single Judge'
+            ,scope: this
+            ,handler: this.addSingleJudge
         }]
     });
     Sovereign.grid.AfricanAssignedJudges.superclass.constructor.call(this,config);
@@ -58,6 +79,19 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
             text: 'Remove Judge'
             ,handler: this.removeJudge
         }];
+    },addSingleJudge: function(e) {
+        var win = MODx.load({
+            galleryId: this.config.galleryId
+            ,xtype: 'sovereign-window-africanjudges-create'
+            ,listeners: {
+                success: {fn: function(r) {
+                    this.refresh();
+                },scope: this},
+                scope: this
+            }
+        });
+        win.baseParams.galleryId = win.galleryId;
+        win.show(e.target);
     },updateJudge: function(btn,e) {
         if (!this.updateJudgeWindow) {
             this.updateJudgeWindow = MODx.load({
@@ -82,7 +116,6 @@ Sovereign.window.UpdateAfricanJudges = function(config) {
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/africa/judges/update'
-            ,id: Ext.getCmp('sovereign-grid-african-assignedjudges').config.id
         }
         ,fields: [{
             xtype: 'hidden'
@@ -108,3 +141,43 @@ Sovereign.window.UpdateAfricanJudges = function(config) {
 };
 Ext.extend(Sovereign.window.UpdateAfricanJudges,MODx.Window);
 Ext.reg('sovereign-window-africanjudges-update',Sovereign.window.UpdateAfricanJudges);
+
+
+
+Sovereign.window.CreateAfricanJudges = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: 'Add Single Judge To Gallery'
+        ,url: Sovereign.config.connectorUrl
+        ,baseParams: {
+            action: 'mgr/africa/judges/create'
+        }
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: 'Full Name'
+            ,name: 'fullname'
+            ,anchor: '100%'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: 'Email Address'
+            ,name: 'email'
+            ,anchor: '100%'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: 'Username'
+            ,name: 'username'
+            ,anchor: '100%'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: 'Password'
+            ,name: 'password'
+            ,anchor: '100%'
+        }]
+    });
+    Sovereign.window.CreateAfricanJudges.superclass.constructor.call(this,config);
+};
+Ext.extend(Sovereign.window.CreateAfricanJudges,MODx.Window);
+Ext.reg('sovereign-window-africanjudges-create',Sovereign.window.CreateAfricanJudges);

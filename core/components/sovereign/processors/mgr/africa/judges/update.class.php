@@ -1,6 +1,6 @@
 <?php
 
-require_once (MODX_CORE_PATH.'model/modx/processors/security/user/_validation.php');
+require_once (MODX_CORE_PATH.'/model/modx/processors/security/user/_validation.php');
 /**
  * Update a user.
  *
@@ -9,9 +9,7 @@ require_once (MODX_CORE_PATH.'model/modx/processors/security/user/_validation.ph
  * @package modx
  * @subpackage processors.security.user
  */
-
-class JudgesAfricanUpdateProcessor extends modUserUpdateProcessor {
-
+class africanJudgeUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modUser';
     public $languageTopics = array('user');
     public $permission = 'save_user';
@@ -253,4 +251,4 @@ class JudgesAfricanUpdateProcessor extends modUserUpdateProcessor {
         }
     }
 }
-return 'JudgesAfricanUpdateProcessor';
+return 'africanJudgeUpdateProcessor';
