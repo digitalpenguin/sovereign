@@ -58,6 +58,7 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
 
         $joinSuccess = $user->joinGroup($group->id, $role->id);
 
+
         if ($success && $joinSuccess) {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'Profile Created: '.print_r($_POST,true));
             return $this->success();
@@ -67,7 +68,7 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             return $this->failure();
         }
 
-
+        // THE ERROR: User Group not found with key: 15
 
     }
 
