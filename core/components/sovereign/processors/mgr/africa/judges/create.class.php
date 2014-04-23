@@ -4,27 +4,6 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
 
     public $object;
 
-/*
-    public function process() {
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of galleryId : ' . $this->getProperty('galleryId'));
-
-
-        $user = $this->modx->newObject('modUser', array('username' => $this->getProperty('username')));
-        $user->set('password', md5($this->getProperty('password')));
-        $userProfile = $this->modx->newObject('modUserProfile');
-        $userProfile->set('fullname', $this->getProperty('fullname'));
-        $userProfile->set('email', $this->getProperty('email'));
-        $success = $user->addOne($userProfile);
-        if ($success) {
-            $user->save();
-            $this->modx->log(modX::LOG_LEVEL_DEBUG, 'SUCCESS');
-            return $this->success();
-        } else {
-            $this->modx->log(modX::LOG_LEVEL_DEBUG, 'FAILURE');
-            return $this->failure();
-        }
-    }*/
-
     public function process() {
         // gets the id of current gallery
         $galleryId = $this->getProperty('galleryId');
@@ -56,7 +35,8 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $success = false;
         }
 
-        $joinSuccess = $user->joinGroup($group->id, $role->id);
+        // Assign the user both a group and a role
+        $joinSuccess = $user->joinGroup($group->get('id'), $role->get('id'));
 
 
         if ($success && $joinSuccess) {
@@ -67,8 +47,6 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'Profile Denied: '.print_r($_POST,true));
             return $this->failure();
         }
-
-        // THE ERROR: User Group not found with key: 15
 
     }
 

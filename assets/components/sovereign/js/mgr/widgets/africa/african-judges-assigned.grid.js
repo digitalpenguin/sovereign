@@ -7,6 +7,9 @@ Sovereign.window.AfricanShowJudgesList = function(config) {
         ,fileUpload: true
         ,width: 600
         ,maxHeight:600
+        ,listeners: {
+            'show': function(){this.center();}
+        }
         ,fields: [{
             xtype: 'sovereign-grid-african-assignedjudges'
         }]
@@ -31,6 +34,9 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
         ,baseParams: {
             action: 'mgr/africa/judges/getList'
             ,galleryId: this.galleryId
+        }
+        ,listeners: {
+            'render': {fn:this.filterJudgesToGallery,scope:this}
         }
         ,fields: ['id','fullname','username','email', 'password', 'menu']
         ,paging: true
@@ -81,6 +87,11 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
             text: 'Remove Judge'
             ,handler: this.removeJudge
         }];
+    },filterJudgesToGallery: function() {
+        var s = this.getStore();
+        s.baseParams.galleryId = this.galleryId;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
     },addSingleJudge: function(e) {
         var win = MODx.load({
             galleryId: this.galleryId
@@ -106,6 +117,19 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
         }
         this.updateJudgeWindow.setValues(this.menu.record);
         this.updateJudgeWindow.show(e.target);
+    },removeJudge: function() {
+        MODx.msg.confirm({
+            title: 'Remove Assigned Judge'
+            ,text: 'Are you sure you want to remove this judge from the gallery?'
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/judges/remove'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     }
 });
 Ext.reg('sovereign-grid-african-assignedjudges',Sovereign.grid.AfricanAssignedJudges);
