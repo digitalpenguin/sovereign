@@ -28,17 +28,16 @@ Ext.reg('sovereign-window-african-showjudges', Sovereign.window.AfricanShowJudge
 Sovereign.grid.AfricanAssignedJudges = function(config) {
     config = config || {};
     this.galleryId = Ext.getCmp('sovereign-grid-africanartworkjudges').config.galleryId; // this may cause a bug!
+    this.userGroupId = Ext.getCmp('sovereign-grid-africanartworkjudges').config.userGroupId; // this may cause a bug!
     Ext.applyIf(config, {
         id: 'sovereign-grid-african-assignedjudges'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/africa/judges/getList'
             ,galleryId: this.galleryId
+            ,usergroup: this.userGroupId
         }
-        ,listeners: {
-            'render': {fn:this.filterJudgesToGallery,scope:this}
-        }
-        ,fields: ['id','fullname','username','email', 'password', 'menu']
+        ,fields: ['id','fullname','username','email','password','menu']
         ,paging: true
         ,pageSize: 6
         ,remoteSort: true
@@ -87,11 +86,6 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
             text: 'Remove Judge'
             ,handler: this.removeJudge
         }];
-    },filterJudgesToGallery: function() {
-        var s = this.getStore();
-        s.baseParams.galleryId = this.galleryId;
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
     },addSingleJudge: function(e) {
         var win = MODx.load({
             galleryId: this.galleryId

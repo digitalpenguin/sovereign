@@ -259,8 +259,9 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },passGalleryId: function(galleryId) {
+    },passGalleryId: function(galleryId, userGroupId) {
         this.config.galleryId = galleryId;
+        this.config.userGroupId = userGroupId;
     }/*,filterByGalleryId: function(id) {
         this.getStore().baseParams['id'] = id;
         this.getBottomToolbar().changePage(1);

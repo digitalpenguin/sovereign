@@ -14,6 +14,16 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $group->save();
         }
 
+        // set the group id to gallery
+        $groupId = $group->get('id');
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of groupid : ' . $groupId);
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of galleryid : ' . $galleryId);
+
+        $gallery = $this->modx->getObject('africanGalleries', array('id' => $galleryId));
+        $gallery->set('usergroupid', $groupId);
+        $gallery->save();
+
+
         // creates the appropriate role for the user if it doesn't already exist
         if (!$role = $this->modx->getObject('modUserGroupRole', array('name' => 'AfricanJudge'))) {
             $role = $this->modx->newObject('modUserGroupRole',
@@ -29,7 +39,15 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $profile = $this->modx->newObject('modUserProfile');
             $profile->set('fullname', $this->getProperty('fullname'));
             $profile->set('email', $this->getProperty('email'));
+            $extended = $profile->get('extended');
+            $extended['children'] = array(
+                'usergroupid' => $group->get('id')
+            );
+            $profile->set('extended', $extended);
+            $profile->save();
             $user->addOne($profile);
+
+
             $success = $user->save();
         } else {
             $success = false;

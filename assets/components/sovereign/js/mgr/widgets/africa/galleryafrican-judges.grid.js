@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanJudges = function(config) {
         id: 'sovereign-grid-galleryafricanjudges'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/africa/galleries/getListJudges' }
-        ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
+        ,fields: ['id','galleryname','description','url','year','artworktotal','usergroupid','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
@@ -13,8 +13,9 @@ Sovereign.grid.GalleryAfricanJudges = function(config) {
                 if (grid.getSelectionModel().hasSelection()) {
                     var row = grid.getSelectionModel().getSelections()[0];
                     var galleryId = row.get('id');
+                    var userGroupId = row.get('usergroupid');
                 }
-                this.loadNewGrid(grid, row, galleryId);
+                this.loadNewGrid(grid, row, galleryId, userGroupId);
             }
         }
         ,autoExpandColumn: 'year'
@@ -173,8 +174,8 @@ Ext.extend(Sovereign.grid.GalleryAfricanJudges,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },loadNewGrid: function(grid, row, galleryId) {
-        Ext.getCmp('sovereign-panel-africa').replaceJudgesGrid(grid, row, galleryId);
+    },loadNewGrid: function(grid, row, galleryId, userGroupId) {
+        Ext.getCmp('sovereign-panel-africa').replaceJudgesGrid(grid, row, galleryId, userGroupId);
     }
 });
 Ext.reg('sovereign-grid-galleryafricanjudges',Sovereign.grid.GalleryAfricanJudges);

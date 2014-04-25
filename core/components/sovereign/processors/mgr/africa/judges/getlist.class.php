@@ -1,5 +1,5 @@
 <?php
-class AssignedJudgesGetListProcessor extends modObjectGetListProcessor {
+class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
     public $classKey = 'modUser';
     public $languageTopics = array('user');
     public $permission = 'view_user';
@@ -35,21 +35,7 @@ class AssignedJudgesGetListProcessor extends modObjectGetListProcessor {
             ));
         }
 
-/*
-        $judgesGroup = 19;//'AfricanJudgesGallery#'.$this->getProperty('galleryId');
-        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of group : ' . $judgesGroup);
 
-
-        $email = 'some@one.com';
-        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of email : ' . $email);
-
-        if(!empty($judgesGroup)) {
-            $c->leftJoin('modUserGroup', 'PrimaryGroup');
-            //$c->where(array('Profile.email' => $email));
-            $c->where(array('PrimaryGroup.name' => $judgesGroup));
-
-        }
-*/
         return $c;
     }
 
@@ -73,4 +59,4 @@ class AssignedJudgesGetListProcessor extends modObjectGetListProcessor {
         return $objectArray;
     }
 }
-return 'AssignedJudgesGetListProcessor';
+return 'AssignedJudgesGetListProcessorOld';

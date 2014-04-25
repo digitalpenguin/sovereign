@@ -158,7 +158,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             submissionsGrid.refresh();
         });
         slideGridOut.delay(350); // keep delay slightly longer than effect
-    },replaceJudgesGrid: function(grid, row, galleryId) {
+    },replaceJudgesGrid: function(grid, row, galleryId, userGroupId) {
         if (!Ext.getCmp('sovereign-grid-africanartworkjudges')) { // stop double clicks
             var africanTabs = Ext.getCmp('africanTabs');
             var activeMainAfricanTab = africanTabs.getActiveTab();
@@ -173,7 +173,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
 
 
             var artworkGrid = new Sovereign.grid.AfricanArtworkJudges;
-            artworkGrid.passGalleryId(galleryId); // pass id of selected gallery
+            artworkGrid.passGalleryId(galleryId, userGroupId); // pass id of selected gallery
             var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
                 judgesGridHeader.update('<img style="float:right;" src="'+Sovereign.config.cssUrl + '/img/gavel.png"><img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/painting-icon.png"><h3>'+ row.get('galleryname')+' - Judges\' Gallery Artworks</h3><p>'+ _('sovereign.judges_artworks_desc') +'</p>');
                 activeMainAfricanTab.add(artworkGrid);
