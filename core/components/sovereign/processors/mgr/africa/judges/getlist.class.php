@@ -1,10 +1,9 @@
 <?php
-class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
+class AssignedJudgeGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modUser';
     public $languageTopics = array('user');
     public $permission = 'view_user';
-    public $defaultSortField = 'email';
-
+    public $defaultSortField = 'username';
 
     public function initialize() {
         $initialized = parent::initialize();
@@ -16,44 +15,6 @@ class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
         if ($this->getProperty('sort') == 'id') $this->setProperty('sort','modUser.id');
         return $initialized;
     }
-
-
-    public function getData() {
-
-        $data = array();
-        $userCollection = array();
-        $judgesGroup = 'AfricanJudgesGallery#'.$this->getProperty('galleryId');
-        if ($userGroup = $this->modx->getObject('modUserGroup',array('name' => $judgesGroup))) {
-            $userCollection = $userGroup->getUsersIn();
-            //$userCollection->leftJoin('modUserProfile', 'Profile');
-            $c->leftJoin('modUserProfile','Profile');
-
-            $query = $this->modx->newQuery('modUser');
-
-            $query->select($this->modx->getSelectColumns('modUser','modUser'));
-            $query->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email')));
-/*
-            foreach ($userCollection as $userObject) {
-                $username = $userObject->get('username');
-                $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of username : ' . $username);
-                $profile = $userObject->getOne('Profile');
-                $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of fullname : ' . $profile->fullname);
-                $userCollection->select($this->modx->getSelectColumns('modUser','modUser'));
-                $userCollection->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email')));
-
-
-            }
-*/
-        }
-
-        $data['total'] = sizeof($userCollection);
-
-        $data['results'] = $userCollection;
-
-        return $data;
-    }
-
-
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modUserProfile','Profile');
@@ -73,6 +34,13 @@ class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
             ));
         }
 
+        $userGroupName = $this->getProperty('usergroupname',0);
+        if (!empty($userGroupName)) {
+            $c->innerJoin('modUserGroup','PrimaryGroup');
+            $c->where(array(
+                'PrimaryGroup.name' => $userGroupName,
+            ));
+        }
 
         return $c;
     }
@@ -80,7 +48,6 @@ class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->select($this->modx->getSelectColumns('modUser','modUser'));
         $c->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email','blocked')));
-        //$this->setProperty('username', $this->getProperty('email'));
         return $c;
     }
 
@@ -97,4 +64,4 @@ class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
         return $objectArray;
     }
 }
-return 'AssignedJudgesGetListProcessorOld';
+return 'AssignedJudgeGetListProcessor';

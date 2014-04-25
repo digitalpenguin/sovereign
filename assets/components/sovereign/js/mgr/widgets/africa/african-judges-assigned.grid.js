@@ -34,6 +34,7 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
         ,baseParams: {
             action: 'mgr/africa/judges/getList'
             ,galleryId: this.galleryId
+            ,usergroupname: 'AfricanJudgesGallery#'+this.galleryId
         }
         ,fields: ['id','fullname','username','email','password','menu']
         ,paging: true
