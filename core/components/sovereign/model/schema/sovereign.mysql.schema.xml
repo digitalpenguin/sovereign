@@ -51,7 +51,6 @@
         <field key="galleryname" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="artworktotal" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
-        <field key="usergroupid" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
         <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
         <field key="vote_on" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="true" default="" />

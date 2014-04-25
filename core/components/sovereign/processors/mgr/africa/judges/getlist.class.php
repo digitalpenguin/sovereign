@@ -17,6 +17,37 @@ class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
         return $initialized;
     }
 
+
+    public function getData() {
+
+        $data = array();
+        $userCollection = array();
+        $judgesGroup = 'AfricanJudgesGallery#'.$this->getProperty('galleryId');
+        if ($userGroup = $this->modx->getObject('modUserGroup',array('name' => $judgesGroup))) {
+            $userCollection = $userGroup->getUsersIn();
+            $userCollection->leftJoin('modUserProfile', 'Profile');
+
+            /*foreach ($userCollection as $userObject) {
+                $username = $userObject->get('username');
+                $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of username : ' . $username);
+                $profile = $userObject->getOne('Profile');
+                $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of fullname : ' . $profile->fullname);
+
+
+
+            }*/
+
+        }
+
+        $data['total'] = sizeof($userCollection);
+
+        $data['results'] = $userCollection;
+
+        return $data;
+    }
+
+
+
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modUserProfile','Profile');
 

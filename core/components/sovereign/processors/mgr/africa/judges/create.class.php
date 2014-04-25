@@ -39,11 +39,6 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $profile = $this->modx->newObject('modUserProfile');
             $profile->set('fullname', $this->getProperty('fullname'));
             $profile->set('email', $this->getProperty('email'));
-            $extended = $profile->get('extended');
-            $extended['children'] = array(
-                'usergroupid' => $group->get('id')
-            );
-            $profile->set('extended', $extended);
             $profile->save();
             $user->addOne($profile);
 
