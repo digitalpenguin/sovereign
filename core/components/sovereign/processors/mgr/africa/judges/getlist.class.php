@@ -25,18 +25,25 @@ class AssignedJudgesGetListProcessorOld extends modObjectGetListProcessor {
         $judgesGroup = 'AfricanJudgesGallery#'.$this->getProperty('galleryId');
         if ($userGroup = $this->modx->getObject('modUserGroup',array('name' => $judgesGroup))) {
             $userCollection = $userGroup->getUsersIn();
-            $userCollection->leftJoin('modUserProfile', 'Profile');
+            //$userCollection->leftJoin('modUserProfile', 'Profile');
+            $c->leftJoin('modUserProfile','Profile');
 
-            /*foreach ($userCollection as $userObject) {
+            $query = $this->modx->newQuery('modUser');
+
+            $query->select($this->modx->getSelectColumns('modUser','modUser'));
+            $query->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email')));
+/*
+            foreach ($userCollection as $userObject) {
                 $username = $userObject->get('username');
                 $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of username : ' . $username);
                 $profile = $userObject->getOne('Profile');
                 $this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of fullname : ' . $profile->fullname);
+                $userCollection->select($this->modx->getSelectColumns('modUser','modUser'));
+                $userCollection->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email')));
 
 
-
-            }*/
-
+            }
+*/
         }
 
         $data['total'] = sizeof($userCollection);
