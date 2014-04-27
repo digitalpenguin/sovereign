@@ -11,6 +11,7 @@ $xpdo_meta_map['africanGalleries']= array (
     'artworktotal' => 0,
     'url' => '',
     'enabled' => 0,
+    'phase' => 0,
     'vote_on' => 0,
     'votes' => 0,
     'createdon' => NULL,
@@ -52,6 +53,15 @@ $xpdo_meta_map['africanGalleries']= array (
       'dbtype' => 'int',
       'precision' => '1',
       'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
+    ),
+    'phase' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
       'null' => true,
       'default' => 0,
     ),

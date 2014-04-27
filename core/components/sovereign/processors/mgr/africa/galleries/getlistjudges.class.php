@@ -13,6 +13,11 @@ class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
      * @return xPDOQuery
      */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
+
+        $c->where(array(
+            'phase' => 1
+        ));
+
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
@@ -47,6 +52,10 @@ class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
         $count = $this->modx->getCount('africanArtworks', array('gallery_id' => $galleryId, 'confirmed' => 1));
         //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of count:' . $count);
         return $count;
+    }
+
+    private function getTotalVotes() {
+
     }
 
     /**

@@ -126,6 +126,9 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
                 text: _('sovereign.gallery_deactivate')
                 ,handler: this.deactivateGalleryAfricanSubmissions
             },'-',{
+                text: _('sovereign.gallery_movetojudges')
+                ,handler: this.moveToJudges
+            },'-',{
                 text: _('sovereign.gallery_remove')
                 ,handler: this.removeGalleryAfricanSubmissions
             }];
@@ -135,7 +138,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             title: _('sovereign.gallery_activate')
             ,text: _('sovereign.gallery_activate_confirm')
             ,url: this.config.url
-            ,galleryname: this.config.galleryname
+            //,galleryname: this.config.galleryname
             ,params: {
                 action: 'mgr/africa/galleries/activate'
                 ,id: this.menu.record.id
@@ -149,10 +152,24 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
             title: _('sovereign.gallery_deactivate')
             ,text: _('sovereign.gallery_deactivate_confirm')
             ,url: this.config.url
-            ,galleryname: this.config.galleryname
+            //,galleryname: this.config.galleryname
             ,params: {
                 action: 'mgr/africa/galleries/deactivate'
                 ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },moveToJudges: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.gallery_movetojudges')
+            ,text: _('sovereign.gallery_movetojudges_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/galleries/moveGallery'
+                ,id: this.menu.record.id
+                ,phase: 1
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}

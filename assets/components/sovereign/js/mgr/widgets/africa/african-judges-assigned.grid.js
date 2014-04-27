@@ -7,6 +7,7 @@ Sovereign.window.AfricanShowJudgesList = function(config) {
         ,fileUpload: true
         ,width: 600
         ,height:600
+        ,modal: true
         ,listeners: {
             'show': function(){this.center();}
         }
@@ -60,11 +61,12 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             ,sortable: false
             ,width:.05
         }]
-        ,tbar: ['Upload .csv file:  ',{
-            xtype: 'field'
-            ,inputType: 'file'
+        ,tbar: [{
+            xtype: 'button'
+            ,text: 'Upload CSV File'
             ,scope: this
-        },'->',{
+            ,handler: this.uploadCsv
+        },'-',{
             xtype: 'button'
             ,text: 'Add Single Judge'
             ,scope: this
@@ -110,6 +112,21 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
         }
         this.updateJudgeWindow.setValues(this.menu.record);
         this.updateJudgeWindow.show(e.target);
+    },resetPassword: function() {
+
+    },uploadCsv: function(e) {
+        var win = MODx.load({
+            galleryId: this.galleryId
+            ,xtype: 'sovereign-window-africanjudges-uploadcsv'
+            ,listeners: {
+                success: {fn: function(r) {
+                    this.refresh();
+                },scope: this},
+                scope: this
+            }
+        });
+        win.baseParams.galleryId = win.galleryId;
+        win.show(e.target);
     },removeJudge: function() {
         MODx.msg.confirm({
             title: 'Remove Assigned Judge'
@@ -131,7 +148,7 @@ Ext.reg('sovereign-grid-african-assignedjudges',Sovereign.grid.AfricanAssignedJu
 Sovereign.window.UpdateAfricanJudges = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('doodles.doodle_update')
+        title: 'Update Judges\' Details'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/africa/judges/update'
@@ -200,3 +217,30 @@ Sovereign.window.CreateAfricanJudges = function(config) {
 };
 Ext.extend(Sovereign.window.CreateAfricanJudges,MODx.Window);
 Ext.reg('sovereign-window-africanjudges-create',Sovereign.window.CreateAfricanJudges);
+
+
+Sovereign.window.AfricanJudgesUploadCsv = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: 'Upload CSV File'
+        ,fileUpload: true
+        ,modal: true
+        ,bodyStyle: 'width:500px;'
+        ,url: Sovereign.config.connectorUrl
+        ,baseParams: {
+            action: 'mgr/africa/judges/uploadcsv'
+        }
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
+            xtype: 'field'
+            ,fieldLabel: 'Upload CSV Files'
+            ,inputType: 'file'
+            ,anchor: '100%'
+        }]
+    });
+    Sovereign.window.AfricanJudgesUploadCsv.superclass.constructor.call(this,config);
+};
+Ext.extend(Sovereign.window.AfricanJudgesUploadCsv,MODx.Window);
+Ext.reg('sovereign-window-africanjudges-uploadcsv',Sovereign.window.AfricanJudgesUploadCsv);

@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanJudges = function(config) {
         id: 'sovereign-grid-galleryafricanjudges'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/africa/galleries/getListJudges' }
-        ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
+        ,fields: ['id','galleryname','description','url','year','artworktotal','votes','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
@@ -40,15 +40,11 @@ Sovereign.grid.GalleryAfricanJudges = function(config) {
             ,sortable: false
             ,width:.055
         },{
-            header: _('sovereign.active_gallery')
+            header: _('sovereign.gallery_vote_total')
             ,align: 'center'
-            ,dataIndex: 'enabled'
+            ,dataIndex: 'votes'
             ,sortable: true
             ,width:.05
-            ,renderer: function(value){
-                var active = value ? 'greentick.png' : 'redcross.png';
-                return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
-            }
         },{
             header: _('sovereign.created_on')
             ,dataIndex: 'createdon'
@@ -113,46 +109,23 @@ Ext.extend(Sovereign.grid.GalleryAfricanJudges,MODx.grid.Grid,{
             var row = grid.getSelectionModel().getSelections()[0];
             var enabledVal = row.get('enabled');
         }
-        if(!enabledVal) {
-            return [{
-                text: _('sovereign.gallery_activate')
-                ,handler: this.activateGalleryAfricanJudges
-            },'-',{
-                text: _('sovereign.gallery_remove')
-                ,handler: this.removeGalleryAfricanJudges
-            }];
-        } else {
-            return [{
-                text: _('sovereign.gallery_deactivate')
-                ,handler: this.deactivateGalleryAfricanJudges
-            },'-',{
-                text: _('sovereign.gallery_remove')
-                ,handler: this.removeGalleryAfricanJudges
-            }];
-        }
-    },activateGalleryAfricanJudges: function() {
+        return [{
+            text: _('sovereign.gallery_back_to_submissions')
+            ,handler: this.backToSubmissionPhaseGalleryAfricanJudges
+        },'-',{
+            text: _('sovereign.gallery_remove')
+            ,handler: this.removeGalleryAfricanJudges
+        }];
+
+    },backToSubmissionPhaseGalleryAfricanJudges: function() {
         MODx.msg.confirm({
-            title: _('sovereign.gallery_activate')
-            ,text: _('sovereign.gallery_activate_confirm')
+            title: _('sovereign.gallery_back_to_submissions')
+            ,text: _('sovereign.gallery_back_to_submissions_confirm')
             ,url: this.config.url
-            ,galleryname: this.config.galleryname
             ,params: {
-                action: 'mgr/africa/galleries/activate'
+                action: 'mgr/africa/galleries/moveGallery'
                 ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    },deactivateGalleryAfricanJudges: function() {
-        MODx.msg.confirm({
-            title: _('sovereign.gallery_deactivate')
-            ,text: _('sovereign.gallery_deactivate_confirm')
-            ,url: this.config.url
-            ,galleryname: this.config.galleryname
-            ,params: {
-                action: 'mgr/africa/galleries/deactivate'
-                ,id: this.menu.record.id
+                ,phase: 0
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}

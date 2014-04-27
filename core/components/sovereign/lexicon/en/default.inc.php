@@ -57,12 +57,16 @@ $_lang['sovereign.gallery_create'] = 'Create New Gallery';
 $_lang['sovereign.active_gallery'] = 'Enabled?';
 $_lang['sovereign.created_on'] = 'Created on';
 $_lang['sovereign.created_by'] = 'Created by';
+$_lang['sovereign.gallery_vote_total'] = 'Vote Total';
 $_lang['sovereign.gallery_artwork_total'] = 'Artwork Total';
 $_lang['sovereign.gallery_activate'] = 'Activate Gallery';
 $_lang['sovereign.gallery_activate_confirm'] = 'Are you sure you wish to activate this gallery? This will allow submissions for this gallery to begin.';
 $_lang['sovereign.gallery_deactivate'] = 'Deactivate Gallery';
 $_lang['sovereign.gallery_deactivate_confirm'] = 'Are you sure you wish to deactivate this gallery? This will suspend submissions for this gallery.';
-
+$_lang['sovereign.gallery_movetojudges'] = 'End Submission Phase';
+$_lang['sovereign.gallery_back_to_submissions'] = 'Move Gallery Back To Submission Phase';
+$_lang['sovereign.gallery_back_to_submissions_confirm'] = 'Are you sure you wish to move this gallery back to the submission phase?';
+$_lang['sovereign.gallery_movetojudges_confirm'] = 'Are you sure you wish to end the submission phase? The confirmed submissions will move into the Judges\' Galleries phase to be voted upon.';
 /*
  * Artwork Grid
  */
@@ -70,7 +74,9 @@ $_lang['sovereign.artworks_update'] = 'Update Artwork Details';
 $_lang['sovereign.artworks_remove'] = 'Remove Artwork';
 $_lang['sovereign.artworks_remove_confirm'] = 'Are you sure you wish to delete this artwork from the database?';
 $_lang['sovereign.artworks_confirm'] = 'Confirm Artwork Submission';
-$_lang['sovereign.artworks_confirm_confirm'] = 'Are you sure you wish to confirm this submission? This artwork will move into the judges\' gallery.';
+$_lang['sovereign.artworks_confirm_confirm'] = 'Are you sure you wish to confirm this submission?';
+$_lang['sovereign.artworks_un-confirm'] = 'Un-confirm Artwork Submission';
+$_lang['sovereign.artworks_un-confirm_confirm'] = 'Are you sure you wish to un-confirm this submission?';
 $_lang['sovereign.back_to_galleries'] = '&#171; Back to Galleries';
 $_lang['sovereign.artist_name'] = 'Artist';
 $_lang['sovereign.artwork_thumb'] = 'Image';
@@ -87,7 +93,8 @@ $_lang['sovereign.first_name'] = 'First Name';
 $_lang['sovereign.surname'] = 'Surname';
 $_lang['sovereign.artwork_title'] = 'Art Title';
 $_lang['sovereign.artwork_nominator'] = 'Nominator';
-$_lang['sovereign.artwork_donation'] = 'Donation';
+$_lang['sovereign.artwork_donation_details'] = 'Donation Details';
+$_lang['sovereign.artwork_estimated_value'] = 'Estimated Value';
 $_lang['sovereign.artwork_confirmed'] = 'Confirmed';
 $_lang['sovereign.artwork_art_materials'] = 'Materials';
 $_lang['sovereign.artwork_work_brief'] = 'Work Brief';

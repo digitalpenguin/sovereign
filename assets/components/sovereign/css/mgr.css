@@ -1,8 +1,8 @@
 .icon-reload { background:url("../css/img/reload.png") no-repeat scroll 5px 4px transparent !important; }
 .icon-add { background:url("../css/img/add.png") no-repeat scroll 5px 4px transparent !important; }
-#panelHome {margin-top:5px}
 .vertical-tabs-header {padding-top: 20px !important;}
 .x-grid3-hd-inner{ text-align:left; }
+#panelHome {margin-top:5px}
 #sovereign-grid-galleryafricansubmissions .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
 #sovereign-grid-galleryafricanjudges .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
 #sovereign-grid-africanartworksubmissions .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
@@ -10,8 +10,20 @@
 #sovereign-grid-africanartworksubmissions .x-grid3-col-2 { padding: 5px 18px 2px 5px;}
 #sovereign-grid-africanartworkjudges .x-grid3-col-2 { padding: 5px 18px 2px 5px;}
 
-.expanded { color:#444444;}
-.expanded h4 {color:#333333;}
+.expanded { width:10%; color:#444444; float:left; margin:20px 0 0 30px; }
+.expanded h4 { color:#333333; margin-bottom:6px; }
+.expanded-wide { color:#444444; float:left; margin:20px 0 0 30px; }
+.expanded-email { width: 150px; }
+.art-dimensions { float:left; }
+.art-dimensions-margin { margin-right:10px; }
+.newline { clear:both; }
+
+/* Make expanded content selectable */
+.x-grid3-row td, .x-grid3-summary-row td, .x-grid3-row-body {
+    -moz-user-select: text !important;
+    -khtml-user-select: text !important;
+}
+
 
 .panel-desc {
     -moz-border-radius:5px;

@@ -13,6 +13,11 @@ class GalleryAfricanSubmissionsGetListProcessor extends modObjectGetListProcesso
      * @return xPDOQuery
      */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
+
+        $c->where(array(
+            'phase' => 0
+        ));
+
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
@@ -44,7 +49,7 @@ class GalleryAfricanSubmissionsGetListProcessor extends modObjectGetListProcesso
      * @return int
      */
     private function getArtworkCount($galleryId) {
-        $count = $this->modx->getCount('africanArtworks', array('gallery_id' => $galleryId, 'confirmed' => 0));
+        $count = $this->modx->getCount('africanArtworks', array('gallery_id' => $galleryId));
         //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'The current value of count:' . $count);
         return $count;
     }

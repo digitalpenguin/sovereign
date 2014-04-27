@@ -13,9 +13,9 @@ class AfricanArtworksJudgesGetListProcessor extends modObjectGetListProcessor {
         if(!empty($galleryId)) {
             $c->where(array(
                     'gallery_id' => $galleryId, // only show artworks that match this gallery id
-                    array(
+                    /*array(
                         'confirmed:=' => 1, // only show artworks that have been confirmed
-                    )
+                    )*/
             ));
         }
 
@@ -24,13 +24,13 @@ class AfricanArtworksJudgesGetListProcessor extends modObjectGetListProcessor {
         if (!empty($query)) {
             $c->where(array(
                 'gallery_id' => $galleryId, // only show artworks that match this gallery id
-                array(
-                    'confirmed:=' => 1, // only show artworks that have been confirmed
+                //array(
+                //    'confirmed:=' => 1, // only show artworks that have been confirmed
                     array(
                         'art_title:LIKE' => '%'.$query.'%',
                         'OR:first_name:LIKE' => '%'.$query.'%'
                     )
-                )
+                //)
             ));
         }
 

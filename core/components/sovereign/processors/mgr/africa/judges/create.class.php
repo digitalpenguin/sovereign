@@ -48,7 +48,6 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'Profile Created: '.print_r($_POST,true));
             return $this->success();
         } else {
-            $this->modx->log(modX::LOG_LEVEL_ERROR,'Join failed');
             $this->modx->log(modX::LOG_LEVEL_ERROR,'Profile Denied: '.print_r($_POST,true));
             return $this->failure();
         }

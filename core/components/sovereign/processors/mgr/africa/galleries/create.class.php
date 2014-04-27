@@ -27,6 +27,7 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
     public function initialize() {
         $this->setUserId();
         $this->setCreateTime();
+        $this->setProperty('phase', 0);
         if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }

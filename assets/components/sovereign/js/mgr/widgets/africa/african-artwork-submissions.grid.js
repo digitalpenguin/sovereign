@@ -4,34 +4,126 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
     this.exp = new Ext.grid.RowExpander({
         enableCaching: false
         ,tpl : new Ext.Template(
-            '<div class="expanded">' +
-                '<h4>Caption</h4>' +
-                '<p>{caption}</p>' +
-            '</div>' +
-            '<div class="expanded">' +
-                '<h4>Work Brief</h4>' +
-                '<p>{work_brief}</p>' +
-            '</div>' +
-            '<div class="expanded">' +
-            '<h4>Art Brief</h4>' +
-            '<p>{art_brief}</p>' +
-            '</div>' +
-            '<div class="expanded">' +
-                '<ul>' +
-                    '<li>{height}</li>' +
-                    '<li>{width}</li>' +
-                    '<li>{depth}</li>' +
-                '</ul>' +
-            '</div>'
+            '<div class="expanded-container">' +
+                '<div class="expanded">' +
+                    '<h4>Filename</h4>' +
+                    '<p>{filename}</p>' +
+                '</div>'+
 
+                '<div class="expanded">' +
+                    '<h4>Height</h4>' +
+                    '<p>{height}</p>' +
+                '</div>' +
+
+                '<div class="expanded">' +
+                    '<h4>Width</h4>' +
+                    '<p>{width}</p>' +
+                '</div>' +
+
+                '<div class="expanded">' +
+                    '<h4>Depth</h4>' +
+                    '<p>{depth}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Edition</h4>' +
+                    '<p>{edition}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Can info be shared?</h4>' +
+                    '<p>{share}</p>' +
+                '</div>'+
+
+                '<div class="newline"></div>' +
+
+                '<div class="expanded">' +
+                    '<h4>Telephone Number</h4>' +
+                    '<p>{tel_no}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Mobile Number</h4>' +
+                    '<p>{mob_no}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Fax Number</h4>' +
+                    '<p>{fax_no}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Date of Birth</h4>' +
+                    '<p>{dob}</p>' +
+                '</div>'+
+
+                '<div class="expanded expanded-email">' +
+                    '<h4>Email Address</h4>' +
+                    '<p>{email_address}</p>' +
+                '</div>'+
+
+                '<div class="newline"></div>' +
+
+                '<div class="expanded">' +
+                    '<h4>Address: Part 1</h4>' +
+                    '<p>{address_1}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Address: Part 2</h4>' +
+                    '<p>{address_2}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Address: Part 3</h4>' +
+                    '<p>{address_3}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>City</h4>' +
+                    '<p>{city}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>State</h4>' +
+                    '<p>{state}</p>' +
+                '</div>'+
+
+                '<div class="expanded">' +
+                    '<h4>Postal Code</h4>' +
+                    '<p>{postal_code}</p>' +
+                '</div>'+
+
+                '<div class="expanded-wide newline">' +
+                    '<h4>Caption</h4>' +
+                    '<p>{caption}</p>' +
+                '</div>' +
+
+                '<div class="expanded-wide newline">' +
+                    '<h4>Statement</h4>' +
+                    '<p>{statement}</p>' +
+                '</div>' +
+
+                '<div class="expanded-wide newline">' +
+                    '<h4>Work Brief</h4>' +
+                    '<p>{work_brief}</p>' +
+                '</div>' +
+
+                '<div class="expanded-wide newline">' +
+                '<h4>Art Brief</h4>' +
+                '<p>{art_brief}</p><br><br>' +
+                '</div>' +
+
+            '</div>'
         )
     });
-
 
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworksubmissions'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/africa/artworks/getListArtworks' }
+        ,baseParams: {
+                action: 'mgr/africa/artworks/getListArtworks'
+        }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
@@ -42,7 +134,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
         ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {
-            'render': {fn:this.filterGalleries,scope:this}
+            'beforerender': {fn:this.filterGalleries,scope:this}
             ,'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
@@ -56,7 +148,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
-            ,width:.02
+            ,width:.01
         },{
             header: _('sovereign.artwork_thumb')
             ,dataIndex: 'filename'
@@ -83,7 +175,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             ,width:.05
         },{
             header: _('sovereign.country')
-            ,dataIndex: 'country'
+            ,dataIndex: _('country')
             ,sortable: true
             ,width:.05
         },{
@@ -97,27 +189,17 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             ,sortable: true
             ,width:.05
         },{
-            header: _('sovereign.artwork_caption')
-            ,dataIndex: 'art_caption'
+            header: _('sovereign.artwork_estimated_value')
+            ,dataIndex: 'value'
             ,sortable: true
-            ,width:.04
-        },{
-            header: _('sovereign.artwork_work_brief')
-            ,dataIndex: 'work_brief'
-            ,sortable: true
-            ,width:.07
-        },{
-            header: _('sovereign.artwork_art_brief')
-            ,dataIndex: 'art_brief'
-            ,sortable: true
-            ,width:.07
+            ,width:.05
         },{
             header: _('sovereign.artwork_nominator')
             ,dataIndex: 'nom_name'
             ,sortable: true
-            ,width:.07
+            ,width:.05
         },{
-            header: _('sovereign.artwork_donation')
+            header: _('sovereign.artwork_donation_details')
             ,dataIndex: 'donate'
             ,sortable: true
             ,width:.05
@@ -125,7 +207,12 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             header: _('sovereign.artwork_confirmed')
             ,dataIndex: 'confirmed'
             ,sortable: true
-            ,width:.05
+            ,width:.035
+            ,align: 'center'
+            ,renderer: function(value){
+                var active = value ? 'greentick.png' : 'redcross.png';
+                return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
+            }
         }]
         ,tbar:[{
             text: _('sovereign.back_to_galleries')
@@ -188,17 +275,34 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         s.baseParams.galleryId = this.config.galleryId;
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },getMenu: function() {
-        return [{
-            text: _('sovereign.artworks_confirm')
-            ,handler: this.confirmAfricanArtworks
-        },'-',{
-            text: _('sovereign.artworks_update')
-            ,handler: this.updateAfricanArtworks
-        },'-',{
-            text: _('sovereign.artworks_remove')
-            ,handler: this.removeAfricanArtworks
-        }];
+    },getMenu: function(grid, index, rec) {
+        if (grid.getSelectionModel().hasSelection()) {
+            var row = grid.getSelectionModel().getSelections()[0];
+            var confirmedVal = row.get('confirmed');
+        }
+        if(!confirmedVal) {
+            return [{
+                text: _('sovereign.artworks_confirm')
+                ,handler: this.confirmAfricanArtworks
+            },'-',{
+                text: _('sovereign.artworks_update')
+                ,handler: this.updateAfricanArtworks
+            },'-',{
+                text: _('sovereign.artworks_remove')
+                ,handler: this.removeAfricanArtworks
+            }];
+        } else {
+            return [{
+                text: _('sovereign.artworks_un-confirm')
+                ,handler: this.unConfirmAfricanArtworks
+            },'-',{
+                text: _('sovereign.artworks_update')
+                ,handler: this.updateAfricanArtworks
+            },'-',{
+                text: _('sovereign.artworks_remove')
+                ,handler: this.removeAfricanArtworks
+            }];
+        }
     },displayAfricanArtwork: function(e) {
         this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkSubmissions;
         this.displayArtworkWindow.setValues(this.menu.record);
@@ -225,6 +329,19 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'mgr/africa/artworks/confirm'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },unConfirmAfricanArtworks: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.artworks_confirm')
+            ,text: _('sovereign.artworks_confirm_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/artworks/un-confirm'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -295,6 +412,7 @@ Sovereign.window.DisplayAfricanArtworkSubmissions = function(config) {
             html: '<a target="_blank" href="'+ MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ this.galleryId +'/'+ this.currentFileName + '">' +
                 '<img src="' + MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ this.galleryId + '/thumbnails/' + this.currentFileName + '_large.jpeg" >'
         }]
+        ,tbar: ['Click the image to view the full version in a new window.']
         ,buttons:[{
             text: 'Close'
             ,scope: this
