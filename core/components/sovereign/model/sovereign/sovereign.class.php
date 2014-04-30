@@ -8,6 +8,7 @@ class Sovereign {
         $modxBasePath = MODX_BASE_PATH;
         $basePath = $this->modx->getOption('sovereign.core_path',$config,$this->modx->getOption('core_path').'components/sovereign/');
         $assetsUrl = $this->modx->getOption('sovereign.assets_url',$config,$this->modx->getOption('assets_url').'components/sovereign/');
+        $csvUrl = $this->modx->getOption('sovereign.csv_upload_url',MODX_ASSETS_PATH.'components/sovereign/temp/');
         $africanGalleryUrl = $this->modx->getOption('sovereign.african_gallery_url',$config,MODX_ASSETS_PATH.'components/sovereign/galleries/african/');
         //$asianGalleryUrl = $this->modx->getOption('sovereign.asian_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/asian/');
         //$europeanGalleryUrl = $this->modx->getOption('sovereign.european_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/european/');
@@ -25,6 +26,7 @@ class Sovereign {
             'assetsUrl' => $assetsUrl,
             'connectorUrl' => $assetsUrl.'connector.php',
             'africanGalleryUrl' => $africanGalleryUrl,
+            'csvUrl' => $csvUrl,
         ),$config);
         $this->modx->addPackage('sovereign',$this->config['modelPath']);
     }

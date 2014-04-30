@@ -141,8 +141,8 @@ $xpdo_meta_map['africanArtworks']= array (
     ),
     'country' => 
     array (
-      'dbtype' => 'char',
-      'precision' => '2',
+      'dbtype' => 'varchar',
+      'precision' => '45',
       'phptype' => 'string',
       'null' => true,
       'default' => '',

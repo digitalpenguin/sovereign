@@ -225,10 +225,10 @@ Sovereign.window.AfricanJudgesUploadCsv = function(config) {
         title: 'Upload CSV File'
         ,fileUpload: true
         ,modal: true
-        ,bodyStyle: 'width:500px;'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/africa/judges/uploadcsv'
+            action: 'mgr/africa/judges/uploadCsv'
+            ,path: Sovereign.config.csvUrl
         }
         ,fields: [{
             xtype: 'hidden'
