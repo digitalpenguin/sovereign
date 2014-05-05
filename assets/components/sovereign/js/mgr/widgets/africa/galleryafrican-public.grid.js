@@ -1,9 +1,9 @@
-Sovereign.grid.GalleryAfrican = function(config) {
+Sovereign.grid.GalleryAfricanPublic = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'sovereign-grid-galleryafrican'
+        id: 'sovereign-grid-galleryafricanpublic'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/africa/galleries/getList' }
+        ,baseParams: { action: 'mgr/africa/galleries/getListPublic' }
         ,fields: ['id','galleryname','year','menu']
         ,paging: true
         ,remoteSort: true
@@ -28,10 +28,10 @@ Sovereign.grid.GalleryAfrican = function(config) {
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')
-            ,handler: { xtype: 'sovereign-window-galleryafrican-create' ,blankValues: true }
+            ,handler: { xtype: 'sovereign-window-galleryafricanpublic-create' ,blankValues: true }
         },'->',{
             xtype: 'textfield'
-            ,id: 'galleryafrican-search-filter'
+            ,id: 'galleryafricanpublic-search-filter'
             ,emptyText: _('sovereign.search...')
             ,listeners: {
                 'change': {fn:this.search,scope:this}
@@ -49,7 +49,7 @@ Sovereign.grid.GalleryAfrican = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear-galleryafrican'
+            ,id: 'modx-filter-clear-galleryafricanpublic'
             ,iconCls:'icon-reload'
             ,text: _('filter_clear')
             ,listeners: {
@@ -57,9 +57,9 @@ Sovereign.grid.GalleryAfrican = function(config) {
             }
         }]
     });
-    Sovereign.grid.GalleryAfrican.superclass.constructor.call(this,config)
+    Sovereign.grid.GalleryAfricanPublic.superclass.constructor.call(this,config)
 };
-Ext.extend(Sovereign.grid.GalleryAfrican,MODx.grid.Grid,{
+Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
@@ -67,10 +67,10 @@ Ext.extend(Sovereign.grid.GalleryAfrican,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/africa/galleries/getList'
+            action: 'mgr/africa/galleries/getListPublic'
             ,'parent': this.config.resource
         };
-        Ext.getCmp('galleryafrican-search-filter').reset();
+        Ext.getCmp('galleryafricanpublic-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },getMenu: function() {
@@ -84,7 +84,7 @@ Ext.extend(Sovereign.grid.GalleryAfrican,MODx.grid.Grid,{
     },updateGalleryAfrican: function(btn,e) {
         if (!this.updateGalleryWindow) {
             this.updateGalleryWindow = MODx.load({
-                xtype: 'sovereign-window-galleryafrican-update'
+                xtype: 'sovereign-window-galleryafricanpublic-update'
                 ,record: this.menu.record
                 ,listeners: {
                     'success': {fn:this.refresh,scope:this}
@@ -108,9 +108,9 @@ Ext.extend(Sovereign.grid.GalleryAfrican,MODx.grid.Grid,{
         });
     }
 });
-Ext.reg('sovereign-grid-galleryafrican',Sovereign.grid.GalleryAfrican);
+Ext.reg('sovereign-grid-galleryafricanpublic',Sovereign.grid.GalleryAfricanPublic);
 
-Sovereign.window.UpdateGalleryAfrican = function(config) {
+Sovereign.window.UpdateGalleryAfricanPublic = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('sovereign.gallery_update')
@@ -133,13 +133,13 @@ Sovereign.window.UpdateGalleryAfrican = function(config) {
             ,anchor: '100%'
         }]
     });
-    Sovereign.window.UpdateGalleryAfrican.superclass.constructor.call(this,config);
+    Sovereign.window.UpdateGalleryAfricanPublic.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.UpdateGalleryAfrican,MODx.Window);
-Ext.reg('sovereign-window-galleryafrican-update',Sovereign.window.UpdateGalleryAfrican);
+Ext.extend(Sovereign.window.UpdateGalleryAfricanPublic,MODx.Window);
+Ext.reg('sovereign-window-galleryafricanpublic-update',Sovereign.window.UpdateGalleryAfricanPublic);
 
 
-Sovereign.window.CreateGalleryAfrican = function(config) {
+Sovereign.window.CreateGalleryAfricanPublic = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
@@ -159,7 +159,7 @@ Sovereign.window.CreateGalleryAfrican = function(config) {
             ,width: 300
         }]
     });
-    Sovereign.window.CreateGalleryAfrican.superclass.constructor.call(this,config);
+    Sovereign.window.CreateGalleryAfricanPublic.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.CreateGalleryAfrican,MODx.Window);
-Ext.reg('sovereign-window-galleryafrican-create',Sovereign.window.CreateGalleryAfrican);
+Ext.extend(Sovereign.window.CreateGalleryAfricanPublic,MODx.Window);
+Ext.reg('sovereign-window-galleryafricanpublic-create',Sovereign.window.CreateGalleryAfricanPublic);

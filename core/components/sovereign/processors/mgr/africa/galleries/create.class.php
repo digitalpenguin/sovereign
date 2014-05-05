@@ -45,30 +45,6 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
         $this->setProperty('createdon', $date);
     }
 
-    /*public function process() {
-        if (!$this->getSource()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        $this->source->initialize();
-        if (!$this->source->checkPolicy('create')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking current url: ' . $this->getProperty('url') . ' Checking current parent: ' . $this->getProperty('parent'));
-
-        $success = $this->source->createContainer($this->getProperty('id'),$this->getProperty('parent'));
-
-        if (empty($success)) {
-            $msg = '';
-            $errors = $this->source->getErrors();
-            foreach ($errors as $k => $msg) {
-                $this->modx->error->addField($k,$msg);
-            }
-            return $this->failure($msg);
-        }
-        return parent::process();
-    }*/
-
     /**
      * Get the active Source
      * @return modMediaSource|boolean

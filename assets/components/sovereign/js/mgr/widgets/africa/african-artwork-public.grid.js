@@ -1,4 +1,4 @@
-Sovereign.grid.AfricanArtworkSubmissions = function(config) {
+Sovereign.grid.AfricanArtworkPublic = function(config) {
     config = config || {};
 
     this.exp = new Ext.grid.RowExpander({
@@ -6,107 +6,107 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
         ,tpl : new Ext.Template(
             '<div class="expanded-container">' +
                 '<div class="expanded">' +
-                    '<h4>Filename</h4>' +
-                    '<p>{filename}</p>' +
+                '<h4>Filename</h4>' +
+                '<p>{filename}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Height</h4>' +
-                    '<p>{height}</p>' +
+                '<h4>Height</h4>' +
+                '<p>{height}</p>' +
                 '</div>' +
 
                 '<div class="expanded">' +
-                    '<h4>Width</h4>' +
-                    '<p>{width}</p>' +
+                '<h4>Width</h4>' +
+                '<p>{width}</p>' +
                 '</div>' +
 
                 '<div class="expanded">' +
-                    '<h4>Depth</h4>' +
-                    '<p>{depth}</p>' +
+                '<h4>Depth</h4>' +
+                '<p>{depth}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Edition</h4>' +
-                    '<p>{edition}</p>' +
+                '<h4>Edition</h4>' +
+                '<p>{edition}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Can info be shared?</h4>' +
-                    '<p>{share}</p>' +
+                '<h4>Can info be shared?</h4>' +
+                '<p>{share}</p>' +
                 '</div>'+
 
                 '<div class="newline"></div>' +
 
                 '<div class="expanded">' +
-                    '<h4>Telephone Number</h4>' +
-                    '<p>{tel_no}</p>' +
+                '<h4>Telephone Number</h4>' +
+                '<p>{tel_no}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Mobile Number</h4>' +
-                    '<p>{mob_no}</p>' +
+                '<h4>Mobile Number</h4>' +
+                '<p>{mob_no}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Fax Number</h4>' +
-                    '<p>{fax_no}</p>' +
+                '<h4>Fax Number</h4>' +
+                '<p>{fax_no}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Date of Birth</h4>' +
-                    '<p>{dob}</p>' +
+                '<h4>Date of Birth</h4>' +
+                '<p>{dob}</p>' +
                 '</div>'+
 
                 '<div class="expanded expanded-email">' +
-                    '<h4>Email Address</h4>' +
-                    '<p>{email_address}</p>' +
+                '<h4>Email Address</h4>' +
+                '<p>{email_address}</p>' +
                 '</div>'+
 
                 '<div class="newline"></div>' +
 
                 '<div class="expanded">' +
-                    '<h4>Address: Part 1</h4>' +
-                    '<p>{address_1}</p>' +
+                '<h4>Address: Part 1</h4>' +
+                '<p>{address_1}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Address: Part 2</h4>' +
-                    '<p>{address_2}</p>' +
+                '<h4>Address: Part 2</h4>' +
+                '<p>{address_2}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Address: Part 3</h4>' +
-                    '<p>{address_3}</p>' +
+                '<h4>Address: Part 3</h4>' +
+                '<p>{address_3}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>City</h4>' +
-                    '<p>{city}</p>' +
+                '<h4>City</h4>' +
+                '<p>{city}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>State</h4>' +
-                    '<p>{state}</p>' +
+                '<h4>State</h4>' +
+                '<p>{state}</p>' +
                 '</div>'+
 
                 '<div class="expanded">' +
-                    '<h4>Postal Code</h4>' +
-                    '<p>{postal_code}</p>' +
+                '<h4>Postal Code</h4>' +
+                '<p>{postal_code}</p>' +
                 '</div>'+
 
                 '<div class="expanded-wide newline">' +
-                    '<h4>Caption</h4>' +
-                    '<p>{caption}</p>' +
+                '<h4>Caption</h4>' +
+                '<p>{caption}</p>' +
                 '</div>' +
 
                 '<div class="expanded-wide newline">' +
-                    '<h4>Statement</h4>' +
-                    '<p>{statement}</p>' +
+                '<h4>Statement</h4>' +
+                '<p>{statement}</p>' +
                 '</div>' +
 
                 '<div class="expanded-wide newline">' +
-                    '<h4>Work Brief</h4>' +
-                    '<p>{work_brief}</p>' +
+                '<h4>Work Brief</h4>' +
+                '<p>{work_brief}</p>' +
                 '</div>' +
 
                 '<div class="expanded-wide newline">' +
@@ -114,16 +114,15 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
                 '<p>{art_brief}</p><br><br>' +
                 '</div>' +
 
-            '</div>'
+                '</div>'
         )
     });
 
+
     Ext.applyIf(config,{
-        id: 'sovereign-grid-africanartworksubmissions'
+        id: 'sovereign-grid-africanartworkpublic'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-                action: 'mgr/africa/artworks/getListArtworks'
-        }
+        ,baseParams: { action: 'mgr/africa/artworks/getListArtworksJudges' }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
@@ -140,7 +139,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
                 if (columnIndex == 2)
-                    this.displayAfricanArtwork(e);
+                    this.displayArtwork(e);
             }
         }
         ,plugins: [this.exp]
@@ -175,7 +174,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             ,width:.05
         },{
             header: _('sovereign.country')
-            ,dataIndex: _('country')
+            ,dataIndex: 'country'
             ,sortable: true
             ,width:.05
         },{
@@ -220,13 +219,17 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
                 'click': {fn: this.backToGallery, scope:this}
             }
         },'-',{
+            xtype: 'button'
+            ,text: _('sovereign.add_judges_to_gallery')
+            ,handler: this.showAfricanJudges
+        },'->',{
             text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
             ,handler: this.createAfricanArtwork
             ,scope: this
-        },'->',{
+        },'-',{
             xtype: 'textfield'
-            ,id: 'africanartworks-search-filter'
+            ,id: 'africanartworkspublic-search-filter'
             ,emptyText: _('sovereign.search...')
             ,listeners: {
                 'change': {fn:this.search,scope:this}
@@ -244,7 +247,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear-africanartworks'
+            ,id: 'modx-filter-clear-africanartworkspublic'
             ,iconCls:'icon-reload'
             ,text: _('filter_clear')
             ,listeners: {
@@ -253,9 +256,9 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
         }]
 
     });
-    Sovereign.grid.AfricanArtworkSubmissions.superclass.constructor.call(this,config)
+    Sovereign.grid.AfricanArtworkPublic.superclass.constructor.call(this,config)
 };
-Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
+Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
@@ -263,11 +266,11 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/africa/artworks/getListArtworks'
+            action: 'mgr/africa/artworks/getListArtworksPublic'
             //,'parent': this.config.resource
             ,'galleryId': this.config.galleryId
         };
-        Ext.getCmp('africanartworks-search-filter').reset();
+        Ext.getCmp('africanartworkspublic-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },filterGalleries: function() {
@@ -275,36 +278,26 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         s.baseParams.galleryId = this.config.galleryId;
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },getMenu: function(grid, index, rec) {
-        if (grid.getSelectionModel().hasSelection()) {
-            var row = grid.getSelectionModel().getSelections()[0];
-            var confirmedVal = row.get('confirmed');
-        }
-        if(!confirmedVal) {
-            return [{
-                text: _('sovereign.artworks_confirm')
-                ,handler: this.confirmAfricanArtworks
-            },'-',{
-                text: _('sovereign.artworks_update')
-                ,handler: this.updateAfricanArtworks
-            },'-',{
-                text: _('sovereign.artworks_remove')
-                ,handler: this.removeAfricanArtworks
-            }];
-        } else {
-            return [{
-                text: _('sovereign.artworks_un-confirm')
-                ,handler: this.unConfirmAfricanArtworks
-            },'-',{
-                text: _('sovereign.artworks_update')
-                ,handler: this.updateAfricanArtworks
-            },'-',{
-                text: _('sovereign.artworks_remove')
-                ,handler: this.removeAfricanArtworks
-            }];
-        }
-    },displayAfricanArtwork: function(e) {
-        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkSubmissions;
+    },getMenu: function() {
+        return [{
+            text: _('sovereign.artworks_update')
+            ,handler: this.updateAfricanArtworks
+        },'-',{
+            text: _('sovereign.artworks_remove')
+            ,handler: this.removeAfricanArtworks
+        }];
+    },showAfricanJudges: function(e) {
+        var win = MODx.load({
+            galleryId: this.config.galleryId
+            ,xtype: 'sovereign-window-african-showjudges'
+            ,listeners: {
+                'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        win.galleryId = this.config.galleryId;
+        win.show();
+    },displayArtwork: function(e) {
+        this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkPublic;
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
@@ -321,43 +314,21 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         });
         win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + win.galleryId + '/';
         win.baseParams.galleryId = win.galleryId;
-        win.show(e.target);
-    },confirmAfricanArtworks: function() {
-        MODx.msg.confirm({
-            title: _('sovereign.artworks_confirm')
-            ,text: _('sovereign.artworks_confirm_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'mgr/africa/artworks/confirm'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    },unConfirmAfricanArtworks: function() {
-        MODx.msg.confirm({
-            title: _('sovereign.artworks_confirm')
-            ,text: _('sovereign.artworks_confirm_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'mgr/africa/artworks/un-confirm'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
+        win.baseParams.confirmed = 1;
+        win.show();
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
-                xtype: 'sovereign-window-africanartworks-update'
+                galleryId: this.config.galleryId
+                ,xtype: 'sovereign-window-africanartworks-update'
                 ,record: this.menu.record
                 ,listeners: {
                     'success': {fn:this.refresh,scope:this}
                 }
             });
         }
+        this.updateArtworksWindow.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + this.updateArtworksWindow.galleryId + '/';
+        this.updateArtworksWindow.baseParams.galleryId = this.updateArtworksWindow.galleryId;
         this.updateArtworksWindow.setValues(this.menu.record);
         this.updateArtworksWindow.show(e.target);
     },removeAfricanArtworks: function() {
@@ -374,39 +345,38 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },passGalleryId: function(galleryId) {
+    },passGalleryId: function(galleryId, userGroupId) {
         this.config.galleryId = galleryId;
+        //this.config.userGroupId = userGroupId;
     }/*,filterByGalleryId: function(id) {
-        this.getStore().baseParams['id'] = id;
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
-    }*/,backToGallery: function() {
-        Ext.getCmp('sovereign-panel-africa').backToSubmissionsGrid();
+     this.getStore().baseParams['id'] = id;
+     this.getBottomToolbar().changePage(1);
+     this.refresh();
+     }*/,backToGallery: function() {
+        Ext.getCmp('sovereign-panel-africa').backToJudgesGrid();
     }
 });
-Ext.reg('sovereign-grid-africanartworksubmissions',Sovereign.grid.AfricanArtworkSubmissions);
+Ext.reg('sovereign-grid-africanartworkpublic',Sovereign.grid.AfricanArtworkPublic);
 
 
-Sovereign.window.DisplayAfricanArtworkSubmissions = function(config) {
+Sovereign.window.DisplayAfricanArtworkPublic = function(config) {
     config = config || {};
     var check = Ext.getCmp('sovereign-window-africanartworksubmissions-display');
     if (check) {
         check.destroy();
     }
-    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.currentFileName;
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworksubmissions').config.galleryId;
+    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworkjudges').config.currentFileName;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworkjudges').config.galleryId;
     this.ident = config.ident || 'sovdisart'+Ext.id();
-    Ext.applyIf(config,{
+    Ext.apply(config,{
         title: this.currentFileName
         ,cls: 'container'
-        ,id: this.ident
+        ,id: this.id
         ,modal: true
         ,layout: 'form'
         ,width: 850
         ,listeners: {
-            'afterrender': function(){
-                this.center();
-            }
+            'show': function(){this.center();}
         }
         ,fields: [{
             html: '<a target="_blank" href="'+ MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ this.galleryId +'/'+ this.currentFileName + '">' +
@@ -420,8 +390,8 @@ Sovereign.window.DisplayAfricanArtworkSubmissions = function(config) {
         }]
     });
 
-    Sovereign.window.DisplayAfricanArtworkSubmissions.superclass.constructor.call(this,config);
-
+    Sovereign.window.DisplayAfricanArtworkPublic.superclass.constructor.call(this,config);
 };
-Ext.extend(Sovereign.window.DisplayAfricanArtworkSubmissions,MODx.Window);
-Ext.reg('sovereign-window-africanartworksubmissions-display',Sovereign.window.DisplayAfricanArtworkSubmissions);
+Ext.extend(Sovereign.window.DisplayAfricanArtworkPublic,MODx.Window);
+Ext.reg('sovereign-window-africanartworkpublic-display',Sovereign.window.DisplayAfricanArtworkPublic);
+
