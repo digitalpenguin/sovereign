@@ -9,7 +9,7 @@ Sovereign.window.AfricanShowJudgesList = function(config) {
         ,height:600
         ,modal: true
         ,listeners: {
-            'show': function(){this.center();}
+            'beforeshow': function(){this.center();}
         }
         ,fields: [{
             xtype: 'sovereign-grid-african-assignedjudges'

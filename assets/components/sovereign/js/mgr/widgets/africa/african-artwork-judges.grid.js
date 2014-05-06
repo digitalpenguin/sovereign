@@ -118,11 +118,14 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
         )
     });
 
-
+    this.currentGalleryId = Ext.getCmp('sovereign-panel-africa').config.currentJudgesGallery;
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworkjudges'
         ,url: Sovereign.config.connectorUrl
-        ,baseParams: { action: 'mgr/africa/artworks/getListArtworksJudges' }
+        ,baseParams: {
+            action: 'mgr/africa/artworks/getListArtworksJudges'
+            ,galleryId: this.currentGalleryId
+        }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
@@ -133,8 +136,8 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
         ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {
-            'beforerender': {fn:this.filterGalleries,scope:this}
-            ,'cellclick': function(grid, rowIndex, columnIndex, e) {
+            //'beforerender': {fn:this.filterGalleries,scope:this}
+            'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
@@ -273,12 +276,12 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
         Ext.getCmp('africanartworksjudges-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },filterGalleries: function() {
+    }/*,filterGalleries: function() {
         var s = this.getStore();
         s.baseParams.galleryId = this.config.galleryId;
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },getMenu: function() {
+    }*/,getMenu: function() {
         return [{
             text: _('sovereign.artworks_update')
             ,handler: this.updateAfricanArtworks

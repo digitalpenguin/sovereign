@@ -14,6 +14,7 @@ class GalleryAfricanSubmissionsGetListProcessor extends modObjectGetListProcesso
      */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
 
+
         $c->where(array(
             'phase' => 0
         ));

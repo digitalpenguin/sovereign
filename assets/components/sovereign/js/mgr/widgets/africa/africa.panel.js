@@ -105,6 +105,7 @@ Sovereign.panel.AfricanPanel = function(config) {
 Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
     replaceSubmissionsGrid: function(grid, row, galleryId) {
         if (!Ext.getCmp('sovereign-grid-africanartworksubmissions')) { // stop double clicks
+            this.config.currentSubmissionsGallery = galleryId;
             var africanTabs = Ext.getCmp('africanTabs');
             var activeMainAfricanTab = africanTabs.getActiveTab();
             var submissionsGrid = Ext.getCmp('sovereign-grid-galleryafricansubmissions');
@@ -166,6 +167,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
         slideGridOut.delay(350); // keep delay slightly longer than effect
     },replaceJudgesGrid: function(grid, row, galleryId) {
         if (!Ext.getCmp('sovereign-grid-africanartworkjudges')) { // stop double clicks
+            this.config.currentJudgesGallery = galleryId;
             var africanTabs = Ext.getCmp('africanTabs');
             var activeMainAfricanTab = africanTabs.getActiveTab();
             var judgesGrid = Ext.getCmp('sovereign-grid-galleryafricanjudges');
@@ -224,6 +226,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
 
     },replacePublicGrid: function(grid, row, galleryId) {
         if (!Ext.getCmp('sovereign-grid-africanartworkpublic')) { // stop double clicks
+            this.config.currentPublicGallery = galleryId;
             var africanTabs = Ext.getCmp('africanTabs');
             var activeMainAfricanTab = africanTabs.getActiveTab();
             var publicGrid = Ext.getCmp('sovereign-grid-galleryafricanpublic');

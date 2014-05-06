@@ -118,11 +118,13 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
         )
     });
 
+    this.currentGalleryId = Ext.getCmp('sovereign-panel-africa').config.currentSubmissionsGallery;
     Ext.applyIf(config,{
         id: 'sovereign-grid-africanartworksubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
                 action: 'mgr/africa/artworks/getListArtworks'
+                ,galleryId: this.currentGalleryId
         }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
@@ -134,8 +136,8 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
         ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {
-            'beforerender': {fn:this.filterGalleries,scope:this}
-            ,'cellclick': function(grid, rowIndex, columnIndex, e) {
+            /*'beforerender': {fn:this.filterGalleries,scope:this}
+            ,*/'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
@@ -270,12 +272,12 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         Ext.getCmp('africanartworks-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },filterGalleries: function() {
+    }/*,filterGalleries: function() {
         var s = this.getStore();
         s.baseParams.galleryId = this.config.galleryId;
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },getMenu: function(grid, index, rec) {
+    }*/,getMenu: function(grid, index, rec) {
         if (grid.getSelectionModel().hasSelection()) {
             var row = grid.getSelectionModel().getSelections()[0];
             var confirmedVal = row.get('confirmed');
@@ -306,6 +308,8 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
     },displayAfricanArtwork: function(e) {
         this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkSubmissions;
         this.displayArtworkWindow.setValues(this.menu.record);
+        //this.displayArtworkWindow.render();
+        //this.displayArtworkWindow.el.center();
         this.displayArtworkWindow.show(e.target);
 
     },createAfricanArtwork: function(e) {
