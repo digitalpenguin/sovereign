@@ -152,7 +152,7 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
         list($width, $height) = getimagesize($path);
         if ($width > $height) {
             // Landscape
-            $thumbnail_widths = array(70, 320, 820);
+            $thumbnail_widths = array(70, 170, 838);
             foreach ($thumbnail_widths as $thumbnail_width) {
                 $modPhpThumb = new modPhpThumb($this->modx);
                 $modPhpThumb->setSourceFilename($path); // original image
@@ -163,6 +163,8 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
                     $sizeName = 'small';
                 } else if ($i === 1) {
                     $modPhpThumb->setParameter('w', $thumbnail_width);
+                    $modPhpThumb->setParameter('h', $thumbnail_width);
+                    $modPhpThumb->setParameter('zc', 'C');
                     $sizeName = 'medium';
                 } else {
                     $modPhpThumb->setParameter('w', $thumbnail_width);
@@ -181,7 +183,7 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
             }
         } else {
             // Portrait or Square
-            $thumbnail_heights = array(70, 320, 680);
+            $thumbnail_heights = array(70, 170, 680);
             foreach ($thumbnail_heights as $thumbnail_height) {
                 $modPhpThumb = new modPhpThumb($this->modx);
                 $modPhpThumb->setSourceFilename($path); // original image
@@ -191,7 +193,9 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
                     $modPhpThumb->setParameter('zc', 'C');
                     $sizeName = 'small';
                 } else if ($i===1) {
+                    $modPhpThumb->setParameter('w', $thumbnail_height);
                     $modPhpThumb->setParameter('h', $thumbnail_height);
+                    $modPhpThumb->setParameter('zc', 'C');
                     $sizeName = 'medium';
                 } else {
                     $modPhpThumb->setParameter('h', $thumbnail_height);

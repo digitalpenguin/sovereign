@@ -132,7 +132,7 @@ Sovereign.grid.AfricanArtworkPublic = function(config) {
             ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
             ,'closeup_desc','createdon','createdby','menu']
         ,paging: true
-        ,pageSize: 5
+        ,pageSize: 10
         ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {

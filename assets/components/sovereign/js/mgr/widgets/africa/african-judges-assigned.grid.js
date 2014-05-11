@@ -61,12 +61,12 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             ,sortable: false
             ,width:.05
         }]
-        ,tbar: [{
+        ,tbar: [/*{
             xtype: 'button'
             ,text: 'Upload CSV File'
             ,scope: this
             ,handler: this.uploadCsv
-        },'-',{
+        },'-',*/{
             xtype: 'button'
             ,text: 'Add Single Judge'
             ,scope: this
@@ -114,7 +114,7 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
         this.updateJudgeWindow.show(e.target);
     },resetPassword: function() {
 
-    },uploadCsv: function(e) {
+    }/*,uploadCsv: function(e) {
         var win = MODx.load({
             galleryId: this.galleryId
             ,xtype: 'sovereign-window-africanjudges-uploadcsv'
@@ -127,7 +127,7 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
         });
         win.baseParams.galleryId = win.galleryId;
         win.show(e.target);
-    },removeJudge: function() {
+    }*/,removeJudge: function() {
         MODx.msg.confirm({
             title: 'Remove Assigned Judge'
             ,text: 'Are you sure you want to remove this judge from the gallery?'
@@ -218,7 +218,7 @@ Sovereign.window.CreateAfricanJudges = function(config) {
 Ext.extend(Sovereign.window.CreateAfricanJudges,MODx.Window);
 Ext.reg('sovereign-window-africanjudges-create',Sovereign.window.CreateAfricanJudges);
 
-
+/*
 Sovereign.window.AfricanJudgesUploadCsv = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -244,3 +244,4 @@ Sovereign.window.AfricanJudgesUploadCsv = function(config) {
 };
 Ext.extend(Sovereign.window.AfricanJudgesUploadCsv,MODx.Window);
 Ext.reg('sovereign-window-africanjudges-uploadcsv',Sovereign.window.AfricanJudgesUploadCsv);
+    */
