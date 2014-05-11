@@ -2,6 +2,6 @@
     <img src="[[++assets_url]]components/sovereign/galleries/african/[[+gallery_id]]/thumbnails/[[+filename]]_medium.jpeg" alt="[[+art_title]]" />
     <div class="item_curtain">
         <h1>[[+art_title]]</h1>
-        <h2>[[+title]] [[+first_name]] [[+surname]]</h2>
+        <h2>[[+first_name]] [[+surname]]</h2>
     </div>
 </a>

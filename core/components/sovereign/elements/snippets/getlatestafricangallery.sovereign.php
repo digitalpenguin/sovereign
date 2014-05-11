@@ -10,6 +10,7 @@ $limit = $modx->getOption('limit',$scriptProperties,6);
 $offset = $modx->getOption('offset',$scriptProperties,0);
 $totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
 
+
 $record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('africanGalleries')} WHERE phase=0");
 $highestId = (integer) $record->fetch(PDO::FETCH_COLUMN);
 $record->closeCursor();
@@ -22,6 +23,8 @@ if(!empty($galleryId)) {
     $c->where(array(
         'gallery_id' => $galleryId
     ));
+} else {
+    return '<p>No artworks currently available!</p>';
 }
 $total = $modx->getCount('africanArtworks',$c);
 $modx->setPlaceholder($totalVar,$total);

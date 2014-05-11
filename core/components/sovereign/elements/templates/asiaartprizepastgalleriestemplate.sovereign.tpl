@@ -58,14 +58,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
 <script src="[[++assets_url]]theme/js/jquery.liquid-slider.min.js"></script>
 
-<!--- sticky --->
-<script type="text/javascript" src="[[++assets_url]]theme/js/jquery.sticky.js"></script>
-
 <!--- smooth scroll --->
 <script src="[[++assets_url]]theme/js/smooth-scroll.js"></script>
-
-<!--- rate it --->
-<script src="[[++assets_url]]theme/js/jquery.rateit.js"></script>
 
 <!-- js call for action -->
 <script src="[[++assets_url]]theme/js/script.js" type="text/javascript"></script>

@@ -33,24 +33,20 @@
 
 
 <!-- Past Gallery intro -->
-<section class="past_gallery_block">
-    <h1>The Sovereign Asian Art Prize Past Galleries</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut fermentum nulla. Vestibulum nisi felis, scelerisque sit amet elit sit amet, rhoncus eleifend ante. Quisque hendrerit massa ut leo cursus, ac convallis justo pharetra. Aliquam vel mi massa. Aliquam ultrices, arcu ac ultrices gravida, est lectus facilisis lectus, vel egestas justo leo sit amet urna.</p>
-</section>
+[[!getPastAfricanGalleryHeader]]
 
 <!-- Past Gallery block -->
 <!-- Past Gallery intro -->
 <section class="past_gallery_block">
-    <h1>2012-13 Finalists</h1>
-    <br />
     <div class="listing">
+
         [[!getPastAfricanGallery]]
         <div class="clear"></div>
     </div>
-<div class="listing_nav">
-    <a href="past_galleries.html">&lt; Back to Listing</a>
-</div>
-
+    <div class="listing_nav">
+        <a href="[[~16]]">&lt; Back to Listing</a>
+    </div>
+</section>
 
 [[$newsletter-signup]]
 
@@ -69,14 +65,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
 <script src="[[++assets_url]]theme/js/jquery.liquid-slider.min.js"></script>
 
-<!--- sticky --->
-<script type="text/javascript" src="[[++assets_url]]theme/js/jquery.sticky.js"></script>
 
 <!--- smooth scroll --->
 <script src="[[++assets_url]]theme/js/smooth-scroll.js"></script>
 
-<!--- rate it --->
-<script src="[[++assets_url]]theme/js/jquery.rateit.js"></script>
 
 <!-- js call for action -->
 <script src="[[++assets_url]]theme/js/script.js" type="text/javascript"></script>

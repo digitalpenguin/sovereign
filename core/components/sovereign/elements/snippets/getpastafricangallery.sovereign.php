@@ -3,31 +3,21 @@ $sovereign = $modx->getService('sovereign','Sovereign',$modx->getOption('soverei
 if (!($sovereign instanceof Sovereign)) return '';
 
 /* setup default properties */
-$tpl = $modx->getOption('tpl',$scriptProperties,'currentGalleryFirstPage');
+$tpl = $modx->getOption('tpl',$scriptProperties,'pastGalleryThumbs');
 $sort = $modx->getOption('sort',$scriptProperties,'id');
-$dir = $modx->getOption('dir',$scriptProperties,'ASC');
-$limit = $modx->getOption('limit',$scriptProperties,6);
-$offset = $modx->getOption('offset',$scriptProperties,0);
-$totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 
-$record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('africanGalleries')} WHERE phase=0");
-$highestId = (integer) $record->fetch(PDO::FETCH_COLUMN);
-$record->closeCursor();
-
-
-$galleryId = $highestId;
-// Get total number of records
+if (is_int((int)$_GET['galleryId'])) { // make sure value is integer
+    $galleryId = $_GET['galleryId'];
+}
 $c = $modx->newQuery('africanArtworks');
 if(!empty($galleryId)) {
     $c->where(array(
         'gallery_id' => $galleryId
     ));
+} else {
+    return '<p>No artworks currently available!</p>';
 }
-$total = $modx->getCount('africanArtworks',$c);
-$modx->setPlaceholder($totalVar,$total);
-
-
-$c->limit($limit,$offset);
 $c->sortby($sort,$dir);
 $artworks = $modx->getCollection('africanArtworks',$c);
 
@@ -36,6 +26,5 @@ $output = '';
 foreach ($artworks as $artwork) {
     $artworkArray = $artwork->toArray();
     $output .= $sovereign->getChunk($tpl,$artworkArray);
-    //$modx->log(modX::LOG_LEVEL_DEBUG, $sovereign->getChunk($tpl,$artworkArray));
 }
 return $output;

@@ -5,8 +5,8 @@ if (!($sovereign instanceof Sovereign)) return '';
 /* setup default properties */
 $tpl = $modx->getOption('tpl',$scriptProperties,'pastGalleriesList');
 $sort = $modx->getOption('sort',$scriptProperties,'id');
-$dir = $modx->getOption('dir',$scriptProperties,'ASC');
-$limit = $modx->getOption('limit',$scriptProperties,6);
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
+$limit = $modx->getOption('limit',$scriptProperties,20);
 $offset = $modx->getOption('offset',$scriptProperties,0);
 $totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
 
@@ -18,8 +18,11 @@ $record->closeCursor();
 $c = $modx->newQuery('africanGalleries');
 if(!empty($highestId)) {
     $c->where(array(
-        'id:!=' => $highestId
+        'id:!=' => $highestId,
+        'AND:phase:=' => 0
     ));
+} else {
+    return '<p>No galleries currently available!</p>';
 }
 $total = $modx->getCount('africanGalleries',$c);
 $modx->setPlaceholder($totalVar,$total);
@@ -34,6 +37,5 @@ $output = '';
 foreach ($galleries as $gallery) {
     $galleryArray = $gallery->toArray();
     $output .= $sovereign->getChunk($tpl,$galleryArray);
-    //$modx->log(modX::LOG_LEVEL_DEBUG, $sovereign->getChunk($tpl,$artworkArray));
 }
 return $output;
