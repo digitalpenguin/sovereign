@@ -90,9 +90,10 @@ class SovereignAfricanArtworkCreateProcessor extends modObjectCreateProcessor {
         }
 
         $artworkTitle = $this->getProperty('art_title');
+        $galleryId = $this->getProperty('gallery_id');
         if (empty($artworkTitle)) {
             $this->addFieldError('art_title',$this->modx->lexicon('sovereign.artwork_err_ns_art_title'));
-        } else if ($this->doesAlreadyExist(array('art_title' => $artworkTitle))) {
+        } else if ($this->doesAlreadyExist(array('art_title' => $artworkTitle, 'gallery_id' => $galleryId))) {
             $this->addFieldError('art_title',$this->modx->lexicon('sovereign.artwork_err_ae_art_title'));
         }
         return parent::beforeSave();

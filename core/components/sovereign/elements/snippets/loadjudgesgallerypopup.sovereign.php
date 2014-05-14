@@ -1,10 +1,9 @@
 <?php
-
 $sovereign = $modx->getService('sovereign','Sovereign',$modx->getOption('sovereign.core_path',null,$modx->getOption('core_path').'components/sovereign/').'model/sovereign/',$scriptProperties);
 if (!($sovereign instanceof Sovereign)) return '';
 
 /* setup default properties */
-$tpl = $modx->getOption('tpl',$scriptProperties,'galleryPopUp');
+$tpl = $modx->getOption('tpl',$scriptProperties,'judgesGalleryPopUp');
 $region = $modx->getOption('region',$scriptProperties,'asia');
 $imageId = $modx->getOption('imageId',$scriptProperties);
 

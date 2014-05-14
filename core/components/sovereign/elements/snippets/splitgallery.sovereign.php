@@ -6,7 +6,7 @@ if (!($sovereign instanceof Sovereign)) return '';
 
 
 /* setup default properties */
-$tpl = $modx->getOption('tpl',$scriptProperties,'currentGallerySplitSlides');
+$tpl = $modx->getOption('tpl',$scriptProperties,'splitGallery');
 
 
 // Get most recent gallery that is in public phase
@@ -32,19 +32,13 @@ if($total < 7) {
     $numOfSlides = ceil($total/6);
 }
 
-$artworks = $modx->getCollection('africanArtworks',$c);
+$modx->setPlaceholder('count', $total);
 
+
+// Output the specified number of slides via the getchunk() function.
 $output = '';
-foreach ($artworks as $artwork) {
-    $i = 0;
-    if($i < $numOfSlides) {
-    $artworkArray = $artwork->toArray();
-    $output .= $sovereign->getChunk($tpl,$artworkArray);
-    $i++;
-    } else {
-        break;
-    }
-
-    //$modx->log(modX::LOG_LEVEL_DEBUG, $sovereign->getChunk($tpl,$artworkArray));
+for ($i = 0; $i < $numOfSlides; $i++) {
+    $output .= $sovereign->getChunk($tpl,'');
 }
+
 return $output;

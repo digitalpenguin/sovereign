@@ -3,20 +3,16 @@ $sovereign = $modx->getService('sovereign','Sovereign',$modx->getOption('soverei
 if (!($sovereign instanceof Sovereign)) return '';
 
 /* setup default properties */
-$tpl = $modx->getOption('tpl',$scriptProperties,'currentGalleryFirstPage');
+$tpl = $modx->getOption('tpl',$scriptProperties,'judgesGallery');
+$tpl2 = $modx->getOption('tpl',$scriptProperties,'judgesGalleryAlt');
 $sort = $modx->getOption('sort',$scriptProperties,'id');
-$dir = $modx->getOption('dir',$scriptProperties,'ASC');
-$limit = $modx->getOption('limit',$scriptProperties,6);
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
+$limit = $modx->getOption('limit',$scriptProperties,10);
 $offset = $modx->getOption('offset',$scriptProperties,0);
 $totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
 
 
-$record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('africanGalleries')} WHERE phase=0");
-$highestId = (integer) $record->fetch(PDO::FETCH_COLUMN);
-$record->closeCursor();
-
-
-$galleryId = $highestId;
+$galleryId = 11;
 // Get total number of records
 $c = $modx->newQuery('africanArtworks');
 if(!empty($galleryId)) {
@@ -28,7 +24,6 @@ if(!empty($galleryId)) {
 }
 $total = $modx->getCount('africanArtworks',$c);
 $modx->setPlaceholder($totalVar,$total);
-$modx->setPlaceholder('current_offset', $offset+6);
 
 $c->limit($limit,$offset);
 $c->sortby($sort,$dir);
@@ -36,9 +31,14 @@ $artworks = $modx->getCollection('africanArtworks',$c);
 
 
 $output = '';
+$i = 1;
 foreach ($artworks as $artwork) {
     $artworkArray = $artwork->toArray();
-    $output .= $sovereign->getChunk($tpl,$artworkArray);
-    //$modx->log(modX::LOG_LEVEL_DEBUG, $sovereign->getChunk($tpl,$artworkArray));
+    if ($i % 2 != 0) {
+        $output .= $sovereign->getChunk($tpl,$artworkArray);
+    } else {
+        $output .= $sovereign->getChunk($tpl2,$artworkArray);
+    }
+    $i++;
 }
 return $output;

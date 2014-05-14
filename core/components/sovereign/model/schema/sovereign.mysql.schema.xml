@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="sovereign" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
 
+    <!-- African Art Prize -->
     <object class="africanArtworks" table="sovereign_african_artworks" extends="xPDOSimpleObject">
         <field key="gallery_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="sid" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="true" default="0" />
@@ -44,9 +45,11 @@
         <field key="createdby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <aggregate alias="AfricanGallery" class="africanGalleries" local="gallery_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="CreatedBy" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
+        <index alias="gallery_id" name="gallery_id" primary="false" unique="false" type="BTREE" >
+            <column key="gallery_id" length="" collation="A" null="false" />
+        </index>
     </object>
 
-  
     <object class="africanGalleries" table="sovereign_african_galleries" extends="xPDOSimpleObject">
         <field key="galleryname" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
         <field key="description" dbtype="text" phptype="string" />
@@ -60,6 +63,39 @@
         <field key="createdby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" default="0" />
         <composite alias="AfricanArtworks" class="africanArtworks" local="id" foreign="gallery_id" cardinality="many" owner="local" />
         <aggregate alias="CreatedBy" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    <object class="africanVotes" table="sovereign_african_votes" extends="xPDOSimpleObject">
+        <field key="artwork_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" />
+        <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" />
+        <field key="value" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" />
+        <field key="ip" dbtype="varchar" precision="255" phptype="string" null="true" />
+        <field key="date" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" />
+        <aggregate alias="AfricanArtwork" class="africanArtworks" local="artwork_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="user_id" foreign="id" cardinality="one" owner="foreign" />
+        <index alias="ip" name="ip" primary="false" unique="false" type="BTREE" >
+            <column key="ip" length="" collation="A" null="false" />
+        </index>
+        <index alias="artwork_id" name="artwork_id" primary="false" unique="false" type="BTREE" >
+            <column key="artwork_id" length="" collation="A" null="false" />
+        </index>
+        <index alias="user_id" name="user_id" primary="false" unique="false" type="BTREE" >
+            <column key="user_id" length="" collation="A" null="false" />
+        </index>
+    </object>
+
+    <!-- Asian Art Prize -->
+    <!-- European Art Prize -->
+    <!-- Middle Eastern Art Prize -->
+
+    <object class="newsletterSubscriptions" table="sovereign_newsletter_subscriptions" extends="xPDOSimpleObject">
+        <field key="first_name" dbtype="varchar" precision="200" phptype="string" null="true" />
+        <field key="surname" dbtype="varchar" precision="200" phptype="string" null="true" />
+        <field key="email_address" dbtype="varchar" precision="250" phptype="string" null="true" />
+        <field key="region" dbtype="tinyint" precision="1" phptype="integer" null="true" />
+        <index alias="region" name="region" primary="false" unique="false" type="BTREE" >
+            <column key="region" length="" collation="A" null="false" />
+        </index>
     </object>
       
 </model>

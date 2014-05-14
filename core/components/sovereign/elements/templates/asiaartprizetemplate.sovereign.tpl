@@ -30,9 +30,7 @@
 
 [[$nav]]
 
-<section id="slide">
-    <img src="[[++assets_url]]theme/images/slide1.jpg" alt="Artworks for childern in need" /></div>
-</section>
+[[$slider]]
 
 <section id="sub_nav">
     <nav id="sticker">
@@ -108,9 +106,7 @@
                 </div>
             </a>
         </div>
-        <div>
-            <!-- There will only be about 5 judges -->
-        </div>
+        
     </div>
     <div class="clear"></div>
 
@@ -337,27 +333,7 @@
     </div>
     <!-- Current Gallery-->
     <div id="prize_gallery" class="liquid-slider">
-        <div>
-            <h2 class="title">Slide 1</h2>
-            [[!getLatestAfricanGallery? &limit=`6`]]
-        </div>
-        <!--[[!splitGallery]]-->
-        <div>
-            <h2 class="title">Slide 2</h2>
-            [[!getLatestAfricanGallery? &limit=`6` &offset=`6`]]
-        </div>
-        <div>
-            <h2 class="title">Slide 3</h2>
-            [[!getLatestAfricanGallery? &limit=`6` &offset=`12`]]
-        </div>
-        <div>
-            <h2 class="title">Slide 4</h2>
-            [[!getLatestAfricanGallery? &limit=`6` &offset=`18`]]
-        </div>
-        <div>
-            <h2 class="title">Slide 5</h2>
-            [[!getLatestAfricanGallery? &limit=`6` &offset=`24`]]
-        </div>
+        [[!splitGallery]]
     </div>
     <div class="clear"></div>
 </section>
@@ -405,9 +381,17 @@
 <script src="[[++assets_url]]theme/js/script.js" type="text/javascript"></script>
 
 
+<!--<script>
+    $(document).ready(function(){
 
+        $('.gallery_slide').each(function() {
+            $(this).append('[[!getLatestAfricanGallery? &limit=`[[+current_offset]]`]]');
+        });
 
+    });
 
+</script>
+-->
 
 </body>
 </html>
