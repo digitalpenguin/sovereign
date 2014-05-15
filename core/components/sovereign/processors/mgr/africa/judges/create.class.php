@@ -3,8 +3,8 @@
 class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
 
     public $object;
-    private $resourceParentId = 21; // Change on upload
-    private $resourceTemplateId = 10; // Change on upload
+    //private $resourceParentId = 21; // Change on upload
+    //private $resourceTemplateId = 10; // Change on upload
 
     public function process() {
         // gets the id of current gallery
@@ -14,7 +14,18 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
         if (!$userGroup = $this->modx->getObject('modUserGroup', array('name' => 'AfricanJudgesGallery#'.$galleryId))) {
             $userGroup = $this->modx->newObject('modUserGroup', array('name' => 'AfricanJudgesGallery#'.$galleryId));
             $userGroup->save();
+
+            // Add context access to the usergroup
+            $context = $this->modx->newObject('modAccessContext');
+            $context->set('target', 'web');
+            $context->set('principal_class', 'modUserGroup');
+            $context->set('principle', $userGroup->get('id'));
+            $context->set('authority', '7');
+            $context->set('policy', '4');
+            $context->save();
         }
+
+
 
         // creates the appropriate role for the user if it doesn't already exist
         if (!$role = $this->modx->getObject('modUserGroupRole', array('name' => 'AfricanJudge'))) {
@@ -28,7 +39,7 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
         if(!$user = $this->modx->getObject('modUserProfile', array('email' => $this->getProperty('email')))) {
             $user = $this->modx->newObject('modUser', array('username' => $this->getProperty('email'))); // make the username the email
             $user->set('primary_group', $userGroup->get('id'));
-            $user->set('password', md5($this->getProperty('password')));
+            $user->set('password',$this->getProperty('password'));
             $profile = $this->modx->newObject('modUserProfile');
             $profile->set('fullname', $this->getProperty('fullname'));
             $profile->set('email', $this->getProperty('email'));
@@ -44,7 +55,7 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
         // Assign the user both a group and a role
         $joinSuccess = $user->joinGroup($userGroup->get('id'), $role->get('id'));
 
-
+/*
         // creates a judges gallery page if it doesn't already exist
         if (!$galleryPage = $this->modx->getObject('modResource', array('pagetitle' => 'AfricanJudgesGallery#'.$galleryId))) {
             $galleryPage = $this->modx->newObject('modResource', array('pagetitle' => 'AfricanJudgesGallery#'.$galleryId));
@@ -56,36 +67,38 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $galleryPage->set('content', 'Testing testing testing');
             $galleryPage->set('alias', 'african-judges-gallery'.$galleryId);
             $galleryPage->save();
-
-
-
-            // creates a resource group if it doesn't already exist
-            if (!$resourceGroup = $this->modx->getObject('modResourceGroup', array('name' => 'AfricanJudgesGallery#'.$galleryId))) {
-                $resourceGroup = $this->modx->newObject('modResourceGroup', array('name' => 'AfricanJudgesGallery#'.$galleryId));
-                $resourceGroup->save();
-            } else {
-                $resourceGroup = $this->modx->getObject('modResourceGroup', array('name' => 'AfricanJudgesGallery#'.$galleryId));
-            }
-
-            // Add page to the resource group
-            $galleryPage->joinGroup($resourceGroup->get('id'));
-
-            // Add the resource group to the user group
-            $rgId = $resourceGroup->get('id');
-            $resourceAccess = $this->modx->newObject('modAccessResourceGroup');
-            $resourceAccess->fromArray(array(
-                'principal' => $userGroup->get('id'),
-                'principal_class' => 'modUserGroup',
-                'target' => $rgId,
-                'authority' => 9999,
-                'policy' => 14,
-                'context_key' => 'mgr',
-            ));
-            if ($resourceAccess->save() == false) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR,'6-1. Could not create access to RG');
-            } else {$this->modx->log(modX::LOG_LEVEL_ERROR,'6-1. Access to RG created');}
-
         }
+*/
+
+        // creates a resource group if it doesn't already exist
+        if (!$resourceGroup = $this->modx->getObject('modResourceGroup', array('name' => 'JudgesGallery'))) {
+            $resourceGroup = $this->modx->newObject('modResourceGroup', array('name' => 'JudgesGallery'));
+            $resourceGroup->save();
+        } else {
+            $resourceGroup = $this->modx->getObject('modResourceGroup', array('name' => 'JudgesGallery'));
+        }
+
+        // Add page to the resource group
+        $galleryPage = $this->modx->getObject('modResource', array('pagetitle' => 'JudgesGallery'));
+        $galleryPage->joinGroup($resourceGroup->get('id'));
+
+        // Add the resource group to the user group
+        $rgId = $resourceGroup->get('id');
+        $resourceAccess = $this->modx->newObject('modAccessResourceGroup');
+        $resourceAccess->fromArray(array(
+            'principal' => $userGroup->get('id'),
+            'principal_class' => 'modUserGroup',
+            'target' => $rgId,
+            'authority' => 7,
+            'policy' => 13,
+            'context_key' => 'web',
+        ));
+        if ($resourceAccess->save() == false) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'6-1. Could not create access to RG');
+        } else {$this->modx->log(modX::LOG_LEVEL_ERROR,'6-1. Access to RG created');}
+
+
+        $this->modx->cacheManager->refresh();
 
 
         if ($success && $joinSuccess) {

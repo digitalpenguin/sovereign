@@ -11,8 +11,44 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $offset = $modx->getOption('offset',$scriptProperties,0);
 $totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
 
+// get the id of the
+$resource = $modx->getObject('modResource', array('pagetitle'=>'JudgesGallery'));
+$resourceId = $resource->get('id');
+echo "<p>Here is the page id: {$resourceId}</p>";
 
-$galleryId = 11;
+$user = $modx->user->get('id');
+$profile = $modx->user->getOne('Profile');
+$name = $profile->get('fullname');
+echo "<p>User id is: {$user}</p>";
+echo "<p>Hi {$name},<br/>Welcome to the Judges' Gallery. Please rate each artwork out of five stars. You can come back and alter your votes until the voting period has ended.</p>";
+
+// Check for judges user group and check region
+foreach($modx->user->getUserGroupNames() as $group) {
+    $groupArray = str_split($group, 3);
+    echo $groupArray[0];
+    switch($groupArray[0]) {
+        case 'Afr': // African Gallery
+            $africanGroup = str_split($group, 21);
+            echo 'Recognised african';
+            $galleryId = $africanGroup[1]; // Gets the gallery number from the end of the group name
+            break;
+        case 'Asi': // Asian Gallery
+            $asianGroup = str_split($group, 19);
+            $galleryId = $asianGroup[1]; // Gets the gallery number from the end of the group name
+            break;
+        case 'Eur': // European Gallery
+            $europeanGroup = str_split($group, 22);
+            $galleryId = $europeanGroup[1]; // Gets the gallery number from the end of the group name
+            break;
+        case 'Mid': // Middle-Eastern Gallery
+            $mideasternGroup = str_split($group, 24);
+            $galleryId = $mideasternGroup[1]; // Gets the gallery number from the end of the group name
+            break;
+    }
+}
+
+echo 'Gallery ID is : '.$galleryId;
+
 // Get total number of records
 $c = $modx->newQuery('africanArtworks');
 if(!empty($galleryId)) {

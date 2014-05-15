@@ -33,7 +33,7 @@
 <!-- Judges Gallery block -->
 <section class="judges_block">
 
-    [[!getAfricanJudgesGallery]]
+    [[*content]]
 
     <div class="judge_submit">
         <input type="submit" class="btn_judge_submit" name="submit" value="Submit" />
@@ -43,7 +43,7 @@
 </section>
 
 
-[[*content]]
+
 [[$newsletter-signup]]
 
 <footer>
