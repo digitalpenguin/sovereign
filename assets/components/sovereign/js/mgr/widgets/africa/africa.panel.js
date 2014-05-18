@@ -76,7 +76,8 @@ Sovereign.panel.AfricanPanel = function(config) {
                 ,defaults: { autoHeight: true }
                 ,id: 'african-panel-public'
                 ,items: [{
-                    html: '<h3>'+_('sovereign.tab_heading_african_public')+'</h3><p>'+ _('sovereign.public_galleries_desc') +'</p>'
+                    html: '<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/world.png"><h3>'+_('sovereign.tab_heading_african_public')+'</h3><p>'+ _('sovereign.public_galleries_desc') +'</p>'
+                    ,id: 'sovereign-galleryafrican-public-header'
                     ,border: true
                     ,bodyCssClass: 'panel-desc'
                     ,bodyStyle: 'margin: 10px 0px 10px 0px'
@@ -127,11 +128,11 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
                     '<p>'+ _('sovereign.submissions_artworks_desc') +'</p>');
                 activeMainAfricanTab.add(artworkGrid);
                 activeMainAfricanTab.doLayout();
-                /*artworkGrid.getEl().slideIn('r', {
+                artworkGrid.getEl().slideIn('r', {
                     easing: 'easeIn',
                     duration:.3,
                     useDisplay: false
-                });*/
+                });
             });
             slideGridIn.delay(350); // keep delay slightly longer than effect
         } else {
@@ -186,11 +187,11 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
                 judgesGridHeader.update('<img style="float:right;" src="'+Sovereign.config.cssUrl + '/img/gavel.png"><img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/painting-icon.png"><h3>'+ row.get('galleryname')+' - Judges\' Gallery Artworks</h3><p>'+ _('sovereign.judges_artworks_desc') +'</p>');
                 activeMainAfricanTab.add(artworkGrid);
                 activeMainAfricanTab.doLayout();
-                /*artworkGrid.getEl().slideIn('r', {
+                artworkGrid.getEl().slideIn('r', {
                  easing: 'easeIn',
                  duration:.3,
                  useDisplay: false
-                 });*/
+                 });
             });
             slideGridIn.delay(350); // keep delay slightly longer than effect
         } else {
@@ -242,14 +243,14 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
             var artworkGrid = new Sovereign.grid.AfricanArtworkPublic;
             artworkGrid.passGalleryId(galleryId); // pass id of selected gallery
             var slideGridIn = new Ext.util.DelayedTask(function(){ // define delay
-                publicGridHeader.update('<h3>'+ row.get('galleryname')+' - Pending Artworks</h3><p>'+ _('sovereign.submissions_artworks_desc') +'</p>');
+                publicGridHeader.update('<img style="float:right;" src="'+Sovereign.config.cssUrl + '/img/world.png"><img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/painting-icon.png"><h3>'+ row.get('galleryname')+' - Public Live Artworks</h3><p>'+ _('sovereign.submissions_artworks_desc') +'</p>');
                 activeMainAfricanTab.add(artworkGrid);
                 activeMainAfricanTab.doLayout();
-                /*artworkGrid.getEl().slideIn('r', {
-                 easing: 'easeIn',
-                 duration:.3,
-                 useDisplay: false
-                 });*/
+                artworkGrid.getEl().slideIn('r', {
+                    easing: 'easeIn',
+                    duration:.3,
+                    useDisplay: false
+                });
             });
             slideGridIn.delay(350); // keep delay slightly longer than effect
         } else {
@@ -269,7 +270,7 @@ Ext.extend(Sovereign.panel.AfricanPanel,MODx.Panel,{
         var publicGrid = Ext.getCmp('sovereign-grid-galleryafricanpublic');
         var publicGridHeader = Ext.getCmp('sovereign-galleryafrican-public-header');
         var slideGridOut = new Ext.util.DelayedTask(function(){
-            publicGridHeader.update('<h3>'+_('sovereign.tab_heading_african_public')+'</h3><p>'+ _('sovereign.public_galleries_desc') +'</p>');
+            publicGridHeader.update('<img style="float:left; margin-right:20px;" src="'+Sovereign.config.cssUrl + '/img/world.png"><h3>'+_('sovereign.tab_heading_african_public')+'</h3><p>'+ _('sovereign.public_galleries_desc') +'</p>');
             tab.remove(artworkGrid);
             tab.add(publicGrid);
             tab.doLayout();

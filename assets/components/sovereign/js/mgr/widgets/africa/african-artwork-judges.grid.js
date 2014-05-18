@@ -130,14 +130,16 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
             ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
-            ,'closeup_desc','createdon','createdby','menu']
+            ,'closeup_desc','createdon','createdby','votes','menu']
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {
-            //'beforerender': {fn:this.filterGalleries,scope:this}
-            'cellclick': function(grid, rowIndex, columnIndex, e) {
+            'beforerender': function() {
+                this.getStore().setDefaultSort( 'votes', 'DESC' );
+            }
+            ,'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
@@ -206,15 +208,11 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
             ,sortable: true
             ,width:.05
         },{
-            header: _('sovereign.artwork_confirmed')
-            ,dataIndex: 'confirmed'
+            header: _('sovereign.artwork_votes_total')
+            ,dataIndex: 'votes'
             ,sortable: true
             ,width:.035
             ,align: 'center'
-            ,renderer: function(value){
-                var active = value ? 'greentick.png' : 'redcross.png';
-                return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
-            }
         }]
         ,tbar:[{
             text: _('sovereign.back_to_galleries')
@@ -348,9 +346,9 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },passGalleryId: function(galleryId, userGroupId) {
+    },passGalleryId: function(galleryId) {
         this.config.galleryId = galleryId;
-        this.config.userGroupId = userGroupId;
+        //this.config.userGroupId = userGroupId;
     }/*,filterByGalleryId: function(id) {
         this.getStore().baseParams['id'] = id;
         this.getBottomToolbar().changePage(1);

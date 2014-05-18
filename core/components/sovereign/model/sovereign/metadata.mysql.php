@@ -5,5 +5,7 @@ $xpdo_meta_map = array (
   array (
     0 => 'africanArtworks',
     1 => 'africanGalleries',
+    2 => 'africanVotes',
+    3 => 'newsletterSubscriptions',
   ),
 );

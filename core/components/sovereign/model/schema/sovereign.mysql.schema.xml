@@ -5,6 +5,7 @@
     <object class="africanArtworks" table="sovereign_african_artworks" extends="xPDOSimpleObject">
         <field key="gallery_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="sid" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="true" default="0" />
+        <field key="lot_num" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="title" dbtype="varchar" precision="10" phptype="string" null="true" default="" />
         <field key="first_name" dbtype="varchar" precision="200" phptype="string" null="true" default="" />
         <field key="surname" dbtype="varchar" precision="200" phptype="string" null="true" default="" />
@@ -37,10 +38,9 @@
         <field key="caption" dbtype="text" phptype="string" />
         <field key="edition" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
         <field key="img_height" dbtype="varchar" precision="30" phptype="string" null="true" default="" />
-        <field key="img_width" dbtype="varchar" precision="30" phptype="string" null="true" default="" />
+        <field key="img_width" dbtype="varchar" precision="30" phptype="string" null="true" />
+        <field key="winner" dbtype="varchar" precision="200" phptype="string" null="true" default="" />
         <field key="confirmed" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="true" default="0" />
-        <field key="closeup_filename" dbtype="varchar" precision="45" phptype="string" null="true" default="" />
-        <field key="closeup_desc" dbtype="text" phptype="string" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <aggregate alias="AfricanGallery" class="africanGalleries" local="gallery_id" foreign="id" cardinality="one" owner="foreign" />
@@ -56,7 +56,8 @@
         <field key="artworktotal" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
         <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
-        <field key="phase" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="true" default="" />
+        <field key="phase" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="type" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="vote_on" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="true" default="" />
         <field key="votes" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
@@ -67,8 +68,10 @@
 
     <object class="africanVotes" table="sovereign_african_votes" extends="xPDOSimpleObject">
         <field key="artwork_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" />
+        <field key="gallery_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" />
         <field key="user_id" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="true" />
-        <field key="value" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" />
+        <field key="value_judges" dbtype="decimal" precision="2,1" phptype="float" attributes="unsigned" null="false" />
+        <field key="value_public" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="false" />
         <field key="ip" dbtype="varchar" precision="255" phptype="string" null="true" />
         <field key="date" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" />
         <aggregate alias="AfricanArtwork" class="africanArtworks" local="artwork_id" foreign="id" cardinality="one" owner="foreign" />

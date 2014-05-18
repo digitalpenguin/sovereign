@@ -32,53 +32,14 @@
 
 <!-- Judges Gallery block -->
 <section class="judges_block">
-
     [[*content]]
-
-    <div class="judge_submit">
-        <input type="submit" class="btn_judge_submit" name="submit" value="Submit" />
-
-    </div>
-
 </section>
 
 
 
 [[$newsletter-signup]]
 
-<footer>
-	<div id="footer_wrap">
-		<div id="footer_contact">
-        	<h1>Contact</h1>
-            <p><u>Email</u><br/>
-            <a href="mailto:art@sovereignartfoundation.com">art@sovereignartfoundation.com</a></p>
-        </div>
-        <div id="footer_contact2">
-            <p><u>Hong Kong</u><br/>
-                Tel: +852 2542 1177<br/>
-                Fax: +852 2545 0550</p>
-            <p><u>London</u><br/>
-                Tel: + 44 (0)20 7389 0555<br/>
-                Fax: + 44 (0)20 7930 1151</p>
-        </div>
-        <div id="footer_soical">
-        	<h1>Follow us</h1>
-            <ul class="social_icons_footer">
-                <li><a href="facebook.com" class="soical_fb">facebook</a></li>
-                <li><a href="facebook.com" class="soical_twitter">twitter</a></li>
-                <li><a href="facebook.com" class="soical_google">google+</a></li>
-                <li><a href="facebook.com" class="soical_youtube">youtube</a></li>
-                <li><a href="facebook.com" class="soical_linkedin">linkedin</a></li>
-                <li><a href="facebook.com" class="soical_rss">rss</a></li>
-        	</ul>  
-            <div class="clear"></div>
-            <p class="copyright">&copy; The Sovereign Group 2014. All rights resevered.<br />
-				<a href="privacypolicy.html">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="accesibility.html">Accesibility</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="cookiepolicy.html">Cookie Policy</a></p>
-        </div>
-    
-    	<div class="clear"></div>
-    </div>
-</footer>
+[[$footer]]
 
 <script src="[[++assets_url]]theme/js/modernizr-latest.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -105,6 +66,29 @@
 <!-- js call for action -->
 <script src="[[++assets_url]]theme/js/script.js" type="text/javascript"></script>
 
+<script>
+    $(function() {
+
+        $('.rateit').bind('rated', function(event, value) {
+            var id = $(this).data('id');
+            var galleryId = $(this).data('galleryId');
+            $.post('[[~27]]', {artworkId:id, value:value, galleryId:galleryId})
+                    .done(function(data){
+                        console.log(data);
+                    });
+
+        });
+
+        $('.rateit').bind('reset', function(event, value) {
+            var id = $(this).data('id');
+            var galleryId = $(this).data('galleryId');
+            $.post('[[~27]]', {artworkId:id, value:value, galleryId:galleryId})
+                    .done(function(data){
+                        console.log(data);
+                    });
+        });
+    });
+</script>
 
 </body>
 </html>

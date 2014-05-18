@@ -4,27 +4,57 @@ Sovereign.grid.GalleryAfricanPublic = function(config) {
         id: 'sovereign-grid-galleryafricanpublic'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/africa/galleries/getListPublic' }
-        ,fields: ['id','galleryname','year','menu']
+        ,fields: ['id','galleryname','description','url','year','artworktotal','votes','enabled','createdon','createdby','menu']
         ,paging: true
+        ,pageSize: 10
         ,remoteSort: true
-        ,autoExpandColumn: 'galleryname'
+        ,listeners : {
+            'rowclick': function(grid, index, rec){
+                if (grid.getSelectionModel().hasSelection()) {
+                    var row = grid.getSelectionModel().getSelections()[0];
+                    var galleryId = row.get('id');
+                }
+                this.loadNewGrid(grid, row, galleryId);
+            }
+        }
+        ,autoExpandColumn: 'year'
         ,columns: [{
-            header: _('id')
+            header: 'ID#'
             ,dataIndex: 'id'
             ,sortable: true
-            ,width: 60
+            ,width:.03
         },{
             header: _('sovereign.galleryname')
             ,dataIndex: 'galleryname'
             ,sortable: true
-            ,width: 100
-            ,editor: { xtype: 'textfield' }
+            ,width:.15
         },{
-            header: _('sovereign.year')
-            ,dataIndex: 'year'
+            header: _('sovereign.gallery_desc')
+            ,dataIndex: 'description'
             ,sortable: true
-            ,width: 100
-            ,editor: { xtype: 'textfield' }
+            ,width:.3
+        },{
+            header: _('sovereign.gallery_artwork_total')
+            ,align: 'center'
+            ,dataIndex: 'artworktotal'
+            ,sortable: false
+            ,width:.055
+        },{
+            header: _('sovereign.gallery_vote_total')
+            ,align: 'center'
+            ,dataIndex: 'votes'
+            ,sortable: true
+            ,width:.05
+        },{
+            header: _('sovereign.created_on')
+            ,dataIndex: 'createdon'
+            ,sortable: true
+            ,width:.08
+        },{
+            header: _('sovereign.created_by')
+            ,dataIndex: 'createdby'
+            ,sortable: true
+            ,width:.08
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')
@@ -59,6 +89,7 @@ Sovereign.grid.GalleryAfricanPublic = function(config) {
     });
     Sovereign.grid.GalleryAfricanPublic.superclass.constructor.call(this,config)
 };
+
 Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
     search: function(tf,nv,ov) {
         var s = this.getStore();
@@ -67,33 +98,56 @@ Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
         this.refresh();
     },clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'mgr/africa/galleries/getListPublic'
+            action: 'mgr/africa/galleries/getListJudges'
             ,'parent': this.config.resource
         };
         Ext.getCmp('galleryafricanpublic-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    },getMenu: function() {
-        return [{
-            text: _('sovereign.gallery_update')
-            ,handler: this.updateGalleryAfrican
-        },'-',{
-            text: _('sovereign.gallery_remove')
-            ,handler: this.removeGalleryAfrican
-        }];
-    },updateGalleryAfrican: function(btn,e) {
-        if (!this.updateGalleryWindow) {
-            this.updateGalleryWindow = MODx.load({
-                xtype: 'sovereign-window-galleryafricanpublic-update'
-                ,record: this.menu.record
-                ,listeners: {
-                    'success': {fn:this.refresh,scope:this}
-                }
-            });
+    },getMenu: function(grid, index, rec) {
+        if (grid.getSelectionModel().hasSelection()) {
+            var row = grid.getSelectionModel().getSelections()[0];
+            var enabledVal = row.get('enabled');
         }
-        this.updateGalleryWindow.setValues(this.menu.record);
-        this.updateGalleryWindow.show(e.target);
-    },removeGalleryAfrican: function() {
+        return [{
+            text: _('sovereign.gallery_endpublicvoting')
+            ,handler: this.endVotingGalleryAfricanPublic
+        },'-',{
+            text: _('sovereign.gallery_back_to_submissions')
+            ,handler: this.backToJudgesPhaseGalleryAfricanPublic
+        },{
+            text: _('sovereign.gallery_remove')
+            ,handler: this.removeGalleryAfricanPublic
+        }];
+
+    },endVotingGalleryAfricanPublic: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.gallery_endpublicvoting')
+            ,text: _('sovereign.gallery_endpublicvoting_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/galleries/endPublicVoting'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },backToJudgesPhaseGalleryAfricanPublic: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.gallery_back_to_judges')
+            ,text: _('sovereign.gallery_back_to_judges_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/galleries/moveGallery'
+                ,id: this.menu.record.id
+                ,phase: 1
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },removeGalleryAfricanPublic: function() {
         MODx.msg.confirm({
             title: _('sovereign.gallery_remove')
             ,text: _('sovereign.gallery_remove_confirm')
@@ -101,61 +155,47 @@ Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
             ,params: {
                 action: 'mgr/africa/galleries/remove'
                 ,id: this.menu.record.id
+                // A hack to prepend the modx install base path
+                ,dir: Sovereign.config.modxBasePath + Sovereign.config.africanGalleryUrl + this.menu.record.id
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
             }
         });
+    },loadNewGrid: function(grid, row, galleryId) {
+        Ext.getCmp('sovereign-panel-africa').replacePublicGrid(grid, row, galleryId);
     }
 });
 Ext.reg('sovereign-grid-galleryafricanpublic',Sovereign.grid.GalleryAfricanPublic);
 
-Sovereign.window.UpdateGalleryAfricanPublic = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('sovereign.gallery_update')
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/africa/galleries/update'
-        }
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.name')
-            ,name: 'galleryname'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
-            ,name: 'year'
-            ,anchor: '100%'
-        }]
-    });
-    Sovereign.window.UpdateGalleryAfricanPublic.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.UpdateGalleryAfricanPublic,MODx.Window);
-Ext.reg('sovereign-window-galleryafricanpublic-update',Sovereign.window.UpdateGalleryAfricanPublic);
 
 
 Sovereign.window.CreateGalleryAfricanPublic = function(config) {
     config = config || {};
+    var check = Ext.getCmp('sovereign-window-galleryafricanpublic-create');
+    if (check) check.destroy();
+    this.ident = config.ident || 'sovcrgal'+Ext.id();
+    this.parent = Sovereign.config.africanGalleryUrl;//'assets/components/sovereign/galleries/african/';
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
             action: 'mgr/africa/galleries/create'
+            ,parent: this.parent
+            ,galleryphase: 2 // 2 represents public phase
         }
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'url'
+        },{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.name')
+            ,fieldLabel: _('sovereign.galleryname')
             ,name: 'galleryname'
             ,width: 300
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('sovereign.year')
-            ,name: 'year'
+            ,fieldLabel: _('sovereign.gallery_desc')
+            ,name: 'description'
             ,width: 300
         }]
     });

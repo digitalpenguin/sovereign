@@ -38,9 +38,20 @@ class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
         foreach ($list as $row){
             $row['artworktotal'] = $this->getArtworkCount($row['id']);
             $row['createdby'] = $this->getUserName($row['createdby']);
+            $row['votes'] = $this->getVoteTotal($row['id']);
             $rows[] = $row;
         }
         return $rows;
+    }
+
+
+    private function getVoteTotal($galleryId) {
+        $total = 0;
+        $votes = $this->modx->getCollection('africanVotes', array('gallery_id'=>$galleryId));
+        foreach ($votes as $vote) {
+            $total = $total + $vote->get('value_judges');
+        }
+        return $total;
     }
 
     /**

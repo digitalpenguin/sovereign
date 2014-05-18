@@ -64,9 +64,17 @@ $_lang['sovereign.gallery_activate_confirm'] = 'Are you sure you wish to activat
 $_lang['sovereign.gallery_deactivate'] = 'Deactivate Gallery';
 $_lang['sovereign.gallery_deactivate_confirm'] = 'Are you sure you wish to deactivate this gallery? This will suspend submissions for this gallery.';
 $_lang['sovereign.gallery_movetojudges'] = 'End Submission Phase';
+$_lang['sovereign.gallery_movetojudges_confirm'] = 'Are you sure you wish to end the submission phase? The confirmed submissions will move into the Judges\' Galleries phase to be voted upon.';
 $_lang['sovereign.gallery_back_to_submissions'] = 'Move Gallery Back To Submission Phase';
 $_lang['sovereign.gallery_back_to_submissions_confirm'] = 'Are you sure you wish to move this gallery back to the submission phase?';
-$_lang['sovereign.gallery_movetojudges_confirm'] = 'Are you sure you wish to end the submission phase? The confirmed submissions will move into the Judges\' Galleries phase to be voted upon.';
+$_lang['sovereign.gallery_movetopublic'] = 'Move Gallery To Public Voting';
+$_lang['sovereign.gallery_movetopublic_confirm'] = 'Are you sure you wish to end the judging phase? This will move the gallery to the public voting phase.';
+$_lang['sovereign.gallery_endpublicvoting'] = 'End Public Voting';
+$_lang['sovereign.gallery_endpublicvoting_confirm'] = 'Are you sure you wish to end voting on this gallery for the public?';
+$_lang['sovereign.gallery_back_to_judges'] = 'Move Gallery Back To Judges Phase';
+$_lang['sovereign.gallery_back_to_judges_confirm'] = 'Are you sure you wish to move this gallery back to the judges phase?';
+
+
 /*
  * Artwork Grid
  */
@@ -100,6 +108,7 @@ $_lang['sovereign.artwork_art_materials'] = 'Materials';
 $_lang['sovereign.artwork_work_brief'] = 'Work Brief';
 $_lang['sovereign.artwork_art_brief'] = 'Art Brief';
 $_lang['sovereign.add_judges_to_gallery'] = 'Assigned Judges';
+$_lang['sovereign.artwork_votes_total'] = 'Votes';
 
 /*
  * Create Gallery Form

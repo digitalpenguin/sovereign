@@ -8,6 +8,7 @@ $xpdo_meta_map['africanArtworks']= array (
   array (
     'gallery_id' => 0,
     'sid' => 0,
+    'lot_num' => 0,
     'title' => '',
     'first_name' => '',
     'surname' => '',
@@ -40,10 +41,9 @@ $xpdo_meta_map['africanArtworks']= array (
     'caption' => NULL,
     'edition' => 0,
     'img_height' => '',
-    'img_width' => '',
+    'img_width' => NULL,
+    'winner' => '',
     'confirmed' => 0,
-    'closeup_filename' => '',
-    'closeup_desc' => NULL,
     'createdon' => NULL,
     'createdby' => 0,
   ),
@@ -59,6 +59,15 @@ $xpdo_meta_map['africanArtworks']= array (
       'default' => 0,
     ),
     'sid' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => true,
+      'default' => 0,
+    ),
+    'lot_num' => 
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -316,6 +325,13 @@ $xpdo_meta_map['africanArtworks']= array (
       'precision' => '30',
       'phptype' => 'string',
       'null' => true,
+    ),
+    'winner' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '200',
+      'phptype' => 'string',
+      'null' => true,
       'default' => '',
     ),
     'confirmed' => 
@@ -326,19 +342,6 @@ $xpdo_meta_map['africanArtworks']= array (
       'attributes' => 'unsigned',
       'null' => true,
       'default' => 0,
-    ),
-    'closeup_filename' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '45',
-      'phptype' => 'string',
-      'null' => true,
-      'default' => '',
-    ),
-    'closeup_desc' => 
-    array (
-      'dbtype' => 'text',
-      'phptype' => 'string',
     ),
     'createdon' => 
     array (
@@ -354,6 +357,25 @@ $xpdo_meta_map['africanArtworks']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'gallery_id' => 
+    array (
+      'alias' => 'gallery_id',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'gallery_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

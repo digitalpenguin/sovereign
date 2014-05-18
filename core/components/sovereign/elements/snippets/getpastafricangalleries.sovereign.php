@@ -22,7 +22,7 @@ if(!empty($highestId)) {
         'AND:phase:=' => 0
     ));
 } else {
-    return '<p>No galleries currently available!</p>';
+    return '<p style="width:300px; margin:100px auto 100px auto;">No galleries currently available!</p>';
 }
 $total = $modx->getCount('africanGalleries',$c);
 $modx->setPlaceholder($totalVar,$total);

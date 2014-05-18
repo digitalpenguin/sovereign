@@ -221,10 +221,6 @@ Sovereign.grid.AfricanArtworkPublic = function(config) {
             ,listeners: {
                 'click': {fn: this.backToGallery, scope:this}
             }
-        },'-',{
-            xtype: 'button'
-            ,text: _('sovereign.add_judges_to_gallery')
-            ,handler: this.showAfricanJudges
         },'->',{
             text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
@@ -289,16 +285,6 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
             text: _('sovereign.artworks_remove')
             ,handler: this.removeAfricanArtworks
         }];
-    },showAfricanJudges: function(e) {
-        var win = MODx.load({
-            galleryId: this.config.galleryId
-            ,xtype: 'sovereign-window-african-showjudges'
-            ,listeners: {
-                'hide':{fn:function() {this.destroy();}}
-            }
-        });
-        win.galleryId = this.config.galleryId;
-        win.show();
     },displayArtwork: function(e) {
         this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkPublic;
         this.displayArtworkWindow.setValues(this.menu.record);
@@ -348,7 +334,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },passGalleryId: function(galleryId, userGroupId) {
+    },passGalleryId: function(galleryId) {
         this.config.galleryId = galleryId;
         //this.config.userGroupId = userGroupId;
     }/*,filterByGalleryId: function(id) {
@@ -356,7 +342,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
      this.getBottomToolbar().changePage(1);
      this.refresh();
      }*/,backToGallery: function() {
-        Ext.getCmp('sovereign-panel-africa').backToJudgesGrid();
+        Ext.getCmp('sovereign-panel-africa').backToPublicGrid();
     }
 });
 Ext.reg('sovereign-grid-africanartworkpublic',Sovereign.grid.AfricanArtworkPublic);

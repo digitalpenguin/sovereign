@@ -19,4 +19,6 @@ $generator->parseSchema($sources['schema_file'],$sources['model']);
 $modx->addPackage('sovereign', $sources['model']); // add package to make all models available
 $manager->createObjectContainer('africanGalleries'); // create the database tables
 $manager->createObjectContainer('africanArtworks');
+$manager->createObjectContainer('africanVotes');
+$manager->createObjectContainer('newsletterSubscriptions');
 $modx->log(modX::LOG_LEVEL_INFO, 'Done!');

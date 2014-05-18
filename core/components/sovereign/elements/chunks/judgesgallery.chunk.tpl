@@ -22,7 +22,7 @@
                     <h3>Size</h3>
                     [[+height]] x [[+width]]cm
                 </div>
-                <div class="rateit"></div>
+                <div class="rateit" data-id="[[+id]]" data-gallery-id="[[+gallery_id]]" data-rateit-value="[[+stored_vote]]"></div>
             </td>
         </tr>
     </table>

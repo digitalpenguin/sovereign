@@ -36,5 +36,23 @@ class AfricanArtworksJudgesGetListProcessor extends modObjectGetListProcessor {
 
         return $c;
     }
+
+    public function afterIteration(array $list) {
+        $rows = array();
+        foreach ($list as $row){
+            $row['votes'] = $this->getVoteTotal($row['id']);
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    private function getVoteTotal($artworkId) {
+        $total = 0;
+        $votes = $this->modx->getCollection('africanVotes', array('gallery_id'=>$artworkId));
+        foreach ($votes as $vote) {
+            $total = $total + $vote->get('value_judges');
+        }
+        return $total;
+    }
 }
 return 'AfricanArtworksJudgesGetListProcessor';
