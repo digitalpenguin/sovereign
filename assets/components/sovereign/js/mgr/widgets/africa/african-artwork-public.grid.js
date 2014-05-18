@@ -227,6 +227,18 @@ Sovereign.grid.AfricanArtworkPublic = function(config) {
             ,handler: this.createAfricanArtwork
             ,scope: this
         },'-',{
+            xtype: 'button'
+            ,text: _('sovereign.export_csv')
+            ,listeners: {
+                'click': {fn: this.exportCsv, scope: this}
+            }
+        },{
+            xtype: 'button'
+            ,text: _('sovereign.export_images')
+            ,listeners: {
+                'click': {fn: this.exportImages, scope: this}
+            }
+        },'-','-',{
             xtype: 'textfield'
             ,id: 'africanartworkspublic-search-filter'
             ,emptyText: _('sovereign.search...')

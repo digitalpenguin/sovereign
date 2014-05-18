@@ -378,6 +378,17 @@ $xpdo_meta_map['africanArtworks']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'AfricanVote' => 
+    array (
+      'class' => 'africanVotes',
+      'local' => 'id',
+      'foreign' => 'artwork_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'AfricanGallery' => 

@@ -38,7 +38,7 @@ Sovereign.grid.GalleryAfricanPublic = function(config) {
             ,align: 'center'
             ,dataIndex: 'artworktotal'
             ,sortable: false
-            ,width:.055
+            ,width:.06
         },{
             header: _('sovereign.gallery_vote_total')
             ,align: 'center'
@@ -51,10 +51,10 @@ Sovereign.grid.GalleryAfricanPublic = function(config) {
             ,sortable: true
             ,width:.08
         },{
-            header: _('sovereign.created_by')
-            ,dataIndex: 'createdby'
-            ,sortable: true
-            ,width:.08
+            header: _('sovereign.gallery_cover')
+            ,dataIndex: 'cover_filename'
+            ,sortable: false
+            ,width:.1
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')

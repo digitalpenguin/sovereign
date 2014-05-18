@@ -14,6 +14,8 @@ $_lang['sovereign.sovereign_err_ns_name'] = 'Please specify a name for the artwo
 $_lang['sovereign.sovereign_err_remove'] = 'An error occurred while trying to remove the artwork.';
 $_lang['sovereign.sovereign_err_save'] = 'An error occurred while trying to save the artwork.';
 $_lang['sovereign.sovereign_create'] = 'Add New Artwork';
+$_lang['sovereign.export_csv'] = 'Export Data to CSV';
+$_lang['sovereign.export_images'] = 'Export Images';
 $_lang['sovereign.downloads'] = 'Downloads';
 $_lang['sovereign.location'] = 'Location';
 $_lang['sovereign.management'] = 'Sovereign Art Prize Management';
@@ -49,6 +51,7 @@ $_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
  */
 $_lang['sovereign.galleryname'] = 'Gallery Name';
 $_lang['sovereign.gallery_desc'] = 'Description / Notes';
+$_lang['sovereign.gallery_cover'] = 'Cover Image';
 $_lang['sovereign.judges_galleries_desc'] = '';
 $_lang['sovereign.gallery_remove'] = 'Remove Gallery';
 $_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';

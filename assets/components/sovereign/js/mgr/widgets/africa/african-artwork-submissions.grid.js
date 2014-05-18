@@ -136,8 +136,7 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
         ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {
-            /*'beforerender': {fn:this.filterGalleries,scope:this}
-            ,*/'cellclick': function(grid, rowIndex, columnIndex, e) {
+            'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
@@ -227,6 +226,18 @@ Sovereign.grid.AfricanArtworkSubmissions = function(config) {
             ,handler: this.createAfricanArtwork
             ,scope: this
         },'->',{
+            xtype: 'button'
+            ,text: _('sovereign.export_csv')
+            ,listeners: {
+                'click': {fn: this.exportCsv, scope: this}
+            }
+        },{
+            xtype: 'button'
+            ,text: _('sovereign.export_images')
+            ,listeners: {
+                'click': {fn: this.exportImages, scope: this}
+            }
+        },'-','-',{
             xtype: 'textfield'
             ,id: 'africanartworks-search-filter'
             ,emptyText: _('sovereign.search...')

@@ -42,8 +42,12 @@ foreach($modx->user->getUserGroupNames() as $group) {
             $i = 1;
             foreach ($artworks as $artwork) {
                 // set placeholder to preset votes to last modified value
-                if($voteOb = $modx->getObject('africanVotes', array('user_id'=>$modx->user->get('id'), 'artwork_id'=>$artwork->get('id')))) {
-                    $modx->setPlaceholder('stored_vote', $voteOb->get('value_judges'));
+                if(!$vote = $artwork->getOne('AfricanVote', array('artwork_id'=>$artwork->get('id'), 'user_id'=>$modx->user->get('id')))) {
+                    //echo 'null';
+                    $modx->setPlaceholder('stored_vote', 0);
+                } else {
+                    //echo $vote->get('id');
+                    $modx->setPlaceholder('stored_vote', $vote->get('value_judges'));
                 }
                 $artworkArray = $artwork->toArray();
                 if ($i % 2 != 0) {
@@ -81,8 +85,12 @@ foreach($modx->user->getUserGroupNames() as $group) {
             $i = 1;
             foreach ($artworks as $artwork) {
                 // set placeholder to preset votes to last modified value
-                if($voteOb = $modx->getObject('asianVotes', array('user_id'=>$modx->user->get('id'), 'artwork_id'=>$artwork->get('id')))) {
-                    $modx->setPlaceholder('stored_vote', $voteOb->get('value_judges'));
+                if(!$vote = $artwork->getOne('AsianVote', array('artwork_id'=>$artwork->get('id'), 'user_id'=>$modx->user->get('id')))) {
+                    //echo 'null';
+                    $modx->setPlaceholder('stored_vote', 0);
+                } else {
+                    //echo $vote->get('id');
+                    $modx->setPlaceholder('stored_vote', $vote->get('value_judges'));
                 }
                 $artworkArray = $artwork->toArray();
                 if ($i % 2 != 0) {
@@ -119,8 +127,12 @@ foreach($modx->user->getUserGroupNames() as $group) {
             $i = 1;
             foreach ($artworks as $artwork) {
                 // set placeholder to preset votes to last modified value
-                if($voteOb = $modx->getObject('europeanVotes', array('user_id'=>$modx->user->get('id'), 'artwork_id'=>$artwork->get('id')))) {
-                    $modx->setPlaceholder('stored_vote', $voteOb->get('value_judges'));
+                if(!$vote = $artwork->getOne('EuropeanVote', array('artwork_id'=>$artwork->get('id'), 'user_id'=>$modx->user->get('id')))) {
+                    //echo 'null';
+                    $modx->setPlaceholder('stored_vote', 0);
+                } else {
+                    //echo $vote->get('id');
+                    $modx->setPlaceholder('stored_vote', $vote->get('value_judges'));
                 }
                 $artworkArray = $artwork->toArray();
                 if ($i % 2 != 0) {
@@ -157,8 +169,12 @@ foreach($modx->user->getUserGroupNames() as $group) {
             $i = 1;
             foreach ($artworks as $artwork) {
                 // set placeholder to preset votes to last modified value
-                if($voteOb = $modx->getObject('mideasternVotes', array('user_id'=>$modx->user->get('id'), 'artwork_id'=>$artwork->get('id')))) {
-                    $modx->setPlaceholder('stored_vote', $voteOb->get('value_judges'));
+                if(!$vote = $artwork->getOne('MideasternVote', array('artwork_id'=>$artwork->get('id'), 'user_id'=>$modx->user->get('id')))) {
+                    //echo 'null';
+                    $modx->setPlaceholder('stored_vote', 0);
+                } else {
+                    //echo $vote->get('id');
+                    $modx->setPlaceholder('stored_vote', $vote->get('value_judges'));
                 }
                 $artworkArray = $artwork->toArray();
                 if ($i % 2 != 0) {

@@ -133,11 +133,11 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
             ,'closeup_desc','createdon','createdby','votes','menu']
         ,paging: true
         ,pageSize: 10
-        ,remoteSort: true
         ,autoExpandColumn: 'art_title'
         ,listeners: {
             'beforerender': function() {
                 this.getStore().setDefaultSort( 'votes', 'DESC' );
+                this.refresh();
             }
             ,'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
@@ -220,15 +220,27 @@ Sovereign.grid.AfricanArtworkJudges = function(config) {
                 'click': {fn: this.backToGallery, scope:this}
             }
         },'-',{
-            xtype: 'button'
-            ,text: _('sovereign.add_judges_to_gallery')
-            ,handler: this.showAfricanJudges
-        },'->',{
             text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
             ,handler: this.createAfricanArtwork
             ,scope: this
         },'-',{
+            xtype: 'button'
+            ,text: _('sovereign.add_judges_to_gallery')
+            ,handler: this.showAfricanJudges
+        },'->',{
+            xtype: 'button'
+            ,text: _('sovereign.export_csv')
+            ,listeners: {
+                'click': {fn: this.exportCsv, scope: this}
+            }
+        },{
+            xtype: 'button'
+            ,text: _('sovereign.export_images')
+            ,listeners: {
+                'click': {fn: this.exportImages, scope: this}
+            }
+        },'-','-',{
             xtype: 'textfield'
             ,id: 'africanartworksjudges-search-filter'
             ,emptyText: _('sovereign.search...')

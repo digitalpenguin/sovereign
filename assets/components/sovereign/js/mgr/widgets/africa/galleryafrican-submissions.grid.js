@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
         id: 'sovereign-grid-galleryafricansubmissions'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/africa/galleries/getListSubmissions' }
-        ,fields: ['id','galleryname','description','url','year','artworktotal','enabled','createdon','createdby','menu']
+        ,fields: ['id','galleryname','description','cover_filename','url','year','artworktotal','enabled','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
@@ -38,7 +38,7 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
             ,align: 'center'
             ,dataIndex: 'artworktotal'
             ,sortable: false
-            ,width:.055
+            ,width:.06
         },{
             header: _('sovereign.active_gallery')
             ,align: 'center'
@@ -55,14 +55,18 @@ Sovereign.grid.GalleryAfricanSubmissions = function(config) {
             ,sortable: true
             ,width:.08
         },{
-            header: _('sovereign.created_by')
-            ,dataIndex: 'createdby'
-            ,sortable: true
-            ,width:.08
+            header: _('sovereign.gallery_cover')
+            ,dataIndex: 'cover_filename'
+            ,sortable: false
+            ,width:.1
+            ,renderer: function(value, metaData, record){
+                return '<img src="' + MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ record.get('id') + '/cover/' + value + '_small.jpeg" >';
+            }
         }]
         ,tbar:[{
             text: _('sovereign.gallery_create')
-            ,handler: { xtype: 'sovereign-window-galleryafricansubmissions-create' ,blankValues: true }
+            ,handler: this.createAfricanGallery
+            ,scope: this
         },'->',{
             xtype: 'textfield'
             ,id: 'galleryafricansubmissions-search-filter'
@@ -133,6 +137,19 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
                 ,handler: this.removeGalleryAfricanSubmissions
             }];
         }
+    },createAfricanGallery: function(e) {
+        var win = MODx.load({
+            xtype: 'sovereign-window-galleryafricansubmissions-create'
+            ,listeners: {
+                success: {fn: function(r) {
+                    this.refresh();
+                },scope: this},
+                scope: this
+            }
+        });
+        win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/';
+        win.show(e.target);
+
     },activateGalleryAfricanSubmissions: function() {
         MODx.msg.confirm({
             title: _('sovereign.gallery_activate')
@@ -207,6 +224,7 @@ Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
     Ext.applyIf(config,{
         title: _('sovereign.gallery_create')
         ,url: Sovereign.config.connectorUrl
+        ,fileUpload: true
         ,baseParams: {
             action: 'mgr/africa/galleries/create'
             ,parent: this.parent
@@ -220,10 +238,16 @@ Sovereign.window.CreateGalleryAfricanSubmissions = function(config) {
             ,name: 'galleryname'
             ,width: 300
         },{
-            xtype: 'textfield'
+            xtype: 'textarea'
             ,fieldLabel: _('sovereign.gallery_desc')
             ,name: 'description'
             ,width: 300
+        },{
+            xtype: 'field'
+            ,inputType: 'file'
+            ,fieldLabel: 'Cover Image Filename'
+            ,name: 'cover_filename'
+            ,allowBlank: false
         }]
     });
     Sovereign.window.CreateGalleryAfricanSubmissions.superclass.constructor.call(this,config);
