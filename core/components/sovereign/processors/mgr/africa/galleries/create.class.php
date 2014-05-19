@@ -181,8 +181,8 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
 
         $modPhpThumb = new modPhpThumb($this->modx);
         $modPhpThumb->setSourceFilename(pathinfo($path,PATHINFO_DIRNAME).'/'.basename($path)); // original image
-        $modPhpThumb->setParameter('w', 100);
-        $modPhpThumb->setParameter('h', 30);
+        $modPhpThumb->setParameter('w', 180);
+        $modPhpThumb->setParameter('h', 50);
         $modPhpThumb->setParameter('zc', 'C');
         $thumbName = 'small';
         $modPhpThumb->setParameter('config_output_format', 'jpeg');

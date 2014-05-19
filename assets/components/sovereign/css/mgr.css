@@ -13,6 +13,10 @@
 #sovereign-grid-africanartworkjudges .x-grid3-col-2 { padding: 5px 18px 2px 5px;}
 #sovereign-grid-africanartworkpublic .x-grid3-col-2 { padding: 5px 18px 2px 5px;}
 
+#sovereign-grid-galleryafricansubmissions .x-grid3-col-6 {padding:2px 0 0 0;}
+#sovereign-grid-galleryafricanjudges .x-grid-col-6 {padding:2px 0 0 0;}
+#sovereign-grid-galleryafricanpublic .x-grid-col-6 {padding:2px 0 0 0;}
+
 .expanded { width:10%; color:#444444; float:left; margin:20px 0 0 30px; }
 .expanded h4 { color:#333333; margin-bottom:6px; }
 .expanded-wide { color:#444444; float:left; margin:20px 0 0 30px; }
