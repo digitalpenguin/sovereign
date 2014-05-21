@@ -5,11 +5,11 @@ Sovereign.window.AfricanShowJudgesList = function(config) {
     Ext.apply(config, {
         title: 'Assigned Judges'
         ,fileUpload: true
-        ,width: 600
-        ,height:600
+        ,width: 1000
+        ,bodyStyle: 'min-height:500px;'
         ,modal: true
         ,listeners: {
-            'beforeshow': function(){this.center();}
+            'show': function(){this.center();}
         }
         ,fields: [{
             xtype: 'sovereign-grid-african-assignedjudges'
@@ -37,7 +37,7 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             ,galleryId: this.galleryId
             ,usergroupname: 'AfricanJudgesGallery#'+this.galleryId
         }
-        ,fields: ['id','fullname','username','email','password','menu']
+        ,fields: ['id','portrait','fullname','username','email','password','address','city','comment','menu']
         ,paging: true
         ,pageSize: 6
         ,remoteSort: true
@@ -46,6 +46,11 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
         ,save_action: 'mgr/africa/judges/updateFromGrid'
         ,autosave: true
         ,columns: [{
+            header: 'Portrait'
+            ,dataIndex: 'website'
+            ,sortable: false
+            ,width:.04
+        },{
             header: 'Full Name'
             ,dataIndex: 'fullname'
             ,sortable: true
@@ -56,17 +61,22 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             ,sortable: true
             ,width:.06
         },{
-            header: 'Username'
-            ,dataIndex: 'username'
+            header: 'Position'
+            ,dataIndex: 'address'
+            ,sortable: false
+            ,width:.05
+        },{
+            header: 'Organisation'
+            ,dataIndex: 'city'
+            ,sortable: false
+            ,width:.05
+        },{
+            header: 'Biography'
+            ,dataIndex: 'comment'
             ,sortable: false
             ,width:.05
         }]
-        ,tbar: [/*{
-            xtype: 'button'
-            ,text: 'Upload CSV File'
-            ,scope: this
-            ,handler: this.uploadCsv
-        },'-',*/{
+        ,tbar: [{
             xtype: 'button'
             ,text: 'Add Single Judge'
             ,scope: this

@@ -47,7 +47,7 @@ class AssignedJudgeGetListProcessor extends modObjectGetListProcessor {
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->select($this->modx->getSelectColumns('modUser','modUser'));
-        $c->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('fullname','email','blocked')));
+        $c->select($this->modx->getSelectColumns('modUserProfile','Profile','',array('website','fullname','email','address','city','comment','blocked')));
         return $c;
     }
 

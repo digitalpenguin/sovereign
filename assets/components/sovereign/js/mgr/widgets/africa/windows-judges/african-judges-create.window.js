@@ -52,7 +52,7 @@ Sovereign.window.CreateAfricanJudge = function(config) {
             xtype: 'field'
             ,inputType: 'file'
             ,fieldLabel: 'Select Judge\'s Portrait'
-            ,name: 'filename'
+            ,name: 'website'
             ,style: 'width:220px; height:32px;'
             ,allowBlank: false
         }]
