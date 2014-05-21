@@ -114,20 +114,7 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
         this.updateJudgeWindow.show(e.target);
     },resetPassword: function() {
 
-    }/*,uploadCsv: function(e) {
-        var win = MODx.load({
-            galleryId: this.galleryId
-            ,xtype: 'sovereign-window-africanjudges-uploadcsv'
-            ,listeners: {
-                success: {fn: function(r) {
-                    this.refresh();
-                },scope: this},
-                scope: this
-            }
-        });
-        win.baseParams.galleryId = win.galleryId;
-        win.show(e.target);
-    }*/,removeJudge: function() {
+    },removeJudge: function() {
         MODx.msg.confirm({
             title: 'Remove Assigned Judge'
             ,text: 'Are you sure you want to remove this judge from the gallery?'
@@ -145,103 +132,4 @@ Ext.extend(Sovereign.grid.AfricanAssignedJudges,MODx.grid.Grid, {
 Ext.reg('sovereign-grid-african-assignedjudges',Sovereign.grid.AfricanAssignedJudges);
 
 
-Sovereign.window.UpdateAfricanJudges = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: 'Update Judges\' Details'
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/africa/judges/update'
-        }
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Full Name'
-            ,name: 'fullname'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Email Address'
-            ,name: 'email'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Username'
-            ,name: 'username'
-            ,anchor: '100%'
-        }]
-    });
-    Sovereign.window.UpdateAfricanJudges.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.UpdateAfricanJudges,MODx.Window);
-Ext.reg('sovereign-window-africanjudges-update',Sovereign.window.UpdateAfricanJudges);
 
-
-
-Sovereign.window.CreateAfricanJudges = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: 'Add Single Judge To Gallery'
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/africa/judges/create'
-        }
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Full Name'
-            ,name: 'fullname'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Email Address'
-            ,name: 'email'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Username'
-            ,name: 'username'
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: 'Password'
-            ,name: 'password'
-            ,anchor: '100%'
-        }]
-    });
-    Sovereign.window.CreateAfricanJudges.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.CreateAfricanJudges,MODx.Window);
-Ext.reg('sovereign-window-africanjudges-create',Sovereign.window.CreateAfricanJudges);
-
-/*
-Sovereign.window.AfricanJudgesUploadCsv = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: 'Upload CSV File'
-        ,fileUpload: true
-        ,modal: true
-        ,url: Sovereign.config.connectorUrl
-        ,baseParams: {
-            action: 'mgr/africa/judges/uploadCsv'
-            ,path: Sovereign.config.csvUrl
-        }
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'field'
-            ,fieldLabel: 'Upload CSV Files'
-            ,inputType: 'file'
-            ,anchor: '100%'
-        }]
-    });
-    Sovereign.window.AfricanJudgesUploadCsv.superclass.constructor.call(this,config);
-};
-Ext.extend(Sovereign.window.AfricanJudgesUploadCsv,MODx.Window);
-Ext.reg('sovereign-window-africanjudges-uploadcsv',Sovereign.window.AfricanJudgesUploadCsv);
-    */

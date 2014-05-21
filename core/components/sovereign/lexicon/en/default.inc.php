@@ -116,15 +116,10 @@ $_lang['sovereign.add_judges_to_gallery'] = 'Assigned Judges';
 $_lang['sovereign.artwork_votes_total'] = 'Votes';
 
 /*
- * Create Gallery Form
+ * Judges
  */
-
-/*
- * Create Artwork Form
- */
-
-
-
+$_lang['sovereign.judge_create'] = 'Add New Judge To Gallery';
+$_lang['sovereign.judge_update'] = 'Update Judge Details';
 
 /*
  * Remove Galleries

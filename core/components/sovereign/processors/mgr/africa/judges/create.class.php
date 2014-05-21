@@ -43,6 +43,10 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $profile = $this->modx->newObject('modUserProfile');
             $profile->set('fullname', $this->getProperty('fullname'));
             $profile->set('email', $this->getProperty('email'));
+            // These 3 fields are unneeded so using them for position, organisation and biography.
+            $profile->set('address', $this->getProperty('address'));
+            $profile->set('city', $this->getProperty('city'));
+            $profile->set('comment', $this->getProperty('comment'));
             $profile->save();
             $user->addOne($profile);
 
