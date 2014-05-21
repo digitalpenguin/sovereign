@@ -221,12 +221,12 @@ Sovereign.grid.AfricanArtworkPublic = function(config) {
             ,listeners: {
                 'click': {fn: this.backToGallery, scope:this}
             }
-        },'->',{
+        },'-',{
             text: _('sovereign.add_artwork')
             ,iconCls: 'icon-add'
             ,handler: this.createAfricanArtwork
             ,scope: this
-        },'-',{
+        },'->',{
             xtype: 'button'
             ,text: _('sovereign.export_csv')
             ,listeners: {

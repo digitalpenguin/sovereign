@@ -5,20 +5,28 @@ class SovereignHomeManagerController extends SovereignManagerController {
     }
     public function getPageTitle() { return $this->modx->lexicon('sovereign'); }
     public function loadCustomCssJs() {
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/plugins/fittoparent.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artworks-create.window.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artworks-update.window.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artwork-submissions.grid.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artwork-judges.grid.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-artwork-public.grid.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/african-judges-assigned.grid.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/galleryafrican-submissions.grid.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/galleryafrican-judges.grid.js');
-        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/galleryafrican-public.grid.js');
+        // African Windows
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-artworks/african-artworks-create.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-artworks/african-artworks-update.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-galleries/galleryafrican-create.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-galleries/galleryafrican-update.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-galleries/galleryafrican-uploadcoverimage.window.js');
+        // African Artwork Grids
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-artworks/african-artwork-submissions.grid.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-artworks/african-artwork-judges.grid.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-artworks/african-artwork-public.grid.js');
+        // African Judges Grids
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-judges/african-judges-assigned.grid.js');
+        // African Galleries Grids
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-galleries/galleryafrican-submissions.grid.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-galleries/galleryafrican-judges.grid.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-galleries/galleryafrican-public.grid.js');
+
         $this->addJavaScript($this->sovereign->config['jsUrl'].'mgr/widgets/asia/galleryasian-submissions.grid.js');
         $this->addJavaScript($this->sovereign->config['jsUrl'].'mgr/widgets/asia/galleryasian-judges.grid.js');
         $this->addJavaScript($this->sovereign->config['jsUrl'].'mgr/widgets/mideast/gallerymideast-submissions.grid.js');
         $this->addJavaScript($this->sovereign->config['jsUrl'].'mgr/widgets/europe/galleryeuropean-submissions.grid.js');
+
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/africa.panel.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/asia/asia.panel.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/mideast/mideast.panel.js');

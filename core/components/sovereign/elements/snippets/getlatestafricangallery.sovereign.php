@@ -11,7 +11,7 @@ $offset = $modx->getOption('offset',$scriptProperties,0);
 $totalVar = $modx->getOption('totalVar', $scriptProperties, 'total');
 
 
-$record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('africanGalleries')} WHERE phase=0");
+$record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('africanGalleries')} WHERE phase=2");
 $highestId = (integer) $record->fetch(PDO::FETCH_COLUMN);
 $record->closeCursor();
 

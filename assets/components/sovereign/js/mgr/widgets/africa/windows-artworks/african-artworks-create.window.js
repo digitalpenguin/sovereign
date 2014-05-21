@@ -409,6 +409,7 @@ Sovereign.window.CreateAfricanArtworks = function(config) {
         ,allowBlank: false
         ,height: 600
         ,width: 750
+        ,modal: true
         ,resizable: false
         ,fields: [{
             xtype: 'hidden'

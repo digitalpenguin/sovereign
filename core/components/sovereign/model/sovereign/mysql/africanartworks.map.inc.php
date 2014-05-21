@@ -359,25 +359,6 @@ $xpdo_meta_map['africanArtworks']= array (
       'default' => 0,
     ),
   ),
-  'indexes' => 
-  array (
-    'gallery_id' => 
-    array (
-      'alias' => 'gallery_id',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'gallery_id' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-  ),
   'composites' => 
   array (
     'AfricanVote' => 

@@ -79,10 +79,6 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
         } else if ($this->doesAlreadyExist(array('galleryname' => $name))) {
             $this->addFieldError('galleryname',$this->modx->lexicon('sovereign.competition_err_ae'));
         }
-
-
-
-
         return parent::beforeSave();
     }
 

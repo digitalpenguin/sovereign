@@ -406,6 +406,7 @@ Sovereign.window.UpdateAfricanArtworks = function(config) {
         ,allowBlank: false
         ,height: 600
         ,width: 750
+        ,modal: true
         ,resizable: false
         ,fields: [{
             xtype: 'hidden'

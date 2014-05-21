@@ -24,6 +24,7 @@ $_lang['sovereign.name'] = 'Name';
 $_lang['sovereign.search...'] = 'Search...';
 $_lang['sovereign.year'] = 'Year';
 $_lang['sovereign.votes'] = 'Active Votes';
+$_lang['sovereign.gallery_er_other_gallery_activated'] = 'Sorry, you may only activate one gallery of the same type for submissions. Either deactivate the current gallery or end the current submission phase to activate a new gallery.';
 
 
 /*
@@ -53,6 +54,7 @@ $_lang['sovereign.galleryname'] = 'Gallery Name';
 $_lang['sovereign.gallery_desc'] = 'Description / Notes';
 $_lang['sovereign.gallery_cover'] = 'Cover Image';
 $_lang['sovereign.judges_galleries_desc'] = '';
+$_lang['sovereign.gallery_upload_cover_image'] = 'Upload New Cover Image';
 $_lang['sovereign.gallery_remove'] = 'Remove Gallery';
 $_lang['sovereign.gallery_remove_confirm'] = 'Are you sure you want to remove this gallery?';
 $_lang['sovereign.gallery_update'] = 'Update Gallery';
@@ -76,7 +78,7 @@ $_lang['sovereign.gallery_endpublicvoting'] = 'End Public Voting';
 $_lang['sovereign.gallery_endpublicvoting_confirm'] = 'Are you sure you wish to end voting on this gallery for the public?';
 $_lang['sovereign.gallery_back_to_judges'] = 'Move Gallery Back To Judges Phase';
 $_lang['sovereign.gallery_back_to_judges_confirm'] = 'Are you sure you wish to move this gallery back to the judges phase?';
-
+$_lang['sovereign.gallery_type'] = 'Gallery Type';
 
 /*
  * Artwork Grid
