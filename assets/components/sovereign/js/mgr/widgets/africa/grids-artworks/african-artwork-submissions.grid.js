@@ -323,7 +323,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkSubmissions,MODx.grid.Grid,{
         //this.displayArtworkWindow.el.center();
         this.displayArtworkWindow.show(e.target);
 
-    },createAfricanArtwork: function(e) {
+    },createAfricanArtwork: function(btn,e) {
         var win = MODx.load({
             galleryId: this.config.galleryId
             ,xtype: 'sovereign-window-africanartworks-create'
@@ -416,6 +416,7 @@ Sovereign.window.DisplayAfricanArtworkSubmissions = function(config) {
         ,cls: 'container'
         ,id: this.ident
         ,modal: true
+        ,bodyStyle: 'min-height:300px;'
         ,layout: 'form'
         ,width: 850
         ,listeners: {

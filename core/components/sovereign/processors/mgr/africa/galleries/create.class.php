@@ -128,7 +128,15 @@ class GalleryAfricanCreateProcessor extends modObjectCreateProcessor {
             return $this->failure($msg);
         }
 
-
+        $success4 = $this->source->createContainer('judges', $this->getProperty('parent').$id);
+        if (empty($success4)) {
+            $msg = '';
+            $errors = $this->source->getErrors();
+            foreach ($errors as $k => $msg) {
+                $this->modx->error->addField($k,$msg);
+            }
+            return $this->failure($msg);
+        }
 
 
         // Get filesystem source

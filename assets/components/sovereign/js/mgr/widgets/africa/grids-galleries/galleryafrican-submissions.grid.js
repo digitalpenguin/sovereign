@@ -154,7 +154,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
                 ,handler: this.removeGalleryAfricanSubmissions
             }];
         }
-    },createAfricanGallery: function(e) {
+    },createAfricanGallery: function(btn, e) {
         var win = MODx.load({
             xtype: 'sovereign-window-galleryafricansubmissions-create'
             ,listeners: {
@@ -179,7 +179,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanSubmissions,MODx.grid.Grid,{
         }
         this.updateAfricanGalleryWindow.setValues(this.menu.record);
         this.updateAfricanGalleryWindow.show(e.target);
-    },uploadCoverImage: function(e) {
+    },uploadCoverImage: function(btn, e) {
         if (!this.uploadCoverImageWindow) {
             this.uploadCoverImageWindow = MODx.load({
                 xtype: 'sovereign-window-galleryafrican-upload-cover'

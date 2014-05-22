@@ -1,10 +1,23 @@
 <?php
+require_once MODX_CORE_PATH.'model/phpthumb/modphpthumb.class.php';
 
 class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
 
     public $object;
+    /** @var modMediaSource|modFileMediaSource $source */
+    public $source;
     //private $resourceParentId = 21; // Change on upload
     //private $resourceTemplateId = 10; // Change on upload
+    public $path;
+
+    public function getSource() {
+        $this->modx->loadClass('sources.modMediaSource');
+        $this->source = modMediaSource::getDefaultSource($this->modx,$this->getProperty('source'));
+        if (empty($this->source) || !$this->source->getWorkingContext()) {
+            return false;
+        }
+        return $this->source;
+    }
 
     public function process() {
         // gets the id of current gallery
@@ -35,6 +48,19 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $role->save();
         }
 
+
+        // Get the filename string from the $_FILES array
+        $filenames = array();
+        if (is_array($_FILES)) {
+            foreach ($_FILES as $file) {
+                if (!empty($file['name'])) {
+                    $filenames[] = $file['name'];
+                }
+            }
+        }
+        $fileName = $filenames[0];
+
+
         // creates the user account with all the fields the judge will need
         if(!$user = $this->modx->getObject('modUserProfile', array('email' => $this->getProperty('email')))) {
             $user = $this->modx->newObject('modUser', array('username' => $this->getProperty('email'))); // make the username the email
@@ -47,32 +73,20 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             $profile->set('address', $this->getProperty('address'));
             $profile->set('city', $this->getProperty('city'));
             $profile->set('comment', $this->getProperty('comment'));
+            // Assign the filename to the correct property
+            $profile->set('website', $fileName); // using website as it is an unneeded field
             $profile->save();
             $user->addOne($profile);
-
-
             $success = $user->save();
+
+            $this->path = MODX_BASE_PATH . $this->getProperty('parent').$galleryId.'/judges/' . $profile->get('website');
         } else {
             $success = false;
         }
 
+
         // Assign the user both a group and a role
         $joinSuccess = $user->joinGroup($userGroup->get('id'), $role->get('id'));
-
-/*
-        // creates a judges gallery page if it doesn't already exist
-        if (!$galleryPage = $this->modx->getObject('modResource', array('pagetitle' => 'AfricanJudgesGallery#'.$galleryId))) {
-            $galleryPage = $this->modx->newObject('modResource', array('pagetitle' => 'AfricanJudgesGallery#'.$galleryId));
-            $galleryPage->set('createdby', $this->modx->user->id);
-            $galleryPage->set('parent', $this->resourceParentId);
-            $galleryPage->set('template', $this->resourceTemplateId);
-            $galleryPage->set('pagetitle', 'AfricanJudgesGallery#'.$galleryId);
-            $galleryPage->set('published', 1);
-            $galleryPage->set('content', 'Testing testing testing');
-            $galleryPage->set('alias', 'african-judges-gallery'.$galleryId);
-            $galleryPage->save();
-        }
-*/
 
         // creates a resource group if it doesn't already exist
         if (!$resourceGroup = $this->modx->getObject('modResourceGroup', array('name' => 'JudgesGallery'))) {
@@ -102,9 +116,21 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
         } else {$this->modx->log(modX::LOG_LEVEL_ERROR,'6-1. Access to RG created');}
 
 
+
+        if (!$this->getSource()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+
+        // Save image to gallery and make thumbs
+        $imageSaved = $this->saveImage();
+        if ($imageSaved != true) {
+            return $this->failure();
+        }
+        $this->generateThumbs();
+
         $this->modx->cacheManager->refresh();
 
-
+        // Success checks and return
         if ($success && $joinSuccess) {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'Profile Created: '.print_r($_POST,true));
             return $this->success();
@@ -113,6 +139,79 @@ class AfricanSingleJudgeCreateProcessor extends modObjectProcessor {
             return $this->failure();
         }
 
+    }
+
+    private function saveImage() {
+        $id = $this->getProperty('galleryId');
+
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking current id: ' . $id);
+        if (!$this->getSource()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+        $this->source->setRequestProperties($this->getProperties());
+        $this->source->initialize();
+        if (!$this->source->checkPolicy('create')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+
+        $success = $this->source->uploadObjectsToContainer($this->getProperty('parent').$id.'/judges/',$_FILES);
+
+        if (empty($success)) {
+            $msg = '';
+            $errors = $this->source->getErrors();
+            foreach ($errors as $k => $msg) {
+                $this->modx->error->addField($k,$msg);
+            }
+            return $this->failure($msg);
+        }
+        return true;
+    }
+
+    private function generateThumbs() {
+
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking galleryUrl: ' . $path);
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking path: ' . pathinfo($path,PATHINFO_DIRNAME).'/'.basename($path));
+        $modPhpThumb = new modPhpThumb($this->modx);
+        $modPhpThumb->setSourceFilename(pathinfo($this->path,PATHINFO_DIRNAME).'/'.basename($this->path)); // original image
+        $modPhpThumb->setParameter('w', 276);
+        $modPhpThumb->setParameter('h', 276);
+        $modPhpThumb->setParameter('zc', 'C');
+        $thumbName = 'large';
+        $modPhpThumb->setParameter('config_output_format', 'jpeg');
+        $output_filename = pathinfo($this->path,PATHINFO_DIRNAME).'/'.basename($this->path).'_'.$thumbName.'.'.$modPhpThumb->config_output_format;
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking path: ' . $output_filename);
+        if ($modPhpThumb->GenerateThumbnail()) {
+            $modPhpThumb->RenderToFile($output_filename);
+        }
+        unset($modPhpThumb);
+
+        $modPhpThumb = new modPhpThumb($this->modx);
+        $modPhpThumb->setSourceFilename(pathinfo($this->path,PATHINFO_DIRNAME).'/'.basename($this->path)); // original image
+        $modPhpThumb->setParameter('w', 170);
+        $modPhpThumb->setParameter('h', 170);
+        $modPhpThumb->setParameter('zc', 'C');
+        $thumbName = 'medium';
+        $modPhpThumb->setParameter('config_output_format', 'jpeg');
+        $output_filename = pathinfo($this->path,PATHINFO_DIRNAME).'/'.basename($this->path).'_'.$thumbName.'.'.$modPhpThumb->config_output_format;
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking path: ' . $output_filename);
+        if ($modPhpThumb->GenerateThumbnail()) {
+            $modPhpThumb->RenderToFile($output_filename);
+        }
+        unset($modPhpThumb);
+
+        $modPhpThumb = new modPhpThumb($this->modx);
+        $modPhpThumb->setSourceFilename(pathinfo($this->path,PATHINFO_DIRNAME).'/'.basename($this->path)); // original image
+        $modPhpThumb->setParameter('w', 70);
+        $modPhpThumb->setParameter('h', 50);
+        $modPhpThumb->setParameter('zc', 'C');
+        $thumbName = 'small';
+        $modPhpThumb->setParameter('config_output_format', 'jpeg');
+        $output_filename = pathinfo($this->path,PATHINFO_DIRNAME).'/'.basename($this->path).'_'.$thumbName.'.'.$modPhpThumb->config_output_format;
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, ' Checking path: ' . $output_filename);
+        if ($modPhpThumb->GenerateThumbnail()) {
+            $modPhpThumb->RenderToFile($output_filename);
+        }
+        unset($modPhpThumb);
     }
 
 }

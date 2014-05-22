@@ -20,5 +20,6 @@ $modx->addPackage('sovereign', $sources['model']); // add package to make all mo
 $manager->createObjectContainer('africanGalleries'); // create the database tables
 $manager->createObjectContainer('africanArtworks');
 $manager->createObjectContainer('africanVotes');
+$manager->createObjectContainer('africanNominators');
 $manager->createObjectContainer('newsletterSubscriptions');
 $modx->log(modX::LOG_LEVEL_INFO, 'Done!');

@@ -12,6 +12,7 @@ class SovereignHomeManagerController extends SovereignManagerController {
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-galleries/galleryafrican-update.window.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-galleries/galleryafrican-uploadcoverimage.window.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-judges/african-judges-create.window.js');
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/windows-nominators/african-nominators-create-update.window.js');
         // African Artwork Grids
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-artworks/african-artwork-submissions.grid.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-artworks/african-artwork-judges.grid.js');
@@ -22,6 +23,9 @@ class SovereignHomeManagerController extends SovereignManagerController {
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-galleries/galleryafrican-submissions.grid.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-galleries/galleryafrican-judges.grid.js');
         $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-galleries/galleryafrican-public.grid.js');
+        // African Nominators Grid
+        $this->addJavascript($this->sovereign->config['jsUrl'].'mgr/widgets/africa/grids-nominators/african-nominators.grid.js');
+
 
         $this->addJavaScript($this->sovereign->config['jsUrl'].'mgr/widgets/asia/galleryasian-submissions.grid.js');
         $this->addJavaScript($this->sovereign->config['jsUrl'].'mgr/widgets/asia/galleryasian-judges.grid.js');

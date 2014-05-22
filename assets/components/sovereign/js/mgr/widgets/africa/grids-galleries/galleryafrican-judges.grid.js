@@ -135,7 +135,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanJudges,MODx.grid.Grid,{
             ,handler: this.removeGalleryAfricanJudges
         }];
 
-    },createAfricanGallery: function(e) {
+    },createAfricanGallery: function(btn,e) {
         var win = MODx.load({
             xtype: 'sovereign-window-galleryafricanjudges-create'
             ,listeners: {

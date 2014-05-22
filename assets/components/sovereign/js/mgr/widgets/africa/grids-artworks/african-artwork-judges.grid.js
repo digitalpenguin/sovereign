@@ -308,13 +308,13 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
             }
         });
         win.galleryId = this.config.galleryId;
-        win.show();
+        win.show(e.target);
     },displayArtwork: function(e) {
         this.displayArtworkWindow = new Sovereign.window.DisplayAfricanArtworkJudges;
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
-    },createAfricanArtwork: function(e) {
+    },createAfricanArtwork: function(btn,e) {
         var win = MODx.load({
             galleryId: this.config.galleryId
             ,xtype: 'sovereign-window-africanartworks-create'
@@ -328,7 +328,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkJudges,MODx.grid.Grid,{
         win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + win.galleryId + '/';
         win.baseParams.galleryId = win.galleryId;
         win.baseParams.confirmed = 1;
-        win.show();
+        win.show(e.target);
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
@@ -386,6 +386,7 @@ Sovereign.window.DisplayAfricanArtworkJudges = function(config) {
         ,cls: 'container'
         ,id: this.id
         ,modal: true
+        ,bodyStyle: 'min-height:300px;'
         ,layout: 'form'
         ,width: 850
         ,listeners: {

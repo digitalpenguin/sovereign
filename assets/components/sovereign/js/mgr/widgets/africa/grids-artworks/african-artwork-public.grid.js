@@ -123,21 +123,24 @@ Sovereign.grid.AfricanArtworkPublic = function(config) {
         id: 'sovereign-grid-africanartworkpublic'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/africa/artworks/getListArtworksJudges'
+            action: 'mgr/africa/artworks/getListArtworksPublic'
             ,galleryId: this.currentGalleryId
         }
         ,fields: ['id','gallery_id','title','first_name','surname','address_1','address_2','address_3'
             ,'city','state','postal_code','country','tel_no','mob_no','fax_no','email_address','dob','nom_name','statement'
             ,'art_title','art_materials','height','width','depth','value','work_brief','art_brief','donate','share'
-            ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','closeup_filename'
-            ,'closeup_desc','createdon','createdby','menu']
+            ,'filename','gallery_type','caption','edition','img_height','img_width','confirmed','votes','winner'
+            ,'createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
-        ,remoteSort: true
+        ,remoteSort: false
         ,autoExpandColumn: 'art_title'
         ,listeners: {
-            //'beforerender': {fn:this.filterGalleries,scope:this}
-            'cellclick': function(grid, rowIndex, columnIndex, e) {
+            'beforerender': function() {
+                this.getStore().setDefaultSort( 'votes', 'DESC' );
+                this.refresh();
+            }
+            ,'cellclick': function(grid, rowIndex, columnIndex, e) {
                 var record = grid.getStore().getAt(rowIndex); // Get the Record
                 var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
                 config.currentFileName = record.get(fieldName);
@@ -201,20 +204,15 @@ Sovereign.grid.AfricanArtworkPublic = function(config) {
             ,sortable: true
             ,width:.05
         },{
-            header: _('sovereign.artwork_donation_details')
-            ,dataIndex: 'donate'
+            header: _('sovereign.artwork_votes_total')
+            ,dataIndex: 'votes'
+            ,sortable: true
+            ,width:.03
+        },{
+            header: _('sovereign.artwork_winner')
+            ,dataIndex: 'winner'
             ,sortable: true
             ,width:.05
-        },{
-            header: _('sovereign.artwork_confirmed')
-            ,dataIndex: 'confirmed'
-            ,sortable: true
-            ,width:.035
-            ,align: 'center'
-            ,renderer: function(value){
-                var active = value ? 'greentick.png' : 'redcross.png';
-                return '<img src="' + Sovereign.config.cssUrl + '/img/' + active + '" >';
-            }
         }]
         ,tbar:[{
             text: _('sovereign.back_to_galleries')
@@ -284,16 +282,17 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
         Ext.getCmp('africanartworkspublic-search-filter').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    }/*,filterGalleries: function() {
-        var s = this.getStore();
-        s.baseParams.galleryId = this.config.galleryId;
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
-    }*/,getMenu: function() {
+    },getMenu: function() {
         return [{
+            text: _('sovereign.artwork_tag_winner')
+            ,handler: this.tagWinnerAfricanArtworks
+        },{
+            text: _('sovereign.artwork_untag_winner')
+            ,handler: this.unTagWinnerAfricanArtworks
+        },'-',{
             text: _('sovereign.artworks_update')
             ,handler: this.updateAfricanArtworks
-        },'-',{
+        },{
             text: _('sovereign.artworks_remove')
             ,handler: this.removeAfricanArtworks
         }];
@@ -302,7 +301,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
         this.displayArtworkWindow.setValues(this.menu.record);
         this.displayArtworkWindow.show(e.target);
 
-    },createAfricanArtwork: function(e) {
+    },createAfricanArtwork: function(btn,e) {
         var win = MODx.load({
             galleryId: this.config.galleryId
             ,xtype: 'sovereign-window-africanartworks-create'
@@ -316,7 +315,35 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
         win.baseParams.galleryUrl = 'assets/components/sovereign/galleries/african/' + win.galleryId + '/';
         win.baseParams.galleryId = win.galleryId;
         win.baseParams.confirmed = 1;
-        win.show();
+        win.show(e.target);
+    },tagWinnerAfricanArtworks: function(btn,e) {
+        var win = MODx.load({
+            galleryId: this.config.galleryId
+            ,xtype: 'sovereign-window-africanartworks-tag-winner'
+            ,record: this.menu.record
+            ,listeners: {
+                success: {fn: function(r) {
+                    this.refresh();
+                },scope: this},
+                scope: this
+            }
+        });
+        win.baseParams.galleryId = win.galleryId;
+        win.setValues(this.menu.record);
+        win.show(e.target);
+    },unTagWinnerAfricanArtworks: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.artwork_untag_winner')
+            ,text: _('sovereign.artwork_untag_winner_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/artworks/unTagWinner'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     },updateAfricanArtworks: function(btn,e) {
         if (!this.updateArtworksWindow) {
             this.updateArtworksWindow = MODx.load({
@@ -349,11 +376,7 @@ Ext.extend(Sovereign.grid.AfricanArtworkPublic,MODx.grid.Grid,{
     },passGalleryId: function(galleryId) {
         this.config.galleryId = galleryId;
         //this.config.userGroupId = userGroupId;
-    }/*,filterByGalleryId: function(id) {
-     this.getStore().baseParams['id'] = id;
-     this.getBottomToolbar().changePage(1);
-     this.refresh();
-     }*/,backToGallery: function() {
+    },backToGallery: function() {
         Ext.getCmp('sovereign-panel-africa').backToPublicGrid();
     }
 });
@@ -362,18 +385,19 @@ Ext.reg('sovereign-grid-africanartworkpublic',Sovereign.grid.AfricanArtworkPubli
 
 Sovereign.window.DisplayAfricanArtworkPublic = function(config) {
     config = config || {};
-    var check = Ext.getCmp('sovereign-window-africanartworksubmissions-display');
+    var check = Ext.getCmp('sovereign-window-africanartworkpublic-display');
     if (check) {
         check.destroy();
     }
-    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworkjudges').config.currentFileName;
-    this.galleryId = Ext.getCmp('sovereign-grid-africanartworkjudges').config.galleryId;
+    this.currentFileName = Ext.getCmp('sovereign-grid-africanartworkpublic').config.currentFileName;
+    this.galleryId = Ext.getCmp('sovereign-grid-africanartworkpublic').config.galleryId;
     this.ident = config.ident || 'sovdisart'+Ext.id();
     Ext.apply(config,{
         title: this.currentFileName
         ,cls: 'container'
         ,id: this.id
         ,modal: true
+        ,bodyStyle: 'min-height:300px;'
         ,layout: 'form'
         ,width: 850
         ,listeners: {
@@ -396,3 +420,32 @@ Sovereign.window.DisplayAfricanArtworkPublic = function(config) {
 Ext.extend(Sovereign.window.DisplayAfricanArtworkPublic,MODx.Window);
 Ext.reg('sovereign-window-africanartworkpublic-display',Sovereign.window.DisplayAfricanArtworkPublic);
 
+
+
+Sovereign.window.AfricanArtworkTagWinner = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'sovwinart'+Ext.id();
+    Ext.apply(config,{
+        title: 'Enter the Prize Title'
+        ,url: Sovereign.config.connectorUrl
+        ,baseParams: {
+            action: 'mgr/africa/artworks/tagWinner'
+        }
+        ,cls: 'container'
+        ,id: this.id
+        ,width: 340
+        ,modal: true
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
+            xtype: 'field'
+            ,width: 300
+            ,fieldLabel: 'Enter the name of the prize:'
+            ,name: 'winner'
+        }]
+    });
+    Sovereign.window.AfricanArtworkTagWinner.superclass.constructor.call(this,config);
+};
+Ext.extend(Sovereign.window.AfricanArtworkTagWinner,MODx.Window);
+Ext.reg('sovereign-window-africanartworks-tag-winner',Sovereign.window.AfricanArtworkTagWinner);

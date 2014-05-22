@@ -31,6 +31,8 @@ class GalleryAfricanMoveToJudgesProcessor extends modObjectUpdateProcessor {
                     break;
             }
         }
+
+        $this->setProperty('public_voting', 0);
         return parent::initialize();
     }
 

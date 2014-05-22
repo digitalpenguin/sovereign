@@ -87,17 +87,31 @@ Sovereign.panel.AfricanPanel = function(config) {
 
                  }]
                  ,listeners: {
-                  'activate': function() {
-                      var artworkGrid;
-                      // check if the artwork grid exists and refresh appropriate grid
-                      if (artworkGrid = Ext.getCmp('sovereign-grid-africanartworkpublic')) {
-                        artworkGrid.refresh();
-                      } else {
-                        Ext.getCmp('sovereign-grid-galleryafricanpublic').refresh();
-                      }
-                  }
+                     'activate': function() {
+                         var artworkGrid;
+                         // check if the artwork grid exists and refresh appropriate grid
+                         if (artworkGrid = Ext.getCmp('sovereign-grid-africanartworkpublic')) {
+                           artworkGrid.refresh();
+                         } else {
+                           Ext.getCmp('sovereign-grid-galleryafricanpublic').refresh();
+                         }
+                     }
                  }
+            },{
+                title: _('sovereign.african_nominators_label')
+                ,defaults: {autoHeight:true}
+                ,id: 'african-panel-nominators'
+                ,items: [{
+                    html: '<h3>'+_('sovereign.tab_heading_african_nominators')+'</h3><p>'+ _('sovereign.nominators_desc') +'</p>'
+                    ,id: 'sovereign-african-nominators-header'
+                    ,border: true
+                    ,bodyCssClass: 'panel-desc'
+                    ,bodyStyle: 'margin: 10px 0px 10px 0px'
+                },{
+                    xtype: 'sovereign-grid-african-nominators'
+                    ,preventRender: true
 
+                }]
             }]
         }]
     });

@@ -25,7 +25,8 @@ $_lang['sovereign.search...'] = 'Search...';
 $_lang['sovereign.year'] = 'Year';
 $_lang['sovereign.votes'] = 'Active Votes';
 $_lang['sovereign.gallery_er_other_gallery_activated'] = 'Sorry, you may only activate one gallery of the same type for submissions. Either deactivate the current gallery or end the current submission phase to activate a new gallery.';
-
+$_lang['sovereign.nominator_create'] = 'Add Nominator';
+$_lang['sovereign.nominator_update'] = 'Update Nominator Details';
 
 /*
  * Galleries Tabs
@@ -46,6 +47,9 @@ $_lang['sovereign.tab_heading_european_public'] ='European Art Galleries - Publi
 $_lang['sovereign.submissionsgallery_label'] = '1. New Galleries';
 $_lang['sovereign.judgesgallery_label'] = '2. Judges\' Galleries';
 $_lang['sovereign.publicgallery_label'] = '3. Public Galleries';
+$_lang['sovereign.african_nominators_label'] = 'Nominators';
+$_lang['sovereign.tab_heading_african_nominators'] = 'African Gallery Nominators';
+$_lang['sovereign.nominators_desc'] = 'These are the nominators for the current gallery.';
 
 /*
  * Gallery Grid
@@ -74,6 +78,8 @@ $_lang['sovereign.gallery_back_to_submissions'] = 'Move Gallery Back To Submissi
 $_lang['sovereign.gallery_back_to_submissions_confirm'] = 'Are you sure you wish to move this gallery back to the submission phase?';
 $_lang['sovereign.gallery_movetopublic'] = 'Move Gallery To Public Voting';
 $_lang['sovereign.gallery_movetopublic_confirm'] = 'Are you sure you wish to end the judging phase? This will move the gallery to the public voting phase.';
+$_lang['sovereign.gallery_startpublicvoting'] = 'Start Public Voting';
+$_lang['sovereign.gallery_startpublicvoting_confirm'] = 'Are you sure you wish to start voting on this gallery for the public?';
 $_lang['sovereign.gallery_endpublicvoting'] = 'End Public Voting';
 $_lang['sovereign.gallery_endpublicvoting_confirm'] = 'Are you sure you wish to end voting on this gallery for the public?';
 $_lang['sovereign.gallery_back_to_judges'] = 'Move Gallery Back To Judges Phase';
@@ -114,6 +120,10 @@ $_lang['sovereign.artwork_work_brief'] = 'Work Brief';
 $_lang['sovereign.artwork_art_brief'] = 'Art Brief';
 $_lang['sovereign.add_judges_to_gallery'] = 'Assigned Judges';
 $_lang['sovereign.artwork_votes_total'] = 'Votes';
+$_lang['sovereign.artwork_winner'] = 'Winner';
+$_lang['sovereign.artwork_tag_winner'] = 'Declare Winner';
+$_lang['sovereign.artwork_untag_winner'] = 'Remove Winning Prize';
+$_lang['sovereign.artwork_untag_winner_confirm'] = 'Are you sure you wish to remove the winning status from this artwork?';
 
 /*
  * Judges
@@ -133,9 +143,8 @@ $_lang['sovereign.tab_heading_african_submissions'] ='African Art Galleries - Un
 $_lang['sovereign.submissions_galleries_desc'] = 'Create new galleries here by clicking the button below. You can then click on a gallery to view and/or confirm any new submissions.';
 $_lang['sovereign.submissions_artworks_desc'] = 'Select artworks to accept into the Judges\' Gallery. "Right Click" on the artwork and select "Confirm Artwork"';
 $_lang['sovereign.tab_heading_african_judges'] ='African Art Galleries - Judges\' Galleries';
-$_lang['sovereign.judges_galleries_desc'] = 'View galleries that are, or will be, voted on by the panel of assigned judges. During the submissions phase, the galleries will be viewable and show any entries that have been confirmed.<br> You may also select a gallery to assign a panel of judges here.';
+$_lang['sovereign.judges_galleries_desc'] = 'View galleries that are, or will be, voted on by the panel of assigned judges. You may also select a gallery to assign a panel of judges here.';
 $_lang['sovereign.judges_artworks_desc'] = 'Assign judges to this gallery here by clicking the "Assign Judges" button.';
 $_lang['sovereign.tab_heading_african_public'] ='African Art Galleries - Public Live Galleries';
 $_lang['sovereign.public_galleries_desc'] = 'View galleries of artworks that are publicly being voted for on the website.';
-//$_lang['sovereign.public_artworks_desc'] = '';
-//$_lang[''] = '';
+

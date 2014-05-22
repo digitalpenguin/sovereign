@@ -37,7 +37,7 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             ,galleryId: this.galleryId
             ,usergroupname: 'AfricanJudgesGallery#'+this.galleryId
         }
-        ,fields: ['id','portrait','fullname','username','email','password','address','city','comment','menu']
+        ,fields: ['id','website','fullname','username','email','password','address','city','comment','menu']
         ,paging: true
         ,pageSize: 6
         ,remoteSort: true
@@ -49,32 +49,35 @@ Sovereign.grid.AfricanAssignedJudges = function(config) {
             header: 'Portrait'
             ,dataIndex: 'website'
             ,sortable: false
-            ,width:.04
+            ,width:.02
+            ,renderer: function(value, metaData, record){
+                return '<img src="' + MODx.config.site_url + 'assets/components/sovereign/galleries/african/'+ Ext.getCmp('sovereign-grid-africanartworkjudges').config.galleryId + '/judges/' + value + '_small.jpeg" >';
+            }
         },{
             header: 'Full Name'
             ,dataIndex: 'fullname'
             ,sortable: true
-            ,width:.04
+            ,width:.03
         },{
             header: 'Email Address'
             ,dataIndex: 'email'
             ,sortable: true
-            ,width:.06
+            ,width:.03
         },{
             header: 'Position'
             ,dataIndex: 'address'
             ,sortable: false
-            ,width:.05
+            ,width:.03
         },{
             header: 'Organisation'
             ,dataIndex: 'city'
             ,sortable: false
-            ,width:.05
+            ,width:.03
         },{
             header: 'Biography'
             ,dataIndex: 'comment'
             ,sortable: false
-            ,width:.05
+            ,width:.07
         }]
         ,tbar: [{
             xtype: 'button'

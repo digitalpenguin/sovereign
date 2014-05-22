@@ -4,7 +4,7 @@ Sovereign.grid.GalleryAfricanPublic = function(config) {
         id: 'sovereign-grid-galleryafricanpublic'
         ,url: Sovereign.config.connectorUrl
         ,baseParams: { action: 'mgr/africa/galleries/getListPublic' }
-        ,fields: ['id','galleryname','description','cover_filename','url','year','artworktotal','votes','type','enabled','createdon','createdby','menu']
+        ,fields: ['id','galleryname','description','cover_filename','url','year','artworktotal','votes','type','enabled','public_voting','createdon','createdby','menu']
         ,paging: true
         ,pageSize: 10
         ,remoteSort: true
@@ -116,26 +116,44 @@ Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
     },getMenu: function(grid, index, rec) {
         if (grid.getSelectionModel().hasSelection()) {
             var row = grid.getSelectionModel().getSelections()[0];
-            var enabledVal = row.get('enabled');
+            var publicVotingEnabled = row.get('public_voting');
         }
-        return [{
-            text: _('sovereign.gallery_endpublicvoting')
-            ,handler: this.endVotingGalleryAfricanPublic
-        },{
-            text: _('sovereign.gallery_back_to_judges')
-            ,handler: this.backToJudgesPhaseGalleryAfricanPublic
-        },'-',{
-            text: _('sovereign.gallery_upload_cover_image')
-            ,handler: this.uploadCoverImage
-        },{
-            text: _('sovereign.gallery_update')
-            ,handler: this.updateAfricanGallery
-        },{
-            text: _('sovereign.gallery_remove')
-            ,handler: this.removeGalleryAfricanPublic
-        }];
-
-    },createAfricanGallery: function(e) {
+        if(!publicVotingEnabled){
+            return [{
+                text: _('sovereign.gallery_startpublicvoting')
+                ,handler: this.startVotingGalleryAfricanPublic
+            },{
+                text: _('sovereign.gallery_back_to_judges')
+                ,handler: this.backToJudgesPhaseGalleryAfricanPublic
+            },'-',{
+                text: _('sovereign.gallery_upload_cover_image')
+                ,handler: this.uploadCoverImage
+            },{
+                text: _('sovereign.gallery_update')
+                ,handler: this.updateAfricanGallery
+            },{
+                text: _('sovereign.gallery_remove')
+                ,handler: this.removeGalleryAfricanPublic
+            }];
+        } else {
+            return [{
+                text: _('sovereign.gallery_endpublicvoting')
+                ,handler: this.endVotingGalleryAfricanPublic
+            },{
+                text: _('sovereign.gallery_back_to_judges')
+                ,handler: this.backToJudgesPhaseGalleryAfricanPublic
+            },'-',{
+                text: _('sovereign.gallery_upload_cover_image')
+                ,handler: this.uploadCoverImage
+            },{
+                text: _('sovereign.gallery_update')
+                ,handler: this.updateAfricanGallery
+            },{
+                text: _('sovereign.gallery_remove')
+                ,handler: this.removeGalleryAfricanPublic
+            }];
+        }
+    },createAfricanGallery: function(btn,e) {
         var win = MODx.load({
             xtype: 'sovereign-window-galleryafricanpublic-create'
             ,listeners: {
@@ -160,7 +178,7 @@ Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
         }
         this.updateAfricanGalleryWindow.setValues(this.menu.record);
         this.updateAfricanGalleryWindow.show(e.target);
-    },uploadCoverImage: function(e) {
+    },uploadCoverImage: function(btn,e) {
         if (!this.uploadCoverImageWindow) {
             this.uploadCoverImageWindow = MODx.load({
                 xtype: 'sovereign-window-galleryafrican-upload-cover'
@@ -172,6 +190,19 @@ Ext.extend(Sovereign.grid.GalleryAfricanPublic,MODx.grid.Grid,{
         }
         this.uploadCoverImageWindow.setValues(this.menu.record);
         this.uploadCoverImageWindow.show(e.target);
+    },startVotingGalleryAfricanPublic: function() {
+        MODx.msg.confirm({
+            title: _('sovereign.gallery_startpublicvoting')
+            ,text: _('sovereign.gallery_startpublicvoting_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/africa/galleries/startPublicVoting'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     },endVotingGalleryAfricanPublic: function() {
         MODx.msg.confirm({
             title: _('sovereign.gallery_endpublicvoting')

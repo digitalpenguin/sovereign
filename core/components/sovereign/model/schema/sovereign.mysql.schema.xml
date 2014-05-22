@@ -57,6 +57,7 @@
         <field key="artworktotal" dbtype="int" precision="10" phptype="integer" null="true" default="0" />
         <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="enabled" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
+        <field key="public_voting" dbtype="int" precision="1" phptype="integer" null="true" default="0" />
         <field key="phase" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="type" dbtype="int" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="cover_filename" dbtype="varchar" precision="250" phptype="string" null="true" default="" />
@@ -87,6 +88,15 @@
         <index alias="user_id" name="user_id" primary="false" unique="false" type="BTREE" >
             <column key="user_id" length="" collation="A" null="false" />
         </index>
+    </object>
+
+    <object class="africanNominators" table="sovereign_african_nominators" extends="xPDOSimpleObject">
+        <field key="fullname" dbtype="varchar" precision="250" phptype="string" null="false" default="" />
+        <field key="filename" dbtype="varchar" precision="250" phptype="string" null="false" default="" />
+        <field key="position" dbtype="varchar" precision="250" phptype="string" null="false" default="" />
+        <field key="organisation" dbtype="varchar" precision="250" phptype="string" null="false" default="" />
+        <field key="biography" dbtype="varchar" precision="250" phptype="string" null="false" default="" />
+        <field key="email" dbtype="varchar" precision="250" phptype="string" null="false" default="" />
     </object>
 
     <!-- Asian Art Prize -->
