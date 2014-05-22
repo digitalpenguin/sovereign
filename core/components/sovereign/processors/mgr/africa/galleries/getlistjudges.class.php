@@ -39,6 +39,7 @@ class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
             $row['artworktotal'] = $this->getArtworkCount($row['id']);
             $row['createdby'] = $this->getUserName($row['createdby']);
             $row['votes'] = $this->getVoteTotal($row['id']);
+            $row['type'] = $this->getgalleryType($row['type']);
             $rows[] = $row;
         }
         return $rows;
@@ -65,9 +66,6 @@ class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
         return $count;
     }
 
-    private function getTotalVotes() {
-
-    }
 
     /**
      * Returns the full user's name that created the gallery
@@ -78,6 +76,14 @@ class GalleryAfricanJudgesGetListProcessor extends modObjectGetListProcessor {
         $profile = $this->modx->getObject('modUserProfile', array('internalKey' => $userId));
         $fullName = $profile->get('fullname');
         return $fullName;
+    }
+
+    private function getGalleryType($type) {
+        if ($type == 0) {
+            return 'Art Prize';
+        } else {
+            return 'School Prize';
+        }
     }
 
 }

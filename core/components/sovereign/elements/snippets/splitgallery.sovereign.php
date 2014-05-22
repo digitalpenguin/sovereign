@@ -1,5 +1,4 @@
 <?php
-
 $sovereign = $modx->getService('sovereign','Sovereign',$modx->getOption('sovereign.core_path',null,$modx->getOption('core_path').'components/sovereign/').'model/sovereign/',$scriptProperties);
 if (!($sovereign instanceof Sovereign)) return '';
 
@@ -10,20 +9,20 @@ $tpl = $modx->getOption('tpl',$scriptProperties,'splitGallery');
 
 
 // Get most recent gallery that is in public phase
-$record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('africanGalleries')} WHERE phase=0");
+$record = $modx->query("SELECT MAX(id) FROM {$modx->getTableName('asianGalleries')} WHERE phase=0");
 $highestId = (integer) $record->fetch(PDO::FETCH_COLUMN);
 $record->closeCursor();
 $galleryId = $highestId;
 
 
 // Get total number of records
-$c = $modx->newQuery('africanArtworks');
+$c = $modx->newQuery('asianArtworks');
 if(!empty($galleryId)) {
     $c->where(array(
         'gallery_id' => $galleryId
     ));
 }
-$total = $modx->getCount('africanArtworks', $c);
+$total = $modx->getCount('asianArtworks', $c);
 
 //Divide total by 6 and round up to get the number of slides required
 if($total < 7) {

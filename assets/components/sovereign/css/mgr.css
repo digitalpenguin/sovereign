@@ -12,12 +12,28 @@
 #sovereign-grid-africanartworksubmissions .x-grid3-col-2 { padding: 2px 18px 0px 5px;}
 #sovereign-grid-africanartworkjudges .x-grid3-col-2 { padding: 2px 18px 0px 5px;}
 #sovereign-grid-africanartworkpublic .x-grid3-col-2 { padding: 2px 18px 0px 5px;}
-
 #sovereign-grid-galleryafricansubmissions .x-grid3-col-7 {padding:2px 0 0 0;}
 #sovereign-grid-galleryafricanjudges .x-grid3-col-7 {padding:2px 0 0 0;}
 #sovereign-grid-galleryafricanpublic .x-grid3-col-7 {padding:2px 0 0 0;}
 #sovereign-grid-african-assignedjudges .x-grid3-col-0 {padding:2px 0 0 2px;}
 #sovereign-grid-african-nominators .x-grid3-col-0 {padding:2px 0 0 2px;}
+
+#sovereign-grid-galleryasiansubmissions .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
+#sovereign-grid-galleryasianjudges .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
+#sovereign-grid-galleryasianpublic .x-grid3-row :hover { cursor:pointer; background-color: #FEF8DC; color: #565550; }
+#sovereign-grid-asianartworksubmissions .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
+#sovereign-grid-asianartworkjudges .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
+#sovereign-grid-asianartworkpublic .x-grid3-cell-inner .x-grid3-col-2 { padding-top:0px; padding-bottom:0px; }
+#sovereign-grid-asianartworksubmissions .x-grid3-col-2 { padding: 2px 18px 0px 5px;}
+#sovereign-grid-asianartworkjudges .x-grid3-col-2 { padding: 2px 18px 0px 5px;}
+#sovereign-grid-asianartworkpublic .x-grid3-col-2 { padding: 2px 18px 0px 5px;}
+#sovereign-grid-galleryasiansubmissions .x-grid3-col-7 {padding:2px 0 0 0;}
+#sovereign-grid-galleryasianjudges .x-grid3-col-7 {padding:2px 0 0 0;}
+#sovereign-grid-galleryasianpublic .x-grid3-col-7 {padding:2px 0 0 0;}
+#sovereign-grid-asian-assignedjudges .x-grid3-col-0 {padding:2px 0 0 2px;}
+#sovereign-grid-asian-nominators .x-grid3-col-0 {padding:2px 0 0 2px;}
+
+
 
 .expanded { width:10%; color:#444444; float:left; margin:20px 0 0 30px; }
 .expanded h4 { color:#333333; margin-bottom:6px; }

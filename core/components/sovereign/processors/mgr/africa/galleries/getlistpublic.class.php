@@ -38,9 +38,21 @@ class GalleryAfricanPublicGetListProcessor extends modObjectGetListProcessor {
         foreach ($list as $row){
             $row['artworktotal'] = $this->getArtworkCount($row['id']);
             $row['createdby'] = $this->getUserName($row['createdby']);
+            $row['type'] = $this->getgalleryType($row['type']);
+            $row['votes'] = $this->getVoteTotal($row['id']);
             $rows[] = $row;
         }
         return $rows;
+    }
+
+
+    private function getVoteTotal($galleryId) {
+        $total = 0;
+        $votes = $this->modx->getCollection('africanVotes', array('gallery_id'=>$galleryId));
+        foreach ($votes as $vote) {
+            $total = $total + $vote->get('value_public');
+        }
+        return $total;
     }
 
     /**
@@ -64,6 +76,14 @@ class GalleryAfricanPublicGetListProcessor extends modObjectGetListProcessor {
         $profile = $this->modx->getObject('modUserProfile', array('internalKey' => $userId));
         $fullName = $profile->get('fullname');
         return $fullName;
+    }
+
+    private function getGalleryType($type) {
+        if ($type == 0) {
+            return 'Art Prize';
+        } else {
+            return 'School Prize';
+        }
     }
 
 }

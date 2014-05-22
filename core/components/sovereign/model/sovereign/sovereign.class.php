@@ -10,9 +10,9 @@ class Sovereign {
         $assetsUrl = $this->modx->getOption('sovereign.assets_url',$config,$this->modx->getOption('assets_url').'components/sovereign/');
         $csvUrl = $this->modx->getOption('sovereign.csv_upload_url',MODX_ASSETS_PATH.'components/sovereign/temp/');
         $africanGalleryUrl = $this->modx->getOption('sovereign.african_gallery_url',$config,MODX_ASSETS_PATH.'components/sovereign/galleries/african/');
-        //$asianGalleryUrl = $this->modx->getOption('sovereign.asian_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/asian/');
-        //$europeanGalleryUrl = $this->modx->getOption('sovereign.european_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/european/');
-        //$mideasternGalleryUrl = $this->modx->getOption('sovereign.mideastern_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/mideastern/');
+        $asianGalleryUrl = $this->modx->getOption('sovereign.asian_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/asian/');
+        $europeanGalleryUrl = $this->modx->getOption('sovereign.european_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/european/');
+        $mideasternGalleryUrl = $this->modx->getOption('sovereign.mideastern_gallery_url',$config,$this->modx->getOption('assets_url').'components/sovereign/galleries/mideastern/');
         $this->config = array_merge(array(
             'modxBasePath' => $modxBasePath,
             'basePath' => $basePath,
@@ -26,6 +26,9 @@ class Sovereign {
             'assetsUrl' => $assetsUrl,
             'connectorUrl' => $assetsUrl.'connector.php',
             'africanGalleryUrl' => $africanGalleryUrl,
+            'asianGalleryUrl' => $asianGalleryUrl,
+            'europeanGalleryUrl' => $europeanGalleryUrl,
+            'mideasternGalleryUrl' => $mideasternGalleryUrl,
             'csvUrl' => $csvUrl,
         ),$config);
         $this->modx->addPackage('sovereign',$this->config['modelPath']);

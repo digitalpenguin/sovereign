@@ -33,7 +33,7 @@ Sovereign.panel.Home = function(config) {
                     ,preventRender: true
                     ,bodyStyle: 'padding: 0 10px 0 0'
                 }]
-            },{
+            }/*,{
                 title: _('sovereign.tab_label_european')
                 ,tooltip: _('')
                 ,defaults: { autoHeight: true }
@@ -53,7 +53,7 @@ Sovereign.panel.Home = function(config) {
                     ,preventRender: true
                     ,bodyStyle: 'padding: 0 10px 0 0'
                 }]
-            }]
+            }*/]
             // only to redo the grid layout after the content is rendered
             // to fix overflow components' panels, especially when scroll bar is shown up
             ,listeners: {

@@ -38,6 +38,7 @@ class GalleryAfricanSubmissionsGetListProcessor extends modObjectGetListProcesso
         foreach ($list as $row){
             $row['artworktotal'] = $this->getArtworkCount($row['id']);
             $row['createdby'] = $this->getUserName($row['createdby']);
+            $row['type'] = $this->getgalleryType($row['type']);
             $rows[] = $row;
         }
         return $rows;
@@ -63,6 +64,14 @@ class GalleryAfricanSubmissionsGetListProcessor extends modObjectGetListProcesso
         $profile = $this->modx->getObject('modUserProfile', array('internalKey' => $userId));
         $fullName = $profile->get('fullname');
         return $fullName;
+    }
+
+    private function getGalleryType($type) {
+        if ($type == 0) {
+            return 'Art Prize';
+        } else {
+            return 'School Prize';
+        }
     }
 
 }

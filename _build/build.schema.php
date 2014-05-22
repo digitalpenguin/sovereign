@@ -21,5 +21,21 @@ $manager->createObjectContainer('africanGalleries'); // create the database tabl
 $manager->createObjectContainer('africanArtworks');
 $manager->createObjectContainer('africanVotes');
 $manager->createObjectContainer('africanNominators');
-$manager->createObjectContainer('newsletterSubscriptions');
+
+$manager->createObjectContainer('asianGalleries'); // create the database tables
+$manager->createObjectContainer('asianArtworks');
+$manager->createObjectContainer('asianVotes');
+$manager->createObjectContainer('asianNominators');
+
+$manager->createObjectContainer('europeanGalleries'); // create the database tables
+$manager->createObjectContainer('europeanArtworks');
+$manager->createObjectContainer('europeanVotes');
+$manager->createObjectContainer('europeanNominators');
+
+$manager->createObjectContainer('mideasternGalleries'); // create the database tables
+$manager->createObjectContainer('mideasternArtworks');
+$manager->createObjectContainer('mideasternVotes');
+$manager->createObjectContainer('mideasternNominators');
+
+//$manager->createObjectContainer('newsletterSubscriptions');
 $modx->log(modX::LOG_LEVEL_INFO, 'Done!');
